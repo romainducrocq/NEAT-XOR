@@ -56,10 +56,9 @@ namespace Genotype
     class Genome
     {
         private:
-            size_t inputs;
-            size_t bias;
+            size_t inputs = HyperParams::INPUTS + 1;
+            size_t outputs = HyperParams::OUTPUTS;
 
-            size_t outputs = HyperParams::ACTION::NOOP;
             size_t lim_hidden = HyperParams::LIM_HIDDEN;
 
             size_t max_neuron = 0;

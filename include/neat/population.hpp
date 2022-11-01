@@ -47,15 +47,11 @@ namespace Population
     class Pool
     {
         private:
-            size_t step = 0;
-            size_t repeat = HyperParams::ACT_REPEAT;
-            size_t noop = HyperParams::MAX_NOOP;
-
-            size_t self_specie = 0;
-            size_t self_genome = 0;
+            size_t curr_specie = 0;
+            size_t curr_genome = 0;
 
             size_t generation = 0;
-            // size_t innovation = HyperParams::ACTION::N;
+            // size_t innovation = HyperParams::OUTPUTS;
             size_t innovation = 0;
 
             float max_fitness = 0.f;
@@ -84,13 +80,18 @@ namespace Population
         public:
             Pool();
 
-            void init(size_t inputs);
+            void init();
 
-            size_t get_self_specie() const;
-            size_t get_self_genome() const;
+            void eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act);
 
-            void set_self_specie(size_t self_specie);
-            void set_self_genome(size_t self_genome);
+            // size_t get_curr_specie() const;
+            // size_t get_curr_genome() const;
+
+            void set_curr_specie(size_t curr_specie);
+            void set_curr_genome(size_t curr_genome);
+
+            Population::Specie& self_curr_specie();
+            Genotype::Genome& self_curr_genome();
     };
 }
 

@@ -3,8 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "neat/population.hpp"
-#include "env/xor.hpp"
+#include "env/env.hpp"
 
 int main(int argc, char** argv)
 {
@@ -12,17 +11,7 @@ int main(int argc, char** argv)
 
     std::cout << "Hello world!" << "\n";
 
-    Xor agent;
-
-    Population::Pool neat;
-    neat.init(2);
-
-    while(true){
-        // STEP
-
-        //
-
-    }
+    Env env;
 
     return 0;
 }

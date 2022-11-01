@@ -191,12 +191,12 @@ void Population::Pool::new_generation()
 }
 
 // initializePool TODO
-void Population::Pool::init(size_t inputs)
+void Population::Pool::init()
 {
     *this = Population::Pool();
 
     for(size_t i = 0; i < this->population_size; i++){
-        Genotype::Genome starter(inputs);
+        Genotype::Genome starter;
         starter.simple_genome(this->innovation);
         this->add_to_species(starter);
     }
@@ -207,28 +207,38 @@ void Population::Pool::init(size_t inputs)
 // fitnessAlreadyMeasured
 bool Population::Pool::fitness_pass()
 {
-    return this->species[this->self_specie].self_genomes()[this->self_genome].get_fitness() != 0.f;
+    return this->species[this->curr_specie].self_genomes()[this->curr_genome].get_fitness() != 0.f;
 }
 
 // nextGenome
 void Population::Pool::next_genome()
 {
-    this->self_genome++;
+    this->curr_genome++;
 
-    if(this->self_genome >= this->species[this->self_specie].self_genomes().size()){
-        this->self_genome = 0;
-        this->self_specie++;
+    if(this->curr_genome >= this->species[this->curr_specie].self_genomes().size()){
+        this->curr_genome = 0;
+        this->curr_specie++;
 
-        if(this->self_specie >= this->species.size()){
-            this->self_specie = 0;
+        if(this->curr_specie >= this->species.size()){
+            this->curr_specie = 0;
 
             this->new_generation();
         }
     }
 }
 
-size_t Population::Pool::get_self_specie() const { return this->self_specie; }
-size_t Population::Pool::get_self_genome() const { return this->self_genome; }
+// evaluateCurrent
+void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act)
+{
+    this->species[this->curr_specie].self_genomes()[this->curr_genome].eval_network(obs, act);
+}
 
-void Population::Pool::set_self_specie(size_t self_specie) { this->self_specie = self_specie; }
-void Population::Pool::set_self_genome(size_t self_genome) { this->self_genome = self_genome; }
+// size_t Population::Pool::get_curr_specie() const { return this->curr_specie; }
+// size_t Population::Pool::get_curr_genome() const { return this->curr_genome; }
+
+void Population::Pool::set_curr_specie(size_t self_specie) { this->curr_specie = curr_specie; }
+void Population::Pool::set_curr_genome(size_t self_genome) { this->curr_genome = curr_genome; }
+
+Population::Specie& Population::Pool::self_curr_specie() { return this->species[this->curr_specie]; }
+Genotype::Genome& Population::Pool::self_curr_genome()
+{ return this->species[this->curr_specie].self_genomes()[this->curr_genome]; }

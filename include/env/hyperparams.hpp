@@ -1,12 +1,16 @@
 #ifndef _ENV_HYPERPARAMS_HPP
 #define _ENV_HYPERPARAMS_HPP
 
+#include <cstddef>
+
 template<typename T>
 struct DefaultHyperParams {
     enum ACTION{
-        XOR = 0,
-        NOOP
+        XOR
     };
+
+    static size_t INPUTS;
+    static size_t OUTPUTS;
 
     static size_t LIM_HIDDEN;
 
@@ -30,8 +34,13 @@ struct DefaultHyperParams {
 
     static size_t ACT_REPEAT;
     static size_t MAX_NOOP;
+    static size_t MAX_STEP;
 };
 
+template<typename T>
+size_t DefaultHyperParams<T>::INPUTS = 2;
+template<typename T>
+size_t DefaultHyperParams<T>::OUTPUTS = 1;
 template<typename T>
 size_t DefaultHyperParams<T>::LIM_HIDDEN = 1000000;
 template<typename T>
@@ -63,9 +72,11 @@ size_t DefaultHyperParams<T>::STALE_SPECIES = 15;
 template<typename T>
 size_t DefaultHyperParams<T>::POPULATION_SIZE = 300;
 template<typename T>
-size_t DefaultHyperParams<T>::ACT_REPEAT = 5;
+size_t DefaultHyperParams<T>::ACT_REPEAT = 0;
 template<typename T>
-size_t DefaultHyperParams<T>::MAX_NOOP = 20;
+size_t DefaultHyperParams<T>::MAX_NOOP = 0;
+template<typename T>
+size_t DefaultHyperParams<T>::MAX_STEP = 0;
 
 using HyperParams = DefaultHyperParams<int>;
 

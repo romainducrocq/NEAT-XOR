@@ -4,11 +4,6 @@ Genotype::Genome::Genome()
 {
 }
 
-Genotype::Genome::Genome(size_t inputs)
-    : inputs(inputs+1)
-{
-}
-
 /*
 Genotype::Genome::Genome(Genotype::Genome&& other)
     : inputs(other.inputs)

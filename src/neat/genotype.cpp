@@ -1,4 +1,4 @@
-#include "genotype.hpp"
+#include "neat/genotype.hpp"
 
 Genotype::Genome::Genome()
 {

@@ -1,4 +1,4 @@
-#include "population.hpp"
+#include "neat/population.hpp"
 
 // newSpecies
 Population::Specie::Specie()

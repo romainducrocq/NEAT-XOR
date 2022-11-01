@@ -17,7 +17,7 @@
 #include <functional>
 #include <utility>
 
-#include "hyperparams.hpp"
+#include "env/hyperparams.hpp"
 
 namespace Genotype
 {

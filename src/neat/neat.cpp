@@ -35,7 +35,7 @@ void Neat::done()
 
     this->mdp.done = this->mdp.done ||
                      (this->max_step && this->timestep >= this->max_step) ||
-                     (this->max_noop && this->n_noop >= this->max_noop);
+                     (this->max_noop && this->noops >= this->max_noop);
 }
 
 void Neat::fitness()
@@ -50,11 +50,11 @@ void Neat::info()
 
 void Neat::noop()
 {
-    if(!this->b_noop){
-        this->n_noop = 0;
+    if(this->noop_func()){
+        this->noops++;
+    }else{
+        this->noops = 0;
     }
-
-    this->noop_func();
 }
 
 // initializeRun
@@ -63,9 +63,7 @@ void Neat::reset()
     this->reset_func();
 
     this->timestep = 0;
-    this->repeat = 0;
-    this->n_noop = 0;
-    this->b_noop = false;
+    this->noops = 0;
 
     mdp.done = false;
     mdp.fitness = 0.f;

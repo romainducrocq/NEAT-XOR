@@ -51,8 +51,9 @@ void Env::info_func()
     }
 }
 
-void Env::noop_func()
+bool Env::noop_func()
 {
+    return false;
 }
 
 void Env::reset_func()

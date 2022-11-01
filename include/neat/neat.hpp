@@ -23,23 +23,19 @@ class Neat
 
         size_t timestep = 0;
         size_t epoch = 0;
-
-        size_t n_noop = 0;
-        bool b_noop = false;
-
+        size_t noops = 0;
         size_t mode = 0;
 
         Neat::Mdp mdp;
+
+        Population::Pool pool;
 
     private:
         size_t repeat = HyperParams::ACT_REPEAT;
         size_t max_noop = HyperParams::MAX_NOOP;
         size_t max_step = HyperParams::MAX_STEP;
-
         size_t max_epoch = HyperParams::EPOCHS;
         size_t max_generation = HyperParams::GENERATIONS;
-
-        Population::Pool pool;
 
     protected:
         virtual void init_func() = 0;
@@ -50,7 +46,7 @@ class Neat
         virtual void fitness_func() = 0;
         virtual void info_func() = 0;
 
-        virtual void noop_func() = 0;
+        virtual bool noop_func() = 0;
 
         virtual void reset_func() = 0;
         virtual void step_func() = 0;

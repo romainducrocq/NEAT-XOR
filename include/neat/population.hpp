@@ -74,9 +74,6 @@ namespace Population
 
             void new_generation();
 
-            bool fitness_pass();
-            void next_genome();
-
         public:
             Pool();
 
@@ -84,9 +81,15 @@ namespace Population
 
             void eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act);
 
+            bool fitness_pass();
+            void next_genome();
+
+            size_t get_generation() const;
+            float get_max_fitness() const;
             // size_t get_curr_specie() const;
             // size_t get_curr_genome() const;
 
+            void set_max_fitness(size_t max_fitness);
             void set_curr_specie(size_t curr_specie);
             void set_curr_genome(size_t curr_genome);
 

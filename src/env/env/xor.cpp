@@ -8,14 +8,17 @@ Xor::Xor()
     this->data[3] = {{1.f, 1.f}, false};
 }
 
-/*
-const std::vector<float>& Xor::obs() const
-{
-    return this->data[this->self].first;
-}
-*/
-
-void Xor::rand_data()
+void Xor::next_data()
 {
     this->curr = std::rand() % 4;
+}
+
+const std::vector<float>& Xor::get_x() const
+{
+    return this->data[this->curr].first;
+}
+
+bool Xor::get_y() const
+{
+    return this->data[this->curr].second;
 }

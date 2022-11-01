@@ -35,6 +35,8 @@ struct DefaultHyperParams {
     static size_t ACT_REPEAT;
     static size_t MAX_NOOP;
     static size_t MAX_STEP;
+    static size_t EPOCHS;
+    static size_t GENERATIONS;
 };
 
 template<typename T>
@@ -76,7 +78,11 @@ size_t DefaultHyperParams<T>::ACT_REPEAT = 0;
 template<typename T>
 size_t DefaultHyperParams<T>::MAX_NOOP = 0;
 template<typename T>
-size_t DefaultHyperParams<T>::MAX_STEP = 0;
+size_t DefaultHyperParams<T>::MAX_STEP = 100;
+template<typename T>
+size_t DefaultHyperParams<T>::EPOCHS = 0;
+template<typename T>
+size_t DefaultHyperParams<T>::GENERATIONS = 100;
 
 using HyperParams = DefaultHyperParams<int>;
 

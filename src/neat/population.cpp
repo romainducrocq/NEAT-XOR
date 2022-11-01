@@ -236,6 +236,10 @@ void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vect
 // size_t Population::Pool::get_curr_specie() const { return this->curr_specie; }
 // size_t Population::Pool::get_curr_genome() const { return this->curr_genome; }
 
+size_t Population::Pool::get_generation() const { return this->generation; }
+float Population::Pool::get_max_fitness() const { return this->max_fitness; }
+
+void Population::Pool::set_max_fitness(size_t max_fitness) { this->max_fitness = max_fitness; }
 void Population::Pool::set_curr_specie(size_t self_specie) { this->curr_specie = curr_specie; }
 void Population::Pool::set_curr_genome(size_t self_genome) { this->curr_genome = curr_genome; }
 

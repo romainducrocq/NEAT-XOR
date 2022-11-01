@@ -22,7 +22,10 @@ class Xor
     public:
         Xor();
 
-        void rand_data();
+        void next_data();
+
+        const std::vector<float>& get_x() const;
+        bool get_y() const;
 };
 
 #endif

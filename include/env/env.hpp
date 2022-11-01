@@ -1,6 +1,8 @@
 #ifndef _ENV_ENV_HPP
 #define _ENV_ENV_HPP
 
+#include <cmath>
+
 #include "neat/neat.hpp"
 
 #include "env/env/xor.hpp"
@@ -13,8 +15,21 @@ class Env: public Neat
         Xor agent;
 
     private:
-        void _reset() override;
-        void _step() override;
+        void init_func() override;
+
+        void obs_func() override;
+        void act_func() override;
+        void done_func() override;
+        void fitness_func() override;
+        void info_func() override;
+
+        void reset_func() override;
+        void step_func() override;
+
+        void reset_render_func() override;
+        void step_render_func() override;
+
+        void noop_func() override;
 
     public:
         Env();

@@ -77,13 +77,14 @@ namespace Population
             void add_to_species(Genotype::Genome& child);
 
             void new_generation();
-            void init(size_t inputs);
 
             bool fitness_pass();
             void next_genome();
 
         public:
             Pool();
+
+            void init(size_t inputs);
 
             size_t get_self_specie() const;
             size_t get_self_genome() const;

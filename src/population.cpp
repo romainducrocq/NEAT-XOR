@@ -94,7 +94,7 @@ void Population::Pool::cull_species(bool half)
 // removeStaleSpecies
 void Population::Pool::pop_stale_species()
 {
-    for(size_t i = this->species.size() - 1; i >= 0; i--){
+    for(size_t i = this->species.size(); i-- > 0 ;){
     // for(auto& specie : this->species) {
         /*
         std::sort(specie.self_genomes().begin(), specie.self_genomes().end(), [](const auto &a, const auto &b) {
@@ -112,7 +112,9 @@ void Population::Pool::pop_stale_species()
 
         if(this->species[i].get_staleness() >= this->stale_species &&
            this->species[i].get_max_fitness() < this->max_fitness){
-            this->species.erase(this->species.begin() + i);
+            std::swap(this->species[i], this->species.back());
+            this->species.pop_back();
+            // this->species.erase(this->species.begin() + i);
         }
     }
 }
@@ -128,9 +130,11 @@ void Population::Pool::pop_weak_species()
 
     this->calc_tot_avg_fitness();
 
-    for(size_t i = this->species.size() - 1; i >= 0; i--){
+    for(size_t i = this->species.size(); i-- > 0 ;){
         if(static_cast<size_t>(this->species[i].get_avg_fitness() / this->tot_avg_fitness * this->population_size) < 1){
-            this->species.erase(this->species.begin() + i);
+            std::swap(this->species[i], this->species.back());
+            this->species.pop_back();
+            //this->species.erase(this->species.begin() + i);
         }
     }
 
@@ -163,8 +167,8 @@ void Population::Pool::new_generation()
 
     std::vector<Genotype::Genome> children;
     for(const auto& specie : this->species){
-        for(size_t i = static_cast<size_t>(specie.get_avg_fitness() / this->tot_avg_fitness * this->population_size);
-            i > 1; i--){
+        for(size_t i = 0;
+            i < static_cast<size_t>(specie.get_avg_fitness() / this->tot_avg_fitness * this->population_size) - 1; i++){
             children.emplace_back();
             specie.breed_child(children.back(), this->innovation);
         }

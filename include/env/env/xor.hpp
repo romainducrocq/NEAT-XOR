@@ -10,8 +10,7 @@
 class Xor
 {
     private:
-        size_t inputs = 2;
-        size_t self = 0;
+        size_t curr = 0;
 
         std::array<std::pair<std::vector<float>, bool>, 4> data; /* {{
                 {{0.f, 0.f}, false},
@@ -23,10 +22,7 @@ class Xor
     public:
         Xor();
 
-        const std::vector<float>& obs() const;
-
-        void reset();
-        void step();
+        void rand_data();
 };
 
 #endif

@@ -11,11 +11,11 @@ void Neat::init()
     this->pool.init();
 
     for(size_t i = 0; i < this->inputs; i++){
-        this->mdp.obs.emplace_back();
+        this->mdp.obs.push_back(0.f);
     }
 
     for(size_t i = 0; i < this->outputs; i++){
-        this->mdp.act.emplace_back();
+        this->mdp.act.push_back(false);
     }
 }
 

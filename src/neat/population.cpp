@@ -233,9 +233,6 @@ void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vect
     this->species[this->curr_specie].self_genomes()[this->curr_genome].eval_network(obs, act);
 }
 
-// size_t Population::Pool::get_curr_specie() const { return this->curr_specie; }
-// size_t Population::Pool::get_curr_genome() const { return this->curr_genome; }
-
 size_t Population::Pool::get_generation() const { return this->generation; }
 float Population::Pool::get_max_fitness() const { return this->max_fitness; }
 

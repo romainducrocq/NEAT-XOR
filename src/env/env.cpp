@@ -25,27 +25,37 @@ void Env::done_func()
 
 void Env::fitness_func()
 {
-    if(this->Super::mdp.done){
-        this->Super::mdp.fitness = pow((this->Super::mdp.fitness / this->Super::timestep), 2);
-        if(this->Super::mdp.fitness == 0.f){
-            this->Super::mdp.fitness = -1.f;
-        }
-    }else{
-        this->Super::mdp.fitness += this->Super::mdp.act[0] == this->agent.get_y() ? 1.f : 0.f;
+    switch(this->Super::mode) {
+
+        case Super::MODE::TRAIN:
+            if (this->Super::mdp.done) {
+                this->Super::mdp.fitness = pow((this->Super::mdp.fitness / this->Super::steps), 2);
+                if (this->Super::mdp.fitness == 0.f) {
+                    this->Super::mdp.fitness = -1.f;
+                }
+            } else {
+                this->Super::mdp.fitness += this->Super::mdp.act[0] == this->agent.get_y() ? 1.f : 0.f;
+            }
+            break;
+
+        case Super::MODE::EVAL:
+            break;
+
+        default:
+            break;
     }
 }
 
 void Env::info_func()
 {
     switch(this->Super::mode){
-        case 0: // test
+
+        case Super::MODE::TRAIN:
             break;
-        case 1: // play
+
+        case Super::MODE::EVAL:
             break;
-        case 2: // eval
-            break;
-        case 3: // train
-            break;
+
         default:
             break;
     }

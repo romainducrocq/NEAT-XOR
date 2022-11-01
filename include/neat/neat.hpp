@@ -18,13 +18,15 @@ class Neat
     };
 
     protected:
+        enum MODE { TEST, PLAY, EVAL, TRAIN };
+        size_t mode = Neat::MODE::TEST;
+
         size_t inputs = HyperParams::INPUTS;
         size_t outputs = HyperParams::OUTPUTS;
 
-        size_t timestep = 0;
+        size_t steps = 0;
         size_t epoch = 0;
         size_t noops = 0;
-        size_t mode = 0;
 
         Neat::Mdp mdp;
 

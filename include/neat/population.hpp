@@ -86,8 +86,6 @@ namespace Population
 
             size_t get_generation() const;
             float get_max_fitness() const;
-            // size_t get_curr_specie() const;
-            // size_t get_curr_genome() const;
 
             void set_max_fitness(size_t max_fitness);
             void set_curr_specie(size_t curr_specie);

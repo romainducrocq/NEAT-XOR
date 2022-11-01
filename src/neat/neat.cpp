@@ -8,7 +8,9 @@ void Neat::init()
 {
     this->init_func();
 
-    this->pool.init();
+    if(this->mode == Neat::MODE::TRAIN){
+        this->pool.init();
+    }
 
     for(size_t i = 0; i < this->inputs; i++){
         this->mdp.obs.push_back(0.f);
@@ -17,6 +19,8 @@ void Neat::init()
     for(size_t i = 0; i < this->outputs; i++){
         this->mdp.act.push_back(false);
     }
+
+    this->epoch = 0;
 }
 
 void Neat::obs()
@@ -34,7 +38,7 @@ void Neat::done()
     this->done_func();
 
     this->mdp.done = this->mdp.done ||
-                     (this->max_step && this->timestep >= this->max_step) ||
+                     (this->max_step && this->steps >= this->max_step) ||
                      (this->max_noop && this->noops >= this->max_noop);
 }
 
@@ -62,7 +66,7 @@ void Neat::reset()
 {
     this->reset_func();
 
-    this->timestep = 0;
+    this->steps = 0;
     this->noops = 0;
 
     mdp.done = false;
@@ -77,7 +81,7 @@ void Neat::step()
 {
     this->step_func();
 
-    if(!this->repeat || this->timestep % this->repeat == 0){
+    if(!this->repeat || this->steps % this->repeat == 0){
         this->obs();
 
         this->pool.eval_curr_genome(this->mdp.obs, this->mdp.act);
@@ -87,9 +91,11 @@ void Neat::step()
 
     this->act();
 
-    this->timestep++;
+    this->steps++;
 
     this->done();
+
+    this->fitness();
 }
 
 void Neat::reset_render()
@@ -104,14 +110,14 @@ void Neat::step_render()
 
 void Neat::train()
 {
-    this->mode = 3;
+    this->mode = Neat::MODE::TRAIN;
+
+    this->init();
 
     this->reset();
 
     while(true){
         this->step();
-
-        this->fitness();
 
         if(this->mdp.done){
 
@@ -139,5 +145,5 @@ void Neat::train()
 
 void Neat::eval() // TODO
 {
-    this->mode = 2;
+    this->mode = Neat::MODE::EVAL;
 }

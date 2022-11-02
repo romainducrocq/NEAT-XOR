@@ -1,6 +1,7 @@
 #ifndef _ENV_HYPERPARAMS_HPP
 #define _ENV_HYPERPARAMS_HPP
 
+#include <iostream>
 #include <cstddef>
 
 template<typename T>

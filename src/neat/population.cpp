@@ -270,7 +270,7 @@ size_t Population::Pool::get_best_genome() const { return this->best_genome; }
 size_t Population::Pool::get_species_size() const { return this->species.size(); }
 size_t Population::Pool::get_genomes_size(size_t i) { return this->species[i].self_genomes().size(); }
 
-void Population::Pool::set_max_fitness(size_t max_fitness) { this->max_fitness = max_fitness; }
+void Population::Pool::set_max_fitness(float max_fitness) { this->max_fitness = max_fitness; }
 
 Genotype::Genome& Population::Pool::self_curr_genome()
 { return this->species[this->curr_specie].self_genomes()[this->curr_genome]; }

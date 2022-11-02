@@ -323,31 +323,31 @@ void Genotype::Genome::mutate(size_t& innovation)
         this->mutate_point();
     }
 
-    for(float p = this->mutation_rates["link"]; p <= 0.f; p -= 1.f){
+    for(float p = this->mutation_rates["link"]; p > 0.f; p -= 1.f){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < p){
             this->mutate_link(false, innovation);
         }
     }
 
-    for(float p = this->mutation_rates["bias"]; p <= 0.f; p -= 1.f){
+    for(float p = this->mutation_rates["bias"]; p > 0.f; p -= 1.f){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < p){
             this->mutate_link(true, innovation);
         }
     }
 
-    for(float p = this->mutation_rates["neuron"]; p <= 0.f; p -= 1.f){
+    for(float p = this->mutation_rates["neuron"]; p > 0.f; p -= 1.f){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < p){
             this->mutate_node(innovation);
         }
     }
 
-    for(float p = this->mutation_rates["enable"]; p <= 0.f; p -= 1.f){
+    for(float p = this->mutation_rates["enable"]; p > 0.f; p -= 1.f){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < p){
             this->mutate_enable(true);
         }
     }
 
-    for(float p = this->mutation_rates["disable"]; p <= 0.f; p -= 1.f){
+    for(float p = this->mutation_rates["disable"]; p > 0.f; p -= 1.f){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < p){
             this->mutate_enable(false);
         }

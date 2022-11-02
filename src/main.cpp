@@ -20,12 +20,7 @@ int main(int argc, char** argv)
         std::cout << "\n";
 
         env.train();
-
-        std::cout << "\n";
-        std::cout << "\n";
     }
-
-    return 0;
 
     {
         Timer timer;
@@ -35,9 +30,6 @@ int main(int argc, char** argv)
         std::cout << "\n";
 
         env.eval();
-
-        std::cout << "\n";
-        std::cout << "\n";
     }
 
     return 0;

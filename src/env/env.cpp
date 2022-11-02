@@ -6,7 +6,7 @@ Env::Env()
 
 void Env::init_func()
 {
-    this->mvg_avg = MovingAverage(100);
+    this->mvg_avg = MovingAverage(20);
 }
 
 void Env::obs_func()
@@ -71,7 +71,7 @@ void Env::info_func()
         case Super::MODE::EVAL:
             std::cout << "EPOCH   : " << this->Super::epoch << " / " << this->Super::max_epoch << "\n";
             std::cout << "SUCCESS : " << this->Super::mdp.fitness << " / " << this->Super::max_step << "\n";
-            std::cout << "RATE    : " << (this->Super::mdp.fitness / this->Super::max_step)  << "\n";
+            std::cout << "RATE    : " << (this->Super::mdp.fitness / this->Super::max_step) <<"\n";
             std::cout << "MVG AVG : " << this->mvg_avg.get() << "\n";
             std::cout << "\n";
             break;

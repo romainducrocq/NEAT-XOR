@@ -201,7 +201,7 @@ void Neat::eval()
             this->reset();
         }
 
-        if(this->max_epoch && this->epoch >= this->max_epoch){
+        if(this->max_epoch && this->epoch > this->max_epoch){
             break;
         }
     }

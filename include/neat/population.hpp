@@ -97,7 +97,7 @@ namespace Population
             size_t get_species_size() const;
             size_t get_genomes_size(size_t i);
 
-            void set_max_fitness(size_t max_fitness);
+            void set_max_fitness(float max_fitness);
 
             Genotype::Genome& self_curr_genome();
             Genotype::Genome& self_best_genome();

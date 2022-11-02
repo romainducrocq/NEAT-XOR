@@ -227,19 +227,52 @@ void Population::Pool::next_genome()
     }
 }
 
+void Population::Pool::set_best_genome()
+{
+    [&] {
+        for(size_t s = 0; s < this->species.size(); s++){
+            for(size_t g = 0; g < this->species[s].self_genomes().size(); g++){
+                this->best_specie = s;
+                this->best_genome = g;
+                return;
+            }
+        }
+    }();
+
+    for(size_t s = 0; s < this->species.size(); s++){
+        for(size_t g = 0; g < this->species[s].self_genomes().size(); g++){
+            if(this->species[s].self_genomes()[g].get_fitness() >
+               this->species[this->best_specie].self_genomes()[this->best_genome].get_fitness()){
+                this->best_specie = s;
+                this->best_genome = g;
+            }
+        }
+    }
+}
+
 // evaluateCurrent
 void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act)
 {
     this->species[this->curr_specie].self_genomes()[this->curr_genome].eval_network(obs, act);
 }
 
+void Population::Pool::eval_best_genome(const std::vector<float>& obs, std::vector<bool>& act)
+{
+    this->species[this->best_specie].self_genomes()[this->best_genome].eval_network(obs, act);
+}
+
 size_t Population::Pool::get_generation() const { return this->generation; }
 float Population::Pool::get_max_fitness() const { return this->max_fitness; }
+size_t Population::Pool::get_curr_specie() const { return this->curr_specie; }
+size_t Population::Pool::get_curr_genome() const { return this->curr_genome; }
+size_t Population::Pool::get_best_specie() const { return this->best_specie; }
+size_t Population::Pool::get_best_genome() const { return this->best_genome; }
+size_t Population::Pool::get_species_size() const { return this->species.size(); }
+size_t Population::Pool::get_genomes_size(size_t i) { return this->species[i].self_genomes().size(); }
 
 void Population::Pool::set_max_fitness(size_t max_fitness) { this->max_fitness = max_fitness; }
-void Population::Pool::set_curr_specie(size_t self_specie) { this->curr_specie = curr_specie; }
-void Population::Pool::set_curr_genome(size_t self_genome) { this->curr_genome = curr_genome; }
 
-Population::Specie& Population::Pool::self_curr_specie() { return this->species[this->curr_specie]; }
 Genotype::Genome& Population::Pool::self_curr_genome()
 { return this->species[this->curr_specie].self_genomes()[this->curr_genome]; }
+Genotype::Genome& Population::Pool::self_best_genome()
+{ return this->species[this->best_specie].self_genomes()[this->best_genome]; }

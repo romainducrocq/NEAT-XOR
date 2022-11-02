@@ -1,18 +1,22 @@
 #ifndef _ENV_ENV_HPP
 #define _ENV_ENV_HPP
 
+#include <iostream>
 #include <cmath>
 
 #include "neat/neat.hpp"
 
 #include "env/env/xor.hpp"
+#include "env/env/utils.hpp"
 
 class Env: public Neat
 {
     private:
         typedef Neat Super;
 
+    private:
         Xor agent;
+        MovingAverage mvg_avg;
 
     private:
         void init_func() override;

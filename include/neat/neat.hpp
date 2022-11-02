@@ -24,20 +24,20 @@ class Neat
         size_t inputs = HyperParams::INPUTS;
         size_t outputs = HyperParams::OUTPUTS;
 
-        size_t steps = 0;
-        size_t epoch = 0;
-        size_t noops = 0;
-
-        Neat::Mdp mdp;
-
-        Population::Pool pool;
-
-    private:
         size_t repeat = HyperParams::ACT_REPEAT;
         size_t max_noop = HyperParams::MAX_NOOP;
         size_t max_step = HyperParams::MAX_STEP;
         size_t max_epoch = HyperParams::EPOCHS;
         size_t max_generation = HyperParams::GENERATIONS;
+
+        size_t steps = 0;
+        size_t noops = 0;
+        size_t epoch = 0;
+        size_t generation = 0;
+
+        Neat::Mdp mdp;
+
+        Population::Pool pool;
 
     protected:
         virtual void init_func() = 0;

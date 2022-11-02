@@ -8,10 +8,6 @@ void Neat::init()
 {
     this->init_func();
 
-    if(this->mode == Neat::MODE::TRAIN){
-        this->pool.init();
-    }
-
     for(size_t i = 0; i < this->inputs; i++){
         this->mdp.obs.push_back(0.f);
     }
@@ -21,6 +17,22 @@ void Neat::init()
     }
 
     this->epoch = 0;
+    this->generation = 0;
+
+    switch(this->mode){
+
+        case Neat::MODE::TRAIN:
+            this->pool.init();
+            break;
+
+        case Neat::MODE::EVAL:
+            this->pool.set_best_genome();
+            this->pool.self_best_genome().ctor_network();
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Neat::obs()
@@ -66,6 +78,8 @@ void Neat::reset()
 {
     this->reset_func();
 
+    this->reset_render();
+
     this->steps = 0;
     this->noops = 0;
 
@@ -73,18 +87,44 @@ void Neat::reset()
     mdp.fitness = 0.f;
 
     this->epoch++;
+    this->generation = this->pool.get_generation();
 
-    this->pool.self_curr_genome().ctor_network();
+    switch(this->mode){
+
+        case Neat::MODE::TRAIN:
+            this->pool.self_curr_genome().ctor_network();
+            break;
+
+        case Neat::MODE::EVAL:
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Neat::step()
 {
     this->step_func();
 
+    this->step_render();
+
     if(!this->repeat || this->steps % this->repeat == 0){
         this->obs();
 
-        this->pool.eval_curr_genome(this->mdp.obs, this->mdp.act);
+        switch(this->mode){
+
+            case Neat::MODE::TRAIN:
+                this->pool.eval_curr_genome(this->mdp.obs, this->mdp.act);
+                break;
+
+            case Neat::MODE::EVAL:
+                this->pool.eval_best_genome(this->mdp.obs, this->mdp.act);
+                break;
+
+            default:
+                break;
+        }
 
         this->noop();
     }
@@ -131,19 +171,38 @@ void Neat::train()
                 this->pool.next_genome();
             }
 
-            this->info();
+            if(this->generation < this->pool.get_generation()){
+                this->info();
+            }
 
             this->reset();
         }
 
-        if((this->max_generation && this->pool.get_generation() >= this->max_generation) ||
-           (this->max_epoch && this->epoch >= this->max_epoch)){
+        if(this->max_generation && this->generation >= this->max_generation){
             break;
         }
     }
 }
 
-void Neat::eval() // TODO
+void Neat::eval()
 {
     this->mode = Neat::MODE::EVAL;
+
+    this->init();
+
+    this->reset();
+
+    while(true){
+        this->step();
+
+        if(this->mdp.done) {
+            this->info();
+
+            this->reset();
+        }
+
+        if(this->max_epoch && this->epoch >= this->max_epoch){
+            break;
+        }
+    }
 }

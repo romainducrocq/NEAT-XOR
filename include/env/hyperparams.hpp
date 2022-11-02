@@ -78,11 +78,11 @@ size_t DefaultHyperParams<T>::ACT_REPEAT = 0;
 template<typename T>
 size_t DefaultHyperParams<T>::MAX_NOOP = 0;
 template<typename T>
-size_t DefaultHyperParams<T>::MAX_STEP = 100;
+size_t DefaultHyperParams<T>::MAX_STEP = 20;
 template<typename T>
-size_t DefaultHyperParams<T>::EPOCHS = 0;
+size_t DefaultHyperParams<T>::EPOCHS = 10;
 template<typename T>
-size_t DefaultHyperParams<T>::GENERATIONS = 100;
+size_t DefaultHyperParams<T>::GENERATIONS = 50;
 
 using HyperParams = DefaultHyperParams<int>;
 

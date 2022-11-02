@@ -49,6 +49,8 @@ namespace Population
         private:
             size_t curr_specie = 0;
             size_t curr_genome = 0;
+            size_t best_specie = 0;
+            size_t best_genome = 0;
 
             size_t generation = 0;
             // size_t innovation = HyperParams::OUTPUTS;
@@ -80,19 +82,25 @@ namespace Population
             void init();
 
             void eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act);
+            void eval_best_genome(const std::vector<float>& obs, std::vector<bool>& act);
 
             bool fitness_pass();
             void next_genome();
+            void set_best_genome();
 
             size_t get_generation() const;
             float get_max_fitness() const;
+            size_t get_curr_specie() const;
+            size_t get_curr_genome() const;
+            size_t get_best_specie() const;
+            size_t get_best_genome() const;
+            size_t get_species_size() const;
+            size_t get_genomes_size(size_t i);
 
             void set_max_fitness(size_t max_fitness);
-            void set_curr_specie(size_t curr_specie);
-            void set_curr_genome(size_t curr_genome);
 
-            Population::Specie& self_curr_specie();
             Genotype::Genome& self_curr_genome();
+            Genotype::Genome& self_best_genome();
     };
 }
 

@@ -26,8 +26,7 @@ void Neat::init()
             break;
 
         case Neat::MODE::EVAL:
-            this->pool.set_best_genome();
-            this->pool.self_best_genome().ctor_network();
+            this->best.ctor_network();
             break;
 
         default:
@@ -119,7 +118,7 @@ void Neat::step()
                 break;
 
             case Neat::MODE::EVAL:
-                this->pool.eval_best_genome(this->mdp.obs, this->mdp.act);
+                this->best.eval_network(this->mdp.obs, this->mdp.act);
                 break;
 
             default:
@@ -168,7 +167,7 @@ void Neat::train()
             }
 
             while(this->pool.fitness_pass()){
-                this->pool.next_genome();
+                this->pool.next_genome(this->best);
             }
 
             if(this->generation < this->pool.get_generation()){

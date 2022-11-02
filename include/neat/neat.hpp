@@ -39,6 +39,8 @@ class Neat
 
         Population::Pool pool;
 
+        Genotype::Genome best;
+
     protected:
         virtual void init_func() = 0;
 

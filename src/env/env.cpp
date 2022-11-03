@@ -28,6 +28,9 @@ void Env::fitness_func()
 {
     switch(this->Super::mode) {
 
+        /* TODO
+         * IN PROGRESS
+         */
         case Super::MODE::TRAIN:
             if(this->Super::mdp.act[0] > 0){
                 this->Super::mdp.fitness -= pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
@@ -39,8 +42,6 @@ void Env::fitness_func()
                 if (this->Super::mdp.fitness == 0.f) {
                     this->Super::mdp.fitness = -1.f;
                 }
-
-                this->mvg_avg.add(this->Super::mdp.fitness);
             }
             break;
 
@@ -48,13 +49,17 @@ void Env::fitness_func()
             std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
             this->Super::mdp.fitness += ((this->Super::mdp.act[0] + 1.f) / 2.f);
 
-            if (this->Super::mdp.done) {
-                this->mvg_avg.add(this->Super::mdp.fitness);
-            }
             break;
 
         default:
             break;
+        /*
+         *
+         */
+    }
+
+    if (this->Super::mdp.done) {
+        this->mvg_avg.add(this->Super::mdp.fitness);
     }
 }
 

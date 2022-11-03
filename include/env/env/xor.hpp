@@ -7,8 +7,6 @@
 #include <vector>
 #include <utility>
 
-#include <algorithm>
-
 class Xor
 {
     private:

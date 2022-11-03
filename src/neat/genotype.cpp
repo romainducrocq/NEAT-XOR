@@ -36,9 +36,11 @@ Genotype::Genome& Genotype::Genome::operator=(const Genotype::Genome& other)
 }
 */
 
-// copyGenome
+// copyGenome // TODO
 void Genotype::Genome::copy_genome(const Genotype::Genome& other)
 {
+    *this = Genotype::Genome();
+
     this->inputs = other.inputs;
     this->max_neuron = other.max_neuron;
 
@@ -88,7 +90,7 @@ void Genotype::Genome::ctor_network()
 }
 
 // evaluateNetwork
-void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<bool>& act)
+void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<float>& act)
 {
     // assert(obs.size() + 1 == this->inputs);
 
@@ -110,7 +112,9 @@ void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<b
 
     // classification
     for(size_t i = 0; i < this->outputs; i++){
-        act[i] = this->neurons.at(i + this->lim_hidden).value > 0;
+        // std::cout << this->neurons.at(i + this->lim_hidden).value << "\n";
+        // act[i] = this->neurons.at(i + this->lim_hidden).value > 0;
+        act[i] = this->neurons.at(i + this->lim_hidden).value;
     }
 }
 

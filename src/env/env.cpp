@@ -21,7 +21,7 @@ void Env::act_func()
 
 void Env::done_func()
 {
-    this->Super::mdp.done = false;
+    this->Super::mdp.done = this->agent.is_end();
 }
 
 void Env::fitness_func()
@@ -29,10 +29,13 @@ void Env::fitness_func()
     switch(this->Super::mode) {
 
         case Super::MODE::TRAIN:
-            this->Super::mdp.fitness += this->Super::mdp.act[0] == this->agent.get_y() ? 1.f : 0.f;
+            if(this->Super::mdp.act[0] > 0){
+                this->Super::mdp.fitness -= pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
+            }
 
+            this->Super::mdp.fitness -= pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
             if (this->Super::mdp.done) {
-                this->Super::mdp.fitness = pow((this->Super::mdp.fitness / this->Super::steps), 2);
+                this->Super::mdp.fitness += 4.f;
                 if (this->Super::mdp.fitness == 0.f) {
                     this->Super::mdp.fitness = -1.f;
                 }
@@ -42,7 +45,8 @@ void Env::fitness_func()
             break;
 
         case Super::MODE::EVAL:
-            this->Super::mdp.fitness += this->Super::mdp.act[0] == this->agent.get_y() ? 1.f : 0.f;
+            std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
+            this->Super::mdp.fitness += ((this->Super::mdp.act[0] + 1.f) / 2.f);
 
             if (this->Super::mdp.done) {
                 this->mvg_avg.add(this->Super::mdp.fitness);
@@ -70,8 +74,8 @@ void Env::info_func()
 
         case Super::MODE::EVAL:
             std::cout << "EPOCH   : " << this->Super::epoch << " / " << this->Super::max_epoch << "\n";
-            std::cout << "SUCCESS : " << this->Super::mdp.fitness << " / " << this->Super::max_step << "\n";
-            std::cout << "RATE    : " << (this->Super::mdp.fitness / this->Super::max_step) << "\n";
+            std::cout << "SUCCESS : " << this->Super::mdp.fitness << " / " << this->Super::steps << "\n";
+            std::cout << "RATE    : " << (this->Super::mdp.fitness / this->Super::steps) << "\n";
             std::cout << "MVG AVG : " << this->mvg_avg.get() << "\n";
             std::cout << "\n";
             break;
@@ -88,6 +92,7 @@ bool Env::noop_func()
 
 void Env::reset_func()
 {
+    this->agent.shuffle_data();
 }
 
 void Env::step_func()

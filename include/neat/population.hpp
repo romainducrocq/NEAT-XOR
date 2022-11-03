@@ -80,8 +80,7 @@ namespace Population
 
             void init();
 
-            void eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act);
-            void eval_best_genome(const std::vector<float>& obs, std::vector<bool>& act);
+            void eval_curr_genome(const std::vector<float>& obs, std::vector<float>& act);
 
             bool fitness_pass();
             void next_genome(Genotype::Genome& best);

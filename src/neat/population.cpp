@@ -261,7 +261,7 @@ void Population::Pool::copy_best_genome(Genotype::Genome& best)
 }
 
 // evaluateCurrent
-void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vector<bool>& act)
+void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vector<float>& act)
 {
     this->species[this->curr_specie].self_genomes()[this->curr_genome].eval_network(obs, act);
 }

@@ -12,7 +12,7 @@ class Neat
     struct Mdp
     {
         std::vector<float> obs;
-        std::vector<bool> act;
+        std::vector<float> act;
         bool done = false;
         float fitness = 0.f;
     };

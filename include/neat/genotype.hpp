@@ -114,7 +114,7 @@ namespace Genotype
             void copy_genome(const Genotype::Genome& other);
 
             void ctor_network();
-            void eval_network(const std::vector<float>& obs, std::vector<bool>& act);
+            void eval_network(const std::vector<float>& obs, std::vector<float>& act);
 
             void mutate(size_t& innovation);
 

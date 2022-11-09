@@ -1,5 +1,5 @@
-#ifndef _ENV_HYPERPARAMS_HPP
-#define _ENV_HYPERPARAMS_HPP
+#ifndef _ENV_CONF_HPP
+#define _ENV_CONF_HPP
 
 #include <unistd.h>
 
@@ -9,7 +9,7 @@
 #include <cstdlib>
 
 template<typename T>
-struct DefaultHyperParams {
+struct DefaultConf {
     enum ACTION{
         XOR
     };
@@ -67,11 +67,11 @@ struct DefaultHyperParams {
                     break;
 
                 case 'g': // generations
-                    DefaultHyperParams<T>::GENERATIONS = static_cast<size_t>(std::atoi(optarg));
+                    DefaultConf<T>::GENERATIONS = static_cast<size_t>(std::atoi(optarg));
                     continue;
 
                 case 'p': // population size
-                    DefaultHyperParams<T>::POPULATION_SIZE = static_cast<size_t>(std::atoi(optarg));
+                    DefaultConf<T>::POPULATION_SIZE = static_cast<size_t>(std::atoi(optarg));
                     continue;
             }
             break;
@@ -82,51 +82,51 @@ struct DefaultHyperParams {
 };
 
 template<typename T>
-const size_t DefaultHyperParams<T>::INPUTS = 2;
+const size_t DefaultConf<T>::INPUTS = 2;
 template<typename T>
-const size_t DefaultHyperParams<T>::OUTPUTS = 1;
+const size_t DefaultConf<T>::OUTPUTS = 1;
 template<typename T>
-const size_t DefaultHyperParams<T>::LIM_HIDDEN = 1000000;
+const size_t DefaultConf<T>::LIM_HIDDEN = 1000000;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_WEIGHT_RATE = 0.1f;
+const float DefaultConf<T>::MUTATE_WEIGHT_RATE = 0.1f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_GENE_RATE = 0.25f;
+const float DefaultConf<T>::MUTATE_GENE_RATE = 0.25f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_LINK_RATE = 2.f;
+const float DefaultConf<T>::MUTATE_LINK_RATE = 2.f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_BIAS_RATE = 0.4f;
+const float DefaultConf<T>::MUTATE_BIAS_RATE = 0.4f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_NEURON_RATE = 0.5f;
+const float DefaultConf<T>::MUTATE_NEURON_RATE = 0.5f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_ENABLE_RATE = 0.2f;
+const float DefaultConf<T>::MUTATE_ENABLE_RATE = 0.2f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_DISABLE_RATE = 0.4f;
+const float DefaultConf<T>::MUTATE_DISABLE_RATE = 0.4f;
 template<typename T>
-const float DefaultHyperParams<T>::MUTATE_OFFSET_SIZE = 0.1f;
+const float DefaultConf<T>::MUTATE_OFFSET_SIZE = 0.1f;
 template<typename T>
-const float DefaultHyperParams<T>::DELTA_DISJOINT = 2.f;
+const float DefaultConf<T>::DELTA_DISJOINT = 2.f;
 template<typename T>
-const float DefaultHyperParams<T>::DELTA_WEIGHTS = 0.4f;
+const float DefaultConf<T>::DELTA_WEIGHTS = 0.4f;
 template<typename T>
-const float DefaultHyperParams<T>::DELTA_THRESHOLD = 1.f;
+const float DefaultConf<T>::DELTA_THRESHOLD = 1.f;
 template<typename T>
-const float DefaultHyperParams<T>::CROSSOVER_PROB = 0.75f;
+const float DefaultConf<T>::CROSSOVER_PROB = 0.75f;
 template<typename T>
-const size_t DefaultHyperParams<T>::STALE_SPECIES = 15;
+const size_t DefaultConf<T>::STALE_SPECIES = 15;
 template<typename T>
-const size_t DefaultHyperParams<T>::ACT_REPEAT = 0;
+const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
-const size_t DefaultHyperParams<T>::MAX_NOOP = 0;
+const size_t DefaultConf<T>::MAX_NOOP = 0;
 template<typename T>
-const size_t DefaultHyperParams<T>::MAX_STEP = 0;
+const size_t DefaultConf<T>::MAX_STEP = 0;
 template<typename T>
-const size_t DefaultHyperParams<T>::EPOCHS = 10;
+const size_t DefaultConf<T>::EPOCHS = 10;
 
 template<typename T>
-size_t DefaultHyperParams<T>::POPULATION_SIZE = 150;
+size_t DefaultConf<T>::POPULATION_SIZE = 150;
 template<typename T>
-size_t DefaultHyperParams<T>::GENERATIONS = 300;
+size_t DefaultConf<T>::GENERATIONS = 300;
 
-using HyperParams = DefaultHyperParams<int>;
+using CONF = DefaultConf<int>;
 
 #endif

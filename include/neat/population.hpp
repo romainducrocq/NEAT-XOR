@@ -9,7 +9,7 @@
 #include <functional>
 #include <utility>
 
-#include "env/hyperparams.hpp"
+#include "env/conf.hpp"
 
 #include "neat/genotype.hpp"
 
@@ -23,7 +23,7 @@ namespace Population
             float max_fitness = 0.f;
             float avg_fitness = 0.f;
 
-            float crossover_prob = HyperParams::CROSSOVER_PROB;
+            float crossover_prob = CONF::CROSSOVER_PROB;
 
             std::vector<Genotype::Genome> genomes;
 
@@ -56,8 +56,8 @@ namespace Population
             float max_fitness = 0.f;
             float tot_avg_fitness = 0.f;
 
-            size_t stale_species = HyperParams::STALE_SPECIES;
-            size_t population_size = HyperParams::POPULATION_SIZE;
+            size_t stale_species = CONF::STALE_SPECIES;
+            size_t population_size = CONF::POPULATION_SIZE;
 
             std::vector<Population::Specie> species;
 

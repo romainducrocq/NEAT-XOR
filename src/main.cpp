@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "env/hyperparams.hpp"
+#include "env/conf.hpp"
 #include "env/env.hpp"
 #include "env/env/utils.hpp"
 
@@ -11,7 +11,7 @@ int main(int argc, char** argv)
 {
     std::srand(time(nullptr));
 
-    if(HyperParams::argParse(argc, argv)) {
+    if(CONF::argParse(argc, argv)) {
         Env env;
 
         {

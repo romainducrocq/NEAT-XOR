@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "env/hyperparams.hpp"
+#include "env/conf.hpp"
 
 #include "neat/population.hpp"
 
@@ -21,14 +21,14 @@ class Neat
         enum MODE { TEST, PLAY, EVAL, TRAIN };
         size_t mode = Neat::MODE::TEST;
 
-        size_t inputs = HyperParams::INPUTS;
-        size_t outputs = HyperParams::OUTPUTS;
+        size_t inputs = CONF::INPUTS;
+        size_t outputs = CONF::OUTPUTS;
 
-        size_t repeat = HyperParams::ACT_REPEAT;
-        size_t max_noop = HyperParams::MAX_NOOP;
-        size_t max_step = HyperParams::MAX_STEP;
-        size_t max_epoch = HyperParams::EPOCHS;
-        size_t max_generation = HyperParams::GENERATIONS;
+        size_t repeat = CONF::ACT_REPEAT;
+        size_t max_noop = CONF::MAX_NOOP;
+        size_t max_step = CONF::MAX_STEP;
+        size_t max_epoch = CONF::EPOCHS;
+        size_t max_generation = CONF::GENERATIONS;
 
         size_t steps = 0;
         size_t noops = 0;

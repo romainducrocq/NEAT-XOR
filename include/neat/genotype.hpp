@@ -18,7 +18,7 @@
 #include <utility>
 #include <memory>
 
-#include "env/hyperparams.hpp"
+#include "env/conf.hpp"
 
 namespace Genotype
 {
@@ -53,30 +53,30 @@ namespace Genotype
     class Genome
     {
         private:
-            size_t inputs = HyperParams::INPUTS + 1;
-            size_t outputs = HyperParams::OUTPUTS;
+            size_t inputs = CONF::INPUTS + 1;
+            size_t outputs = CONF::OUTPUTS;
 
-            size_t lim_hidden = HyperParams::LIM_HIDDEN;
+            size_t lim_hidden = CONF::LIM_HIDDEN;
 
             size_t max_neuron = 0;
 
             float fitness = 0.f;
             size_t global_rank = 0;
 
-            float mutation_rate_weight = HyperParams::MUTATE_WEIGHT_RATE;
+            float mutation_rate_weight = CONF::MUTATE_WEIGHT_RATE;
             std::unordered_map<std::string, float> mutation_rates = {
-                {"gene", HyperParams::MUTATE_GENE_RATE},
-                {"link", HyperParams::MUTATE_LINK_RATE},
-                {"bias", HyperParams::MUTATE_BIAS_RATE},
-                {"neuron", HyperParams::MUTATE_NEURON_RATE},
-                {"enable", HyperParams::MUTATE_ENABLE_RATE},
-                {"disable", HyperParams::MUTATE_DISABLE_RATE},
-                {"offset", HyperParams::MUTATE_OFFSET_SIZE}
+                {"gene", CONF::MUTATE_GENE_RATE},
+                {"link", CONF::MUTATE_LINK_RATE},
+                {"bias", CONF::MUTATE_BIAS_RATE},
+                {"neuron", CONF::MUTATE_NEURON_RATE},
+                {"enable", CONF::MUTATE_ENABLE_RATE},
+                {"disable", CONF::MUTATE_DISABLE_RATE},
+                {"offset", CONF::MUTATE_OFFSET_SIZE}
             };
 
-            float d_disjoint = HyperParams::DELTA_DISJOINT;
-            float d_weight = HyperParams::DELTA_WEIGHTS;
-            float d_threshold = HyperParams::DELTA_THRESHOLD;
+            float d_disjoint = CONF::DELTA_DISJOINT;
+            float d_weight = CONF::DELTA_WEIGHTS;
+            float d_threshold = CONF::DELTA_THRESHOLD;
 
             std::vector<std::shared_ptr<Genotype::Gene>> genes;
             std::map<size_t, Genotype::Neuron> neurons;

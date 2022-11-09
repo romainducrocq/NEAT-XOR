@@ -28,7 +28,6 @@ void Neat::init()
             break;
 
         case Neat::MODE::EVAL:
-            this->best.ctor_network();
             break;
 
         default:
@@ -97,6 +96,7 @@ void Neat::reset()
             break;
 
         case Neat::MODE::EVAL:
+            this->best.ctor_network();
             break;
 
         default:

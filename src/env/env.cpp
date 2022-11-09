@@ -38,7 +38,7 @@ void Env::fitness_func()
             break;
 
         case Super::MODE::EVAL:
-            std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
+            // std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
             this->Super::mdp.fitness += 1.f - std::abs(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y());
 
             break;

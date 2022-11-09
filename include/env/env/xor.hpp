@@ -12,17 +12,13 @@ class Xor
     private:
         size_t curr = -1;
 
-        std::array<std::pair<std::vector<float>, float>, 4> data; /* {{
-                {{0.f, 0.f}, false},
-                {{0.f, 1.f}, true},
-                {{1.f, 0.f}, true},
-                {{1.f, 1.f}, false}
-            }}; */
+        std::array<std::pair<std::vector<float>, float>, 4> data;
 
     public:
         Xor();
 
         void shuffle_data();
+        void reset_data();
         void next_data();
 
         const std::vector<float>& get_x() const;

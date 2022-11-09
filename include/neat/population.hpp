@@ -1,7 +1,6 @@
 #ifndef _NEAT_POPULATION_HPP
 #define _NEAT_POPULATION_HPP
 
-// #include <cassert>
 #include <cstdlib>
 #include <cmath>
 
@@ -35,7 +34,7 @@ namespace Population
 
             void breed_child(Genotype::Genome& child, size_t& innovation) const;
 
-            size_t get_avg_fitness() const;
+            float get_avg_fitness() const;
             size_t get_staleness() const;
             float get_max_fitness() const;
 
@@ -52,7 +51,6 @@ namespace Population
             size_t curr_genome = 0;
 
             size_t generation = 0;
-            // size_t innovation = HyperParams::OUTPUTS;
             size_t innovation = 0;
 
             float max_fitness = 0.f;
@@ -88,10 +86,6 @@ namespace Population
 
             size_t get_generation() const;
             float get_max_fitness() const;
-            // size_t get_curr_specie() const;
-            // size_t get_curr_genome() const;
-            // size_t get_species_size() const;
-            // size_t get_genomes_size(size_t i);
 
             void set_max_fitness(float max_fitness);
 

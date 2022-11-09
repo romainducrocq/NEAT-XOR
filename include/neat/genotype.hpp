@@ -1,7 +1,6 @@
 #ifndef _NEAT_GENOTYPE_HPP
 #define _NEAT_GENOTYPE_HPP
 
-// #include <cassert>
 #include <cmath>
 #include <cstdlib>
 #include <cmath>
@@ -39,10 +38,6 @@ namespace Genotype
 
         float weight = 0.f;
         bool enabled = true;
-
-        //bool operator<(const Genotype::Gene& other) const {
-        //    return out < other.out;
-        //}
 
         Gene() {}
         Gene(size_t into, size_t out, size_t innovation, float weight, bool enabled)

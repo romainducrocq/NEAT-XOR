@@ -13,7 +13,10 @@ void Xor::shuffle_data()
     for(size_t i = 0; i < data.size(); i++){
         std::swap(data[i], data[std::rand() % data.size()]);
     }
+}
 
+void Xor::reset_data()
+{
     this->curr = -1;
 }
 

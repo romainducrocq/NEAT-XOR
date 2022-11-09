@@ -24,13 +24,12 @@ void Population::Specie::breed_child(Genotype::Genome& child, size_t& innovation
             .crossover(this->genomes[std::rand() % this->genomes.size()], child);
     }else{
         child.copy_genome(this->genomes[std::rand() % this->genomes.size()]);
-        // child = this->genomes[rand() % this->genomes.size()]; // copy op
     }
 
     child.mutate(innovation);
 }
 
-size_t Population::Specie::get_avg_fitness() const { return this->avg_fitness; }
+float Population::Specie::get_avg_fitness() const { return this->avg_fitness; }
 size_t Population::Specie::get_staleness() const { return this->staleness; }
 float Population::Specie::get_max_fitness() const { return this->max_fitness; }
 
@@ -96,12 +95,6 @@ void Population::Pool::cull_species(bool half)
 void Population::Pool::pop_stale_species()
 {
     for(size_t i = this->species.size(); i-- > 0 ;){
-    // for(auto& specie : this->species) {
-        /*
-        std::sort(specie.self_genomes().begin(), specie.self_genomes().end(), [](const auto &a, const auto &b) {
-            return a.get_fitness() > b.get_fitness();
-        });
-        */
 
         if(!this->species[i].self_genomes().empty() &&
            this->species[i].self_genomes()[0].get_fitness() > this->species[i].get_max_fitness()){
@@ -115,7 +108,6 @@ void Population::Pool::pop_stale_species()
            this->species[i].get_max_fitness() < this->max_fitness){
             std::swap(this->species[i], this->species.back());
             this->species.pop_back();
-            // this->species.erase(this->species.begin() + i);
         }
     }
 }
@@ -135,7 +127,6 @@ void Population::Pool::pop_weak_species()
         if(static_cast<size_t>(this->species[i].get_avg_fitness() / this->tot_avg_fitness * this->population_size) < 1){
             std::swap(this->species[i], this->species.back());
             this->species.pop_back();
-            //this->species.erase(this->species.begin() + i);
         }
     }
 
@@ -147,16 +138,12 @@ void Population::Pool::add_to_species(Genotype::Genome& child){
     for(auto& specie : this->species){
         if(!specie.self_genomes().empty() && specie.self_genomes()[0].same_specie(child)){
             specie.self_genomes().emplace_back(std::move(child));
-            // specie.self_genomes().emplace_back(); // keep move semantics ? TODO
-            // specie.self_genomes().back().copy_genome(child); //
             return;
         }
     }
 
     this->species.emplace_back();
     this->species.back().self_genomes().emplace_back(std::move(child));
-    // this->species.back().self_genomes().emplace_back(); // keep move semantics ? TODO
-    // this->species.back().self_genomes().back().copy_genome(child); //
 }
 
 // newGeneration
@@ -191,7 +178,7 @@ void Population::Pool::new_generation()
     // save to file TODO
 }
 
-// initializePool TODO
+// initializePool
 void Population::Pool::init()
 {
     *this = Population::Pool();
@@ -201,8 +188,6 @@ void Population::Pool::init()
         starter.simple_genome(this->innovation);
         this->add_to_species(starter);
     }
-
-    // init run // TODO
 }
 
 // fitnessAlreadyMeasured
@@ -243,7 +228,6 @@ void Population::Pool::copy_best_genome(Genotype::Genome& best)
                 return;
             }
         }
-        // assert(false);
     }();
 
     for(size_t s = 0; s < this->species.size(); s++){
@@ -256,9 +240,7 @@ void Population::Pool::copy_best_genome(Genotype::Genome& best)
         }
     }
 
-    // if(best.get_fitness() == 0.f || this->species[best_specie].self_genomes()[best_genome].get_fitness() > this->max_fitness){
     best.copy_genome(this->species[best_specie].self_genomes()[best_genome]);
-    //}
 }
 
 // evaluateCurrent
@@ -269,10 +251,6 @@ void Population::Pool::eval_curr_genome(const std::vector<float>& obs, std::vect
 
 size_t Population::Pool::get_generation() const { return this->generation; }
 float Population::Pool::get_max_fitness() const { return this->max_fitness; }
-// size_t Population::Pool::get_curr_specie() const { return this->curr_specie; }
-// size_t Population::Pool::get_curr_genome() const { return this->curr_genome; }
-// size_t Population::Pool::get_species_size() const { return this->species.size(); }
-// size_t Population::Pool::get_genomes_size(size_t i) { return this->species[i].self_genomes().size(); }
 
 void Population::Pool::set_max_fitness(float max_fitness) { this->max_fitness = max_fitness; }
 

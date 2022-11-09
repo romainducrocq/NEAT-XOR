@@ -4,39 +4,7 @@ Genotype::Genome::Genome()
 {
 }
 
-/*
-Genotype::Genome::Genome(Genotype::Genome&& other)
-    : inputs(other.inputs)
-    , max_neuron(other.max_neuron)
-    , mutation_rates(std::move(other.mutation_rates))
-    , genes(std::move(other.genes))
-    , innovation_set(std::move(other.innovation_set))
-    , innovation_gene_map(std::move(other.innovation_gene_map))
-{
-}
-*/
-/*
-Genotype::Genome& Genotype::Genome::operator=(const Genotype::Genome& other)
-{
-    this->inputs = other.inputs;
-    this->max_neuron = other.max_neuron;
-
-    for(const auto& mutation_rate : other.mutation_rates){
-        this->mutation_rates[mutation_rate.first] = mutation_rate.second;
-    }
-
-    for(const auto& gene : other.genes){
-        this->genes.push_back(gene);
-
-        this->innovation_set.insert(gene.innovation);
-        this->innovation_gene_map.insert({gene.innovation, std::ref(this->genes.back())});
-    }
-
-    return *this;
-}
-*/
-
-// copyGenome // TODO
+// copyGenome
 void Genotype::Genome::copy_genome(const Genotype::Genome& other)
 {
     *this = Genotype::Genome();
@@ -94,8 +62,6 @@ void Genotype::Genome::ctor_network()
 // evaluateNetwork
 void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<float>& act)
 {
-    // assert(obs.size() + 1 == this->inputs);
-
     for(size_t i = 0; i < obs.size(); i++){
         this->neurons.at(i).value = obs[i];
     }
@@ -142,31 +108,6 @@ void Genotype::Genome::rand_neurons(size_t& into, size_t& out) const
     do{
         out = *std::next(neurons.begin(), std::rand() % neurons.size());
     }while(out < this->inputs);
-
-    /*
-    std::set<size_t> neurons;
-
-    for(size_t i = 0; i < this->outputs; i++){
-        neurons.insert(i + this->lim_hidden);
-    }
-
-    for(const auto& gene : this->genes){
-        if(gene.into >= this->inputs){
-            neurons.insert(gene.into);
-        }
-        if(gene.out >= this->inputs){
-            neurons.insert(gene.out);
-        }
-    }
-
-    out = *std::next(neurons.begin(), rand() % neurons.size());
-
-    for(size_t i = 0; i < this->inputs; i++){
-        neurons.insert(i);
-    }
-
-    into = *std::next(neurons.begin(), rand() % neurons.size());
-     */
 }
 
 // newInnovation
@@ -225,37 +166,8 @@ void Genotype::Genome::mutate_link(bool bias, size_t& innovation)
         ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 4.f) - 2.f,
         true
     ));
-    this->innovation_set.insert(this->genes.back()->innovation); //
-    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
-
-    /*
-    size_t neuron1 = this->rand_neuron(true);
-    size_t neuron2 = this->rand_neuron(false);
-
-    if(neuron1 < this->inputs && neuron2 < this->inputs){
-        return;
-    }
-    if(neuron2 < this->inputs){
-        std::swap(neuron1, neuron2);
-    }
-
-    Genotype::Gene link;
-    link.into = neuron1;
-    link.out = neuron2;
-
-    if(bias){
-        link.into = this->inputs - 1;
-    }
-
-    if(this->contains_link(link)){
-        return;
-    }
-
-    link.innovation = inc_innovation(innovation);
-    link.weight = ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 4.f) - 2.f;
-
-    this->genes.push_back(link);
-     */
+    this->innovation_set.insert(this->genes.back()->innovation);
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()});
 }
 
 // nodeMutate
@@ -267,7 +179,6 @@ void Genotype::Genome::mutate_node(size_t& innovation)
 
     this->max_neuron++;
 
-    // const auto gene = this->genes[std::rand() % this->genes.size()];
     size_t gene = std::rand() % this->genes.size();
 
     if(! this->genes[gene]->enabled){
@@ -282,8 +193,8 @@ void Genotype::Genome::mutate_node(size_t& innovation)
         1.f,
         true
     ));
-    this->innovation_set.insert(this->genes.back()->innovation); //
-    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
+    this->innovation_set.insert(this->genes.back()->innovation);
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()});
 
     this->genes.push_back(std::make_shared<Genotype::Gene>(
         this->max_neuron,
@@ -292,8 +203,8 @@ void Genotype::Genome::mutate_node(size_t& innovation)
         this->genes[gene]->weight,
         true
     ));
-    this->innovation_set.insert(this->genes.back()->innovation); //
-    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
+    this->innovation_set.insert(this->genes.back()->innovation);
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()});
 }
 
 // enableDisableMutate
@@ -365,18 +276,6 @@ void Genotype::Genome::mutate(size_t& innovation)
 float Genotype::Genome::delta_disjoints(const Genotype::Genome& other) const
 {
     std::vector<size_t> disjoints;
-
-    /*
-    std::set<int> innovation_these, innovation_others;
-
-    for(const auto& gene : this->genes){
-        innovation_these.insert(gene.innovation);
-    }
-
-    for(const auto& gene : others){
-        innovation_others.insert(gene.innovation);
-    }
-     */
 
     std::set_symmetric_difference(this->innovation_set.begin(), this->innovation_set.end(),
                                   other.innovation_set.begin(), other.innovation_set.end(),

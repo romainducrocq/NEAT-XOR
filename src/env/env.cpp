@@ -27,35 +27,24 @@ void Env::done_func()
 void Env::fitness_func()
 {
     switch(this->Super::mode) {
-
-        /* TODO
-         * IN PROGRESS
-         */
         case Super::MODE::TRAIN:
-            if(this->Super::mdp.act[0] > 0){
-                this->Super::mdp.fitness -= pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
-            }
+            this->Super::mdp.fitness += 1.f - std::pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
 
-            this->Super::mdp.fitness -= pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
             if (this->Super::mdp.done) {
-                this->Super::mdp.fitness += 4.f;
                 if (this->Super::mdp.fitness == 0.f) {
-                    this->Super::mdp.fitness = -1.f;
+                    this->Super::mdp.fitness = std::numeric_limits<float>::min();
                 }
             }
             break;
 
         case Super::MODE::EVAL:
             std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
-            this->Super::mdp.fitness += ((this->Super::mdp.act[0] + 1.f) / 2.f);
+            this->Super::mdp.fitness += 1.f - std::abs(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y());
 
             break;
 
         default:
             break;
-        /*
-         *
-         */
     }
 
     if (this->Super::mdp.done) {
@@ -69,9 +58,6 @@ void Env::info_func()
 
         case Super::MODE::TRAIN:
             std::cout << "GENERATION  : " << this->Super::pool.get_generation() << " / " << this->Super::max_generation << "\n";
-            // std::cout << "SPECIE      : " << this->Super::pool.get_curr_specie() << " / " << this->Super::pool.get_species_size() << "\n";
-            // std::cout << "GENOME      : " << this->Super::pool.get_curr_genome() << " / " << this->Super::pool.get_genomes_size(this->Super::pool.get_curr_genome()) << "\n";
-            // std::cout << "FITNESS     : " << this->Super::mdp.fitness << "\n";
             std::cout << "MAX FITNESS : " << this->Super::pool.get_max_fitness() << "\n";
             std::cout << "MVG AVG     : " << this->mvg_avg.get() << "\n";
             std::cout << "\n";
@@ -97,7 +83,8 @@ bool Env::noop_func()
 
 void Env::reset_func()
 {
-    this->agent.shuffle_data();
+    // this->agent.shuffle_data();
+    this->agent.reset_data();
 }
 
 void Env::step_func()

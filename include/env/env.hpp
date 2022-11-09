@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <limits>
 
 #include "neat/neat.hpp"
 

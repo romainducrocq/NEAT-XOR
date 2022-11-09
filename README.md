@@ -9,7 +9,8 @@
 ### Build
 
 - **Dep**: `sudo apt-get update && apt-get install g++ cmake valgrind`  
-- **Run**: `cd bin && ./build.sh && ./compile.sh && ./run.sh -g 300 -p 150`  
+- **Run**: `cd bin && ./build.sh && ./compile.sh && ./run.sh -g 300 -p 150`   
+- **(Valgrind Memcheck)**: `cd bin && ./build.sh && ./compile.sh && ./debug.sh -g 15 -p 15 && cat apps/out.txt`  
 
 ```
 usage: apps/exec [-h] [-g GEN] [-p POP]

@@ -2,6 +2,7 @@
 #define _NEAT_GENOTYPE_HPP
 
 // #include <cassert>
+#include <cmath>
 #include <cstdlib>
 #include <cmath>
 #include <cstring>
@@ -16,6 +17,7 @@
 #include <algorithm>
 #include <functional>
 #include <utility>
+#include <memory>
 
 #include "env/hyperparams.hpp"
 
@@ -25,7 +27,7 @@ namespace Genotype
     {
         static inline float sigmoid(float z)
         {
-            return 2.f / (1.f + exp(-4.9f * z)) - 1.f;
+            return 2.f / (1.f + std::exp(-4.9f * z)) - 1.f;
         }
     };
 
@@ -38,9 +40,9 @@ namespace Genotype
         float weight = 0.f;
         bool enabled = true;
 
-        bool operator<(const Genotype::Gene& other) const {
-            return out < other.out;
-        }
+        //bool operator<(const Genotype::Gene& other) const {
+        //    return out < other.out;
+        //}
 
         Gene() {}
         Gene(size_t into, size_t out, size_t innovation, float weight, bool enabled)
@@ -49,7 +51,7 @@ namespace Genotype
 
     struct Neuron
     {
-        std::vector<std::reference_wrapper<Genotype::Gene>> incoming;
+        std::vector<std::shared_ptr<Genotype::Gene>> incoming;
         float value = 0.f;
     };
 
@@ -81,11 +83,11 @@ namespace Genotype
             float d_weight = HyperParams::DELTA_WEIGHTS;
             float d_threshold = HyperParams::DELTA_THRESHOLD;
 
-            std::vector<Genotype::Gene> genes;
+            std::vector<std::shared_ptr<Genotype::Gene>> genes;
             std::map<size_t, Genotype::Neuron> neurons;
 
             std::set<size_t> innovation_set;
-            std::unordered_map<size_t, std::reference_wrapper<Genotype::Gene>> innovation_gene_map;
+            std::unordered_map<size_t, std::shared_ptr<Genotype::Gene>> innovation_gene_map;
 
             float(*activation_func)(float) = Genotype::Activation::sigmoid;
 
@@ -105,7 +107,6 @@ namespace Genotype
 
         public:
             Genome();
-            Genome(size_t inputs);
             Genome(const Genotype::Genome& other) = delete;
             Genome(Genotype::Genome&& other) noexcept = default;
             Genotype::Genome& operator=(const Genotype::Genome& other) = delete;

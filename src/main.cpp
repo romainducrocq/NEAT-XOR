@@ -6,7 +6,7 @@
 #include "env/env.hpp"
 #include "env/env/utils.hpp"
 
-int main(int argc, char** argv)
+int main()
 {
     std::srand(time(nullptr));
 

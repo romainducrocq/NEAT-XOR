@@ -49,10 +49,10 @@ void Genotype::Genome::copy_genome(const Genotype::Genome& other)
     }
 
     for(const auto& gene : other.genes){
-        this->genes.push_back(gene);
+        this->genes.push_back(std::make_shared<Genotype::Gene>(*gene));
 
-        this->innovation_set.insert(gene.innovation);
-        this->innovation_gene_map.insert({gene.innovation, std::ref(this->genes.back())});
+        this->innovation_set.insert(this->genes.back()->innovation);
+        this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()});
     }
 }
 
@@ -70,19 +70,21 @@ void Genotype::Genome::ctor_network()
                               std::forward_as_tuple());
     }
 
-    std::sort(this->genes.begin(), this->genes.end());
+    std::sort(this->genes.begin(), this->genes.end(), [](const auto& a, const auto& b) {
+        return a->out < b->out;
+    });
 
     for(auto& gene : this->genes){
-        if(gene.enabled){
-            if(!this->neurons.count(gene.out)){
-                this->neurons.emplace(std::piecewise_construct, std::forward_as_tuple(gene.out),
+        if(gene->enabled){
+            if(!this->neurons.count(gene->out)){
+                this->neurons.emplace(std::piecewise_construct, std::forward_as_tuple(gene->out),
                                       std::forward_as_tuple());
             }
 
-            this->neurons.at(gene.out).incoming.push_back(std::ref(gene));
+            this->neurons.at(gene->out).incoming.push_back(gene);
 
-            if(!this->neurons.count(gene.into)){
-                this->neurons.emplace(std::piecewise_construct, std::forward_as_tuple(gene.into),
+            if(!this->neurons.count(gene->into)){
+                this->neurons.emplace(std::piecewise_construct, std::forward_as_tuple(gene->into),
                                       std::forward_as_tuple());
             }
         }
@@ -100,10 +102,10 @@ void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<f
     this->neurons.at(obs.size()).value = 1.f; // bias
 
     for(auto& neuron : this->neurons){
-        if(neuron.second.incoming.size() > 0) {
+        if(! neuron.second.incoming.empty()) {
             float dot = 0.f;
-            for(const auto &gene : neuron.second.incoming) {
-                dot += gene.get().weight * this->neurons.at(gene.get().into).value;
+            for(const auto& gene : neuron.second.incoming) {
+                dot += gene->weight * this->neurons.at(gene->into).value;
             }
 
             neuron.second.value = this->activation_func(dot);
@@ -112,7 +114,6 @@ void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<f
 
     // classification
     for(size_t i = 0; i < this->outputs; i++){
-        // std::cout << this->neurons.at(i + this->lim_hidden).value << "\n";
         // act[i] = this->neurons.at(i + this->lim_hidden).value > 0;
         act[i] = this->neurons.at(i + this->lim_hidden).value;
     }
@@ -132,14 +133,14 @@ void Genotype::Genome::rand_neurons(size_t& into, size_t& out) const
     }
 
     for(const auto& gene : this->genes){
-        neurons.insert(gene.into);
-        neurons.insert(gene.out);
+        neurons.insert(gene->into);
+        neurons.insert(gene->out);
     }
 
-    into = *std::next(neurons.begin(), rand() % neurons.size());
+    into = *std::next(neurons.begin(), std::rand() % neurons.size());
 
     do{
-        out = *std::next(neurons.begin(), rand() % neurons.size());
+        out = *std::next(neurons.begin(), std::rand() % neurons.size());
     }while(out < this->inputs);
 
     /*
@@ -179,7 +180,7 @@ size_t Genotype::Genome::inc_innovation(size_t& innovation) const
 bool Genotype::Genome::contains_link(size_t into, size_t out) const
 {
     return std::find_if(this->genes.begin(), this->genes.end(), [&](const auto& gene){
-        return gene.into == into && gene.out == out;
+        return gene->into == into && gene->out == out;
     }) != this->genes.end();
 }
 
@@ -188,9 +189,9 @@ void Genotype::Genome::mutate_point()
 {
     for(auto& gene : this->genes){
         if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < this->mutation_rate_weight){
-            gene.weight = ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 4.f) - 2.f;
+            gene->weight = ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 4.f) - 2.f;
         } else {
-            gene.weight += ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX))
+            gene->weight += ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX))
                             * (this->mutation_rates["offset"] * 2.f)) - this->mutation_rates["offset"];
         }
     }
@@ -217,15 +218,15 @@ void Genotype::Genome::mutate_link(bool bias, size_t& innovation)
         return;
     }
 
-    this->genes.emplace_back(
+    this->genes.push_back(std::make_shared<Genotype::Gene>(
         into,
         out,
         this->inc_innovation(innovation),
         ((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) * 4.f) - 2.f,
         true
-    );
-    this->innovation_set.insert(this->genes.back().innovation); //
-    this->innovation_gene_map.insert({this->genes.back().innovation, std::ref(this->genes.back())}); //
+    ));
+    this->innovation_set.insert(this->genes.back()->innovation); //
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
 
     /*
     size_t neuron1 = this->rand_neuron(true);
@@ -266,31 +267,33 @@ void Genotype::Genome::mutate_node(size_t& innovation)
 
     this->max_neuron++;
 
-    auto& gene = this->genes[std::rand() % this->genes.size()];
-    if(! gene.enabled){
+    // const auto gene = this->genes[std::rand() % this->genes.size()];
+    size_t gene = std::rand() % this->genes.size();
+
+    if(! this->genes[gene]->enabled){
         return;
     }
-    gene.enabled = false;
+    this->genes[gene]->enabled = false;
 
-    this->genes.emplace_back(
-        gene.into,
+    this->genes.push_back(std::make_shared<Genotype::Gene>(
+        this->genes[gene]->into,
         this->max_neuron,
         this->inc_innovation(innovation),
         1.f,
         true
-    );
-    this->innovation_set.insert(this->genes.back().innovation); //
-    this->innovation_gene_map.insert({this->genes.back().innovation, std::ref(this->genes.back())}); //
+    ));
+    this->innovation_set.insert(this->genes.back()->innovation); //
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
 
-    this->genes.emplace_back(
+    this->genes.push_back(std::make_shared<Genotype::Gene>(
         this->max_neuron,
-        gene.out,
+        this->genes[gene]->out,
         this->inc_innovation(innovation),
-        gene.weight,
+        this->genes[gene]->weight,
         true
-    );
-    this->innovation_set.insert(this->genes.back().innovation); //
-    this->innovation_gene_map.insert({this->genes.back().innovation, std::ref(this->genes.back())}); //
+    ));
+    this->innovation_set.insert(this->genes.back()->innovation); //
+    this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()}); //
 }
 
 // enableDisableMutate
@@ -299,7 +302,7 @@ void Genotype::Genome::mutate_enable(bool enable)
     std::vector<size_t> candidates;
 
     for(size_t i = 0; i < this->genes.size(); i++){
-        if(this->genes[i].enabled != enable){
+        if(this->genes[i]->enabled != enable){
             candidates.push_back(i);
         }
     }
@@ -309,7 +312,7 @@ void Genotype::Genome::mutate_enable(bool enable)
     }
 
     size_t gene = candidates[std::rand() % candidates.size()];
-    this->genes[gene].enabled = ! this->genes[gene].enabled;
+    this->genes[gene]->enabled = ! this->genes[gene]->enabled;
 }
 
 // mutate
@@ -389,8 +392,8 @@ float Genotype::Genome::delta_weights(const Genotype::Genome& other) const
     size_t coincident = 0;
 
     for(const auto& gene : this->genes){
-        if(other.innovation_gene_map.count(gene.innovation)){
-            sum += std::abs(gene.weight - other.innovation_gene_map.at(gene.innovation).get().weight);
+        if(other.innovation_gene_map.count(gene->innovation)){
+            sum += std::abs(gene->weight - other.innovation_gene_map.at(gene->innovation)->weight);
             coincident += 1;
         }
     }
@@ -422,16 +425,17 @@ void Genotype::Genome::crossover(const Genotype::Genome& other, Genotype::Genome
     }
 
     for(const auto& gene : p1_genome->genes){
-        if(p2_genome->innovation_gene_map.count(gene.innovation) &&
-           p2_genome->innovation_gene_map.at(gene.innovation).get().enabled &&
+        if(p2_genome->innovation_gene_map.count(gene->innovation) &&
+           p2_genome->innovation_gene_map.at(gene->innovation)->enabled &&
            std::rand() % 2){
-            child.genes.push_back(p2_genome->innovation_gene_map.at(gene.innovation).get());
+            child.genes.push_back(
+                    std::make_shared<Genotype::Gene>(*(p2_genome->innovation_gene_map.at(gene->innovation))));
         }else{
-            child.genes.push_back(gene);
+            child.genes.push_back(std::make_shared<Genotype::Gene>(*gene));
         }
 
-        child.innovation_set.insert(gene.innovation);
-        child.innovation_gene_map.insert({gene.innovation, std::ref(child.genes.back())});
+        child.innovation_set.insert(child.genes.back()->innovation);
+        child.innovation_gene_map.insert({child.genes.back()->innovation, child.genes.back()});
     }
 }
 

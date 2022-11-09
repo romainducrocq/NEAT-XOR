@@ -20,9 +20,10 @@ void Population::Specie::calc_avg_fitness()
 void Population::Specie::breed_child(Genotype::Genome& child, size_t& innovation) const
 {
     if((static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX)) < this->crossover_prob){
-        this->genomes[rand() % this->genomes.size()].crossover(this->genomes[rand() % this->genomes.size()], child);
+        this->genomes[std::rand() % this->genomes.size()]
+            .crossover(this->genomes[std::rand() % this->genomes.size()], child);
     }else{
-        child.copy_genome(this->genomes[rand() % this->genomes.size()]);
+        child.copy_genome(this->genomes[std::rand() % this->genomes.size()]);
         // child = this->genomes[rand() % this->genomes.size()]; // copy op
     }
 
@@ -178,7 +179,7 @@ void Population::Pool::new_generation()
 
     while(children.size() + this->species.size() < this->population_size){
         children.emplace_back();
-        this->species[rand() % this->species.size()].breed_child(children.back(), this->innovation);
+        this->species[std::rand() % this->species.size()].breed_child(children.back(), this->innovation);
     }
 
     for(auto& child : children){

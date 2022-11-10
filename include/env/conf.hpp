@@ -57,15 +57,15 @@ struct DefaultConf {
                 default :
                     std::cerr << "usage: apps/exec [-h] [-g NUM] [-p SIZ] [-l PLT] \n";
                     std::cerr << "\n";
-                    std::cerr << "NEAT XOR                                \n";
+                    std::cerr << "NEAT XOR                                         \n";
                     std::cerr << "\n";
-                    std::cerr << "optional args:                          \n";
-                    std::cerr << "  -h      Print this help and exit      \n";
-                    std::cerr << "  params:                               \n";
-                    std::cerr << "  -g NUM  Set generation number         \n";
-                    std::cerr << "  -p SIZ  Set population size           \n";
-                    std::cerr << "  utils:                                \n";
-                    std::cerr << "  -l PLT  Set plot log file name        \n";
+                    std::cerr << "optional args:                                   \n";
+                    std::cerr << "  -h      Print this help and exit               \n";
+                    std::cerr << "  params:                                        \n";
+                    std::cerr << "  -g NUM  Set generation number                  \n";
+                    std::cerr << "  -p SIZ  Set population size                    \n";
+                    std::cerr << "  utils:                                         \n";
+                    std::cerr << "  -l PLT  Set plot log file name                 \n";
 
                     return false;
 

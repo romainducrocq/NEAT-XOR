@@ -12,17 +12,20 @@
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150`  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150`  
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat apps/out.txt`  
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat ../log/valgrind/out.txt`  
 
 ```
-usage: apps/exec [-h] [-g GEN] [-p POP]
+usage: apps/exec [-h] [-g NUM] [-p SIZ] [-l PLT]
 
 NEAT XOR
 
 optional args:
-  -h      Print help and exit
-  -g GEN  Set generation number
-  -p POP  Set population size
+  -h      Print this help and exit
+  params:
+  -g NUM  Set generation number
+  -p SIZ  Set population size
+  utils:
+  -l PLT  Set plot log file name
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`
 

@@ -24,6 +24,7 @@ optional args:
   -g GEN  Set generation number
   -p POP  Set population size
 ```
+> Hyperparameter configuration file: `include/env/conf.hpp`
 
 ****
 

@@ -10,9 +10,9 @@
 
 `cd bin`
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150`  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150`  
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat apps/out.txt`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150`  
 
 ```
 usage: apps/exec [-h] [-g GEN] [-p POP]

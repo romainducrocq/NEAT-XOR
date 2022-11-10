@@ -8,10 +8,11 @@
 
 ### Run
 
-- **Install**&nbsp;&nbsp;: `sudo apt-get update && apt-get install g++ cmake valgrind` or `cd bin && ./make.sh`  
-- **Debug**&nbsp;&nbsp;&nbsp;&nbsp;: `cd bin` && `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150`  
-- **Memcheck**&nbsp;: `cd bin` && `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat apps/out.txt`  
-- **Release**&nbsp;&nbsp;: `cd bin` && `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150`  
+`cd bin`
+- **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150`  
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat apps/out.txt`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150`  
 
 ```
 usage: apps/exec [-h] [-g GEN] [-p POP]
@@ -28,7 +29,7 @@ optional args:
 
 ### Demo
 
-- `cd bin && ./app.sh`
+`cd bin && ./app.sh`
 
 ```
 -------------------------------EVAL--------------------------------

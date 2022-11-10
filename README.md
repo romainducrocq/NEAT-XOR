@@ -20,7 +20,7 @@ usage: apps/exec [-h] [-g GEN] [-p POP]
 NEAT XOR
 
 optional args:
-  -h      Print this help and exit
+  -h      Print help and exit
   -g GEN  Set generation number
   -p POP  Set population size
 ```

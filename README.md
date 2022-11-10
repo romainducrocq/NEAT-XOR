@@ -15,15 +15,15 @@
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat ../log/valgrind/out.txt`  
 
 ```
-usage: apps/exec [-h] [-g NUM] [-p SIZ] [-l PLT]
+usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT]
 
 NEAT XOR
 
 optional args:
   -h      Print help and exit
   params:
-  -g NUM  Set generation number
-  -p SIZ  Set population size
+  -g GEN  Set generation number
+  -p POP  Set population size
   utils:
   -l PLT  Set plot log file name
 ```

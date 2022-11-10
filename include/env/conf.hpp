@@ -38,40 +38,50 @@ struct DefaultConf {
     const static size_t ACT_REPEAT;
     const static size_t MAX_NOOP;
     const static size_t MAX_STEP;
-    const static size_t EPOCHS;
+    const static size_t MVG_AVG;
+    const static size_t EPOCHS_EVAL;
 
     static size_t POPULATION_SIZE;
-    static size_t GENERATIONS;
+    static size_t GENERATIONS_TRAIN;
+
+    static std::string LOG_PLT;
 
     static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
         for(;;){
-            switch(getopt(argc, argv, "h:g:p:")){
+            switch(getopt(argc, argv, "h:g:l:p:")){
                 case '?': // help
                 case 'h':
                 default :
-                    std::cerr << "usage: apps/exec [-h] [-g GEN] [-p POP] \n";
+                    std::cerr << "usage: apps/exec [-h] [-g NUM] [-p SIZ] [-l PLT] \n";
                     std::cerr << "\n";
                     std::cerr << "NEAT XOR                                \n";
                     std::cerr << "\n";
                     std::cerr << "optional args:                          \n";
                     std::cerr << "  -h      Print this help and exit      \n";
-                    std::cerr << "  -g GEN  Set generation number         \n";
-                    std::cerr << "  -p POP  Set population size           \n";
+                    std::cerr << "  params:                               \n";
+                    std::cerr << "  -g NUM  Set generation number         \n";
+                    std::cerr << "  -p SIZ  Set population size           \n";
+                    std::cerr << "  utils:                                \n";
+                    std::cerr << "  -l PLT  Set plot log file name        \n";
 
                     return false;
 
                 case -1:
                     break;
 
-                case 'g': // generations
-                    DefaultConf<T>::GENERATIONS = static_cast<size_t>(std::atoi(optarg));
+                case 'g': // generation number
+                    DefaultConf<T>::GENERATIONS_TRAIN = static_cast<size_t>(std::atoi(optarg));
                     continue;
 
                 case 'p': // population size
                     DefaultConf<T>::POPULATION_SIZE = static_cast<size_t>(std::atoi(optarg));
+                    continue;
+
+                case 'l': // plot log file name
+                    DefaultConf<T>::LOG_PLT = std::string(optarg);
                     continue;
             }
             break;
@@ -120,12 +130,16 @@ const size_t DefaultConf<T>::MAX_NOOP = 0;
 template<typename T>
 const size_t DefaultConf<T>::MAX_STEP = 0;
 template<typename T>
-const size_t DefaultConf<T>::EPOCHS = 10;
+const size_t DefaultConf<T>::MVG_AVG = 20;
+template<typename T>
+const size_t DefaultConf<T>::EPOCHS_EVAL = 10;
 
 template<typename T>
 size_t DefaultConf<T>::POPULATION_SIZE = 150;
 template<typename T>
-size_t DefaultConf<T>::GENERATIONS = 300;
+size_t DefaultConf<T>::GENERATIONS_TRAIN = 300;
+template<typename T>
+std::string DefaultConf<T>::LOG_PLT = "";
 
 using CONF = DefaultConf<int>;
 

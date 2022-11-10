@@ -61,6 +61,11 @@ public:
     {
         return this->avg;
     }
+
+    size_t max() const
+    {
+        return this->n;
+    }
 };
 
 #endif

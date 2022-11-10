@@ -1,17 +1,23 @@
 #ifndef _NEAT_NEAT_HPP
 #define _NEAT_NEAT_HPP
 
-#include <vector>
-
 #include <limits>
 #include <cstring>
 #include <sstream>
+
+#include <vector>
+#include <utility>
+
+#include <algorithm>
 
 #include "env/conf.hpp"
 
 #include "neat/population.hpp"
 
 #include "utils/utils.hpp"
+
+#include "pbplots/pbPlots.hpp"
+#include "pbplots/supportLib.hpp"
 
 class Neat
 {
@@ -27,17 +33,14 @@ class Neat
         enum MODE { TEST, PLAY, EVAL, TRAIN };
         size_t mode = Neat::MODE::TEST;
 
-        MovingAverage mvg_avg;
-        std::stringstream ss_info;
-
         size_t inputs = CONF::INPUTS;
         size_t outputs = CONF::OUTPUTS;
 
         size_t repeat = CONF::ACT_REPEAT;
         size_t max_noop = CONF::MAX_NOOP;
         size_t max_step = CONF::MAX_STEP;
-        size_t max_epoch = CONF::EPOCHS;
-        size_t max_generation = CONF::GENERATIONS;
+        size_t max_epoch_eval = CONF::EPOCHS_EVAL;
+        size_t max_generation_train = CONF::GENERATIONS_TRAIN;
 
         size_t steps = 0;
         size_t noops = 0;
@@ -49,6 +52,12 @@ class Neat
         Population::Pool pool;
 
         Genotype::Genome best;
+
+        size_t mvg_avg_max = CONF::MVG_AVG;
+        std::string log_plt = CONF::LOG_PLT;
+        MovingAverage mvg_avg;
+        std::stringstream ss_info;
+        std::pair<std::vector<double>, std::vector<double>> plt_data;
 
     protected:
         virtual void init_func() = 0;
@@ -81,6 +90,9 @@ class Neat
 
         void reset_render();
         void step_render();
+
+        void to_plt();
+        void plot();
 
     public:
         Neat();

@@ -8,7 +8,7 @@ void Neat::init()
 {
     this->init_func();
 
-    this->mvg_avg = MovingAverage(20);
+    this->mvg_avg = MovingAverage(this->mvg_avg_max);
 
     this->mdp.obs.clear();
     for(size_t i = 0; i < this->inputs; i++){
@@ -186,15 +186,19 @@ void Neat::train()
 
             if(this->generation < this->pool.get_generation()){
                 this->info();
+
+                if(! this->log_plt.empty()) { this->to_plt(); }
             }
 
             this->reset();
         }
 
-        if(this->max_generation && this->generation >= this->max_generation){
+        if(this->max_generation_train && this->generation >= this->max_generation_train){
             break;
         }
     }
+
+    if(! this->log_plt.empty()) { this->plot(); }
 }
 
 void Neat::eval()
@@ -214,8 +218,46 @@ void Neat::eval()
             this->reset();
         }
 
-        if(this->max_epoch && this->epoch > this->max_epoch){
+        if(this->max_epoch_eval && this->epoch > this->max_epoch_eval){
             break;
         }
     }
+}
+
+void Neat::to_plt()
+{
+    this->plt_data.first.push_back(static_cast<double>(this->generation));
+    this->plt_data.second.push_back(static_cast<double>(this->mvg_avg.get()));
+}
+
+void Neat::plot()
+{
+    RGBABitmapImageReference* imageReference = CreateRGBABitmapImageReference();
+
+    ScatterPlotSeries* series = GetDefaultScatterPlotSeriesSettings();
+    series->xs = &this->plt_data.first;
+    series->ys = &this->plt_data.second;
+    series->linearInterpolation = true;
+    series->lineType = toVector(L"solid");
+    series->color = CreateRGBColor(0, 0, 1);
+
+    std::string str;
+    ScatterPlotSettings* settings = GetDefaultScatterPlotSettings();
+    settings->width = 1200;
+    settings->height = 800;
+    settings->autoBoundaries = true;
+    settings->autoPadding = true;
+    str = "Learning Curve : " + this->log_plt;
+    settings->title = toVector(std::wstring(str.begin(), str.end()).c_str());
+    str = "Generations (" + std::to_string(this->max_generation_train) + ")";
+    settings->xLabel = toVector(std::wstring(str.begin(), str.end()).c_str());
+    str = "Fitness (Mvg Avg " + std::to_string(this->mvg_avg.max()) + ")";
+    settings->yLabel = toVector(std::wstring(str.begin(), str.end()).c_str());
+    settings->scatterPlotSeries->push_back(series);
+
+    DrawScatterPlotFromSettings(imageReference, settings, nullptr);
+
+    std::vector<double>* pngData = ConvertToPNG(imageReference->image);
+    WriteToFile(pngData, "../../log/plots/" + this->log_plt + ".png");
+    DeleteImage(imageReference->image);
 }

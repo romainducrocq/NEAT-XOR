@@ -13,5 +13,5 @@ valgrind --leak-check=full \
          --show-leak-kinds=all \
          --track-origins=yes \
          --verbose \
-         --log-file=out.txt \
+         --log-file=$(dirname $(dirname $(pwd)))/log/valgrind/out.txt \
          ./exec${args}

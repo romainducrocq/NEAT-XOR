@@ -8,6 +8,8 @@ void Neat::init()
 {
     this->init_func();
 
+    this->mvg_avg = MovingAverage(20);
+
     this->mdp.obs.clear();
     for(size_t i = 0; i < this->inputs; i++){
         this->mdp.obs.push_back(0.f);
@@ -58,11 +60,21 @@ void Neat::done()
 void Neat::fitness()
 {
     this->fitness_func();
+
+    if (this->mdp.done) {
+        if (this->mdp.fitness == 0.f) {
+            this->mdp.fitness = std::numeric_limits<float>::min();
+        }
+
+        this->mvg_avg.add(this->mdp.fitness);
+    }
 }
 
 void Neat::info()
 {
     this->info_func();
+
+    this->ss_info.str(std::string());
 }
 
 void Neat::noop()

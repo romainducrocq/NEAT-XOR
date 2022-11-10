@@ -3,9 +3,15 @@
 
 #include <vector>
 
+#include <limits>
+#include <cstring>
+#include <sstream>
+
 #include "env/conf.hpp"
 
 #include "neat/population.hpp"
+
+#include "utils/utils.hpp"
 
 class Neat
 {
@@ -20,6 +26,9 @@ class Neat
     protected:
         enum MODE { TEST, PLAY, EVAL, TRAIN };
         size_t mode = Neat::MODE::TEST;
+
+        MovingAverage mvg_avg;
+        std::stringstream ss_info;
 
         size_t inputs = CONF::INPUTS;
         size_t outputs = CONF::OUTPUTS;

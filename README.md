@@ -1,4 +1,4 @@
-### Simple XOR PROBLEM with NEAT
+### [C++] Simple XOR PROBLEM with NEAT
 
 - The NeuroEvolution of Augmenting Topologies (NEAT) User Page: http://www.cs.ucf.edu/~kstanley/neat.html
 - MarI/O - Machine Learning for Video Games (SethBling): https://www.youtube.com/watch?v=qv6UVOQ0F44 

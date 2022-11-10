@@ -62,6 +62,10 @@ void Genotype::Genome::ctor_network()
 // evaluateNetwork
 void Genotype::Genome::eval_network(const std::vector<float>& obs, std::vector<float>& act)
 {
+    for(auto& neuron : this->neurons){
+        neuron.second.value = 0.f;
+    }
+
     for(size_t i = 0; i < obs.size(); i++){
         this->neurons.at(i).value = obs[i];
     }

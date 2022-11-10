@@ -38,7 +38,10 @@ void Env::fitness_func()
             break;
 
         case Super::MODE::EVAL:
-            // std::cout << ((this->Super::mdp.act[0] + 1.f) / 2.f) << " " << this->agent.get_y() << "\n";
+            this->ss_info << "#" << this->Super::steps << " | "
+                          << this->agent.get_x()[0] << " " << this->agent.get_x()[1] << " | "
+                          << this->agent.get_y()                                     << " | "
+                          << ((this->Super::mdp.act[0] + 1.f) / 2.f)                 << " | " << "\n";
             this->Super::mdp.fitness += 1.f - std::abs(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y());
 
             break;
@@ -68,7 +71,13 @@ void Env::info_func()
             std::cout << "SUCCESS : " << this->Super::mdp.fitness << " / " << this->Super::steps << "\n";
             std::cout << "RATE    : " << (this->Super::mdp.fitness / this->Super::steps) << "\n";
             std::cout << "MVG AVG : " << this->mvg_avg.get() << "\n";
+            std::cout << "   |  X  | Y | H |" << "\n";
+            std::cout << "---|-----|---|---|" << "\n";
+            std::cout << this->ss_info.str();
+            std::cout << "------------------" << "\n";
             std::cout << "\n";
+
+            this->ss_info.str(std::string());
             break;
 
         default:
@@ -83,7 +92,7 @@ bool Env::noop_func()
 
 void Env::reset_func()
 {
-    // this->agent.shuffle_data();
+    this->agent.shuffle_data();
     this->agent.reset_data();
 }
 

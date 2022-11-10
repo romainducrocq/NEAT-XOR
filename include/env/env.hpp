@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cmath>
 #include <limits>
+#include <cstring>
+#include <sstream>
 
 #include "neat/neat.hpp"
 
@@ -18,6 +20,7 @@ class Env: public Neat
     private:
         Xor agent;
         MovingAverage mvg_avg;
+        std::stringstream ss_info;
 
     private:
         void init_func() override;

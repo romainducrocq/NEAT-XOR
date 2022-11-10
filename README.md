@@ -20,7 +20,7 @@ usage: apps/exec [-h] [-g NUM] [-p SIZ] [-l PLT]
 NEAT XOR
 
 optional args:
-  -h      Print this help and exit
+  -h      Print help and exit
   params:
   -g NUM  Set generation number
   -p SIZ  Set population size

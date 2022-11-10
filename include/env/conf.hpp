@@ -60,7 +60,7 @@ struct DefaultConf {
                     std::cerr << "NEAT XOR                                         \n";
                     std::cerr << "\n";
                     std::cerr << "optional args:                                   \n";
-                    std::cerr << "  -h      Print this help and exit               \n";
+                    std::cerr << "  -h      Print help and exit                    \n";
                     std::cerr << "  params:                                        \n";
                     std::cerr << "  -g NUM  Set generation number                  \n";
                     std::cerr << "  -p SIZ  Set population size                    \n";

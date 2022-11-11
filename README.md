@@ -10,8 +10,14 @@
 
 `cd bin`
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
-- **Run**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav && ./run.sh -m eval -s sav`  
-- or `./app.sh`  
+- **Run**:
+```
+./build.sh -R
+./compile.sh
+./run.sh -m train -g 300 -p 150 -l plt -s sav
+./run.sh -m eval -s sav
+```
+    - or `./app.sh`  
 
 ### Train
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -p 15`  

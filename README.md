@@ -10,12 +10,12 @@
 
 `cd bin`
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150 -l plt`  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150 -l plt`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150 -l plt -s sav`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150 -l plt -s sav`  
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15 && cat ../log/valgrind/out.txt`  
 
 ```
-usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT]
+usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] [-s SAV]
 
 NEAT XOR
 
@@ -26,6 +26,7 @@ optional args:
   -p POP  Set population size
   utils:
   -l PLT  Set plot log file name
+  -s SAV  Set save sav file name
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`
 

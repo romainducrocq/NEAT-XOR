@@ -123,7 +123,7 @@ namespace Genotype
 
             void simple_genome(size_t& innovation);
 
-            void save() const;
+            void save(const std::string& file) const;
             void load(const std::string& file);
 
             float get_fitness() const;

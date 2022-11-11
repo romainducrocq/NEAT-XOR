@@ -346,7 +346,7 @@ void Genotype::Genome::simple_genome(size_t& innovation)
     this->mutate(innovation);
 }
 
-void Genotype::Genome::save() const
+void Genotype::Genome::save(const std::string& file) const
 {
     nlohmann::json j;
 
@@ -361,7 +361,7 @@ void Genotype::Genome::save() const
 
     std::cout << j.dump(4) << std::endl;
 
-    std::ofstream o("../../log/save/sav.json");
+    std::ofstream o("../../log/save/" + file + ".json");
     o << std::setw(4) << j << std::endl;
 }
 

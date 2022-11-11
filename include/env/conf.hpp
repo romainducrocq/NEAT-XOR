@@ -45,27 +45,29 @@ struct DefaultConf {
     static size_t GENERATIONS_TRAIN;
 
     static std::string LOG_PLT;
+    static std::string LOG_SAV;
 
     static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
         for(;;){
-            switch(getopt(argc, argv, "h:g:l:p:")){
+            switch(getopt(argc, argv, "h:g:l:p:s:")){
                 case '?': // help
                 case 'h':
                 default :
-                    std::cerr << "usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] \n";
+                    std::cerr << "usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] [-s SAV] \n";
                     std::cerr << "\n";
-                    std::cerr << "NEAT XOR                                         \n";
+                    std::cerr << "NEAT XOR                                                  \n";
                     std::cerr << "\n";
-                    std::cerr << "optional args:                                   \n";
-                    std::cerr << "  -h      Print help and exit                    \n";
-                    std::cerr << "  params:                                        \n";
-                    std::cerr << "  -g GEN  Set generation number                  \n";
-                    std::cerr << "  -p POP  Set population size                    \n";
-                    std::cerr << "  utils:                                         \n";
-                    std::cerr << "  -l PLT  Set plot log file name                 \n";
+                    std::cerr << "optional args:                                            \n";
+                    std::cerr << "  -h      Print help and exit                             \n";
+                    std::cerr << "  params:                                                 \n";
+                    std::cerr << "  -g GEN  Set generation number                           \n";
+                    std::cerr << "  -p POP  Set population size                             \n";
+                    std::cerr << "  utils:                                                  \n";
+                    std::cerr << "  -l PLT  Set plot log file name                          \n";
+                    std::cerr << "  -s SAV  Set save sav file name                          \n";
 
                     return false;
 
@@ -82,6 +84,10 @@ struct DefaultConf {
 
                 case 'l': // plot log file name
                     DefaultConf<T>::LOG_PLT = std::string(optarg);
+                    continue;
+
+                case 's': // save sav file name
+                    DefaultConf<T>::LOG_SAV = std::string(optarg);
                     continue;
             }
             break;
@@ -140,6 +146,8 @@ template<typename T>
 size_t DefaultConf<T>::GENERATIONS_TRAIN = 300;
 template<typename T>
 std::string DefaultConf<T>::LOG_PLT = "";
+template<typename T>
+std::string DefaultConf<T>::LOG_SAV = "";
 
 using CONF = DefaultConf<int>;
 

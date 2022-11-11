@@ -55,6 +55,7 @@ class Neat
 
         size_t mvg_avg_max = CONF::MVG_AVG;
         std::string log_plt = CONF::LOG_PLT;
+        std::string log_sav = CONF::LOG_SAV;
         MovingAverage mvg_avg;
         std::stringstream ss_info;
         std::pair<std::vector<double>, std::vector<double>> plt_data;

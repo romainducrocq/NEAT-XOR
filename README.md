@@ -10,7 +10,7 @@
 
 `cd bin`
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
-- **Run**:
+- **Run**: `./app.sh` or  
 ```
 ./build.sh -R
 ./compile.sh
@@ -18,17 +18,17 @@
 ./run.sh -m eval -e 10 -s sav
 ```
 
-    - or `./app.sh`  
-
 ### Train
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15`  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -p plt -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p plt -s sav`  
+or `./train.sh`  
 
 ### Eval
 - **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m eval -e 10 -s sav`  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -e 10 -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -s sav`  
+or `./eval.sh`  
 
 ```
 usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-p PLT] [-s SAV]

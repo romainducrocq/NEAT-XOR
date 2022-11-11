@@ -8,8 +8,7 @@ Genotype::Genome::Genome()
 void Genotype::Genome::copy_genome(const Genotype::Genome& other)
 {
     *this = Genotype::Genome();
-
-    this->inputs = other.inputs;
+    
     this->max_neuron = other.max_neuron;
 
     for(const auto& mutation_rate : other.mutation_rates){
@@ -320,8 +319,6 @@ void Genotype::Genome::crossover(const Genotype::Genome& other, Genotype::Genome
         std::swap(p1_genome, p2_genome);
     }
 
-    child.inputs = p1_genome->inputs;
-    child.outputs = p1_genome->outputs;
     child.max_neuron = std::max(p1_genome->max_neuron, p2_genome->max_neuron);
     for(const auto& mutation_rate : p1_genome->mutation_rates){
         child.mutation_rates[mutation_rate.first] = mutation_rate.second;

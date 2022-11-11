@@ -9,4 +9,5 @@ cmake-build-debug
 .ipynb_checkpoints
 out.txt
 *.png
+perf.data
 tmp

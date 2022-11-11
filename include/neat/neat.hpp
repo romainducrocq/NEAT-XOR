@@ -17,7 +17,7 @@
 
 #include "neat/population.hpp"
 
-#include "utils/utils.hpp"
+#include "utils/mvgavg.hpp"
 
 class Neat
 {
@@ -49,8 +49,8 @@ class Neat
         std::pair<std::vector<double>, std::vector<double>> plt_data;
 
     protected:
-        enum MODE { TEST, EVAL, TRAIN };
-        size_t mode = Neat::MODE::TEST;
+        enum MODE { TRAIN, EVAL, PLAY, TEST };
+        size_t mode = CONF::MODE;
 
         size_t max_epoch_eval = CONF::EPOCHS_EVAL;
         size_t max_generation_train = CONF::GENERATIONS_TRAIN;
@@ -103,10 +103,10 @@ protected:
     public:
         Neat();
 
-        void init();
+        void init(size_t mode, bool load, Genotype::Genome* best);
 
-        void train();
-        void eval();
+        bool train();
+        bool eval();
 };
 
 #endif

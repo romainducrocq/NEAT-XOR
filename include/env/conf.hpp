@@ -9,9 +9,13 @@
 #include <cstdlib>
 
 template<typename T>
-struct DefaultConf {
-    enum ACTION{
-        XOR
+struct DefaultConf{
+    enum Mode{
+        TRAIN, EVAL, PLAY, TEST, NONE
+    };
+
+    enum Action{
+        ZERO, ONE
     };
 
     const static size_t INPUTS;
@@ -47,32 +51,47 @@ struct DefaultConf {
     static std::string LOG_PLT;
     static std::string LOG_SAV;
 
+    static Mode MODE;
+
     static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
         for(;;){
-            switch(getopt(argc, argv, "h:g:l:p:s:")){
+            switch(getopt(argc, argv, "h:g:l:m:p:s:")){
                 case '?': // help
                 case 'h':
                 default :
-                    std::cerr << "usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] [-s SAV] \n";
+                    std::cerr << "usage: apps/exec [-h] [-m MOD] [-g GEN] [-p POP] [-l PLT] [-s SAV] \n";
                     std::cerr << "\n";
-                    std::cerr << "NEAT XOR                                                  \n";
+                    std::cerr << "NEAT XOR                                                           \n";
                     std::cerr << "\n";
-                    std::cerr << "optional args:                                            \n";
-                    std::cerr << "  -h      Print help and exit                             \n";
-                    std::cerr << "  params:                                                 \n";
-                    std::cerr << "  -g GEN  Set generation number                           \n";
-                    std::cerr << "  -p POP  Set population size                             \n";
-                    std::cerr << "  utils:                                                  \n";
-                    std::cerr << "  -l PLT  Set plot log file name                          \n";
-                    std::cerr << "  -s SAV  Set save sav file name                          \n";
+                    std::cerr << "optional args:                                                     \n";
+                    std::cerr << "  -h      Print help and exit                                      \n";
+                    std::cerr << "  -m MOD  Set mode < train | eval | play | test >                  \n";
+                    std::cerr << "  params:                                                          \n";
+                    std::cerr << "  -g GEN  Set generation number                                    \n";
+                    std::cerr << "  -p POP  Set population size                                      \n";
+                    std::cerr << "  utils:                                                           \n";
+                    std::cerr << "  -l PLT  Set plot log file name                                   \n";
+                    std::cerr << "  -s SAV  Set save sav file name                                   \n";
 
                     return false;
 
                 case -1:
                     break;
+
+                case 'm': // mode < train | eval | play | test >
+                    if(std::strcmp(optarg, "train") == 0){
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::TRAIN;
+                    }else if(std::strcmp(optarg, "eval") == 0){
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::EVAL;
+                    }else if(std::strcmp(optarg, "play") == 0){
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::PLAY;
+                    }else if(std::strcmp(optarg, "test") == 0){
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::TEST;
+                    }
+                continue;
 
                 case 'g': // generation number
                     DefaultConf<T>::GENERATIONS_TRAIN = static_cast<size_t>(std::atoi(optarg));
@@ -148,6 +167,9 @@ template<typename T>
 std::string DefaultConf<T>::LOG_PLT = "";
 template<typename T>
 std::string DefaultConf<T>::LOG_SAV = "";
+
+template<typename T>
+typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::NONE;
 
 using CONF = DefaultConf<int>;
 

@@ -4,8 +4,10 @@ Neat::Neat()
 {
 }
 
-void Neat::init()
+void Neat::init(size_t mode, bool load, Genotype::Genome* best)
 {
+    this->mode = mode;
+
     this->init_func();
 
     this->mvg_avg = MovingAverage(this->mvg_avg_max);
@@ -31,13 +33,17 @@ void Neat::init()
             break;
 
         case Neat::MODE::EVAL:
-            if(! this->log_sav.empty()) { this->best.load(this->log_sav); }
+            if(load)      { this->best.load(this->log_sav); }
+            else if(best) { this->best.copy_genome(*best);  }
+
             this->best.ctor_network();
             break;
 
         default:
             break;
     }
+
+    this->reset();
 }
 
 void Neat::obs()
@@ -162,71 +168,61 @@ void Neat::step_render()
     this->step_render_func();
 }
 
-void Neat::train()
+bool Neat::train()
 {
-    this->mode = Neat::MODE::TRAIN;
+    this->step();
 
-    this->init();
+    if(this->mdp.done){
 
-    this->reset();
+        this->pool.self_curr_genome().set_fitness(this->mdp.fitness);
 
-    while(true){
-        this->step();
-
-        if(this->mdp.done){
-
-            this->pool.self_curr_genome().set_fitness(this->mdp.fitness);
-
-            if(this->mdp.fitness > this->pool.get_max_fitness()){
-                this->pool.set_max_fitness(this->mdp.fitness);
-                this->max_fitness = this->pool.get_max_fitness();
-            }
-
-            while(this->pool.fitness_pass()){
-                this->pool.next_genome(this->best);
-            }
-
-            if(this->generation < this->pool.get_generation()){
-                this->generation = this->pool.get_generation();
-
-                this->info();
-
-                if(! this->log_plt.empty()) { this->to_plt(); }
-            }
-
-            this->reset();
+        if(this->mdp.fitness > this->pool.get_max_fitness()){
+            this->pool.set_max_fitness(this->mdp.fitness);
+            this->max_fitness = this->pool.get_max_fitness();
         }
 
-        if(this->max_generation_train && this->generation >= this->max_generation_train){
-            break;
+        while(this->pool.fitness_pass()){
+            this->pool.next_genome(this->best);
         }
-    }
 
-    if(! this->log_plt.empty()) { this->plot(); }
-    if(! this->log_sav.empty()) { this->best.save(this->log_sav); }
-}
+        if(this->generation < this->pool.get_generation()){
+            this->generation = this->pool.get_generation();
 
-void Neat::eval()
-{
-    this->mode = Neat::MODE::EVAL;
-
-    this->init();
-
-    this->reset();
-
-    while(true){
-        this->step();
-
-        if(this->mdp.done) {
             this->info();
 
-            this->reset();
+            if(! this->log_plt.empty()) { this->to_plt(); }
         }
 
-        if(this->max_epoch_eval && this->epoch > this->max_epoch_eval){
-            break;
-        }
+        this->reset();
     }
+
+    if(this->max_generation_train && this->generation >= this->max_generation_train){
+
+        if(! this->log_plt.empty()) { this->plot(); }
+        if(! this->log_sav.empty()) { this->best.save(this->log_sav); }
+
+        return false;
+    }
+
+    return true;
+}
+
+bool Neat::eval()
+{
+    this->step();
+
+    if(this->mdp.done) {
+        this->info();
+
+        this->reset();
+    }
+
+    if(this->max_epoch_eval && this->epoch > this->max_epoch_eval){
+
+        return false;
+    }
+
+    return true;
 }
 
 void Neat::to_plt()

@@ -1,30 +1,7 @@
-#ifndef _UTILS_UTILS_HPP
-#define _UTILS_UTILS_HPP
-
-#include <iostream>
-#include <chrono>
+#ifndef _UTILS_MVGAVG_HPP
+#define _UTILS_MVGAVG_HPP
 
 #include <vector>
-
-struct Timer
-{
-    std::chrono::_V2::system_clock::time_point m_start, m_end;
-    std::chrono::duration<float> m_duration;
-
-    Timer()
-    {
-        this->m_start = std::chrono::high_resolution_clock::now();
-    }
-
-    ~Timer()
-    {
-        this->m_end = std::chrono::high_resolution_clock::now();
-        this->m_duration = this->m_end - this->m_start;
-
-        float ms = this->m_duration.count() * 1000.0f;
-        std::cout << "Time: " << ms << "ms" << std::endl;
-    }
-};
 
 struct MovingAverage
 {

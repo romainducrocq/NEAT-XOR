@@ -1,41 +1,34 @@
-#include <iostream>
-
 #include <cstdlib>
 #include <ctime>
 
 #include "env/conf.hpp"
-#include "env/env.hpp"
 
-#include "utils/utils.hpp"
+#include "train.hpp"
+#include "eval.hpp"
 
 int main(int argc, char** argv)
 {
     std::srand(time(nullptr));
 
     if(CONF::argParse(argc, argv)) {
-        Env env;
 
-        {
-            Timer timer;
+        switch(CONF::MODE){
 
-            std::cout << "\n";
-            std::cout << "-------------------------------TRAIN-------------------------------" << "\n";
-            std::cout << "\n";
+            case CONF::Mode::TRAIN:{
+                Train train;
+                return 0;
+            }
 
-            env.train();
+            case CONF::Mode::EVAL:{
+                if(CONF::LOG_SAV.empty()) { return 1; }
+                Eval eval;
+                return 0;
+            }
+
+            default:
+                return 1;
         }
 
-        {
-            Timer timer;
-
-            std::cout << "\n";
-            std::cout << "-------------------------------EVAL--------------------------------" << "\n";
-            std::cout << "\n";
-
-            env.eval();
-        }
-
-        return 0;
     }
 
     return 1;

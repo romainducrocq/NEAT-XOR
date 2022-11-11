@@ -1,4 +1,4 @@
-### [C++] Simple XOR PROBLEM with NEAT
+# [C++] Simple XOR PROBLEM with NEAT
 
 - The NeuroEvolution of Augmenting Topologies (NEAT) User Page: http://www.cs.ucf.edu/~kstanley/neat.html
 - MarI/O - Machine Learning for Video Games (SethBling): https://www.youtube.com/watch?v=qv6UVOQ0F44 
@@ -6,13 +6,22 @@
 
 ****
 
-### Run
+## Run
 
 `cd bin`
 - **Install**: `sudo apt-get update && apt-get install g++ cmake valgrind` or `./make.sh`  
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -g 15 -p 15`  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -g 300 -p 150 -l plt -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -g 300 -p 150 -l plt -s sav`  
+- **Run**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav && ./run.sh -m eval -s sav`  
+- or `./app.sh`  
+
+### Train
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -p 15`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav`  
+
+### Eval
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m eval -s sav`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -s sav`  
 
 ```
 usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] [-s SAV]
@@ -32,7 +41,7 @@ optional args:
 
 ****
 
-### Demo
+## Demo
 
 `cd bin && ./app.sh`
 

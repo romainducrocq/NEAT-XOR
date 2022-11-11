@@ -50,8 +50,8 @@ void Env::info_func()
     switch(this->Super::mode){
 
         case Super::MODE::TRAIN:
-            std::cout << "GENERATION  : " << this->Super::pool.get_generation() << " / " << this->Super::max_generation_train << "\n";
-            std::cout << "MAX FITNESS : " << this->Super::pool.get_max_fitness() << "\n";
+            std::cout << "GENERATION  : " << this->Super::generation << " / " << this->Super::max_generation_train << "\n";
+            std::cout << "MAX FITNESS : " << this->Super::max_fitness << "\n";
             std::cout << "MVG AVG     : " << this->Super::mvg_avg.get() << "\n";
             std::cout << "\n";
             break;

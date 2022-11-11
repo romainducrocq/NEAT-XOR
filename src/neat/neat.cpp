@@ -22,6 +22,7 @@ void Neat::init()
 
     this->epoch = 0;
     this->generation = 0;
+    this->max_fitness = 0.f;
 
     switch(this->mode){
 
@@ -97,11 +98,10 @@ void Neat::reset()
     this->steps = 0;
     this->noops = 0;
 
-    mdp.done = false;
-    mdp.fitness = 0.f;
+    this->mdp.done = false;
+    this->mdp.fitness = 0.f;
 
     this->epoch++;
-    this->generation = this->pool.get_generation();
 
     switch(this->mode){
 
@@ -179,6 +179,7 @@ void Neat::train()
 
             if(this->mdp.fitness > this->pool.get_max_fitness()){
                 this->pool.set_max_fitness(this->mdp.fitness);
+                this->max_fitness = this->pool.get_max_fitness();
             }
 
             while(this->pool.fitness_pass()){
@@ -186,6 +187,8 @@ void Neat::train()
             }
 
             if(this->generation < this->pool.get_generation()){
+                this->generation = this->pool.get_generation();
+
                 this->info();
 
                 if(! this->log_plt.empty()) { this->to_plt(); }

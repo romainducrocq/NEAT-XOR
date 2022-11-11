@@ -29,8 +29,14 @@ class Neat
         float fitness = 0.f;
     };
 
+    private:
+        Population::Pool pool;
+
+        std::string log_plt = CONF::LOG_PLT;
+        std::pair<std::vector<double>, std::vector<double>> plt_data;
+
     protected:
-        enum MODE { TEST, PLAY, EVAL, TRAIN };
+        enum MODE { TEST, EVAL, TRAIN };
         size_t mode = Neat::MODE::TEST;
 
         size_t inputs = CONF::INPUTS;
@@ -46,21 +52,18 @@ class Neat
         size_t noops = 0;
         size_t epoch = 0;
         size_t generation = 0;
+        float max_fitness = 0.f;
 
         Neat::Mdp mdp;
 
-        Population::Pool pool;
+        MovingAverage mvg_avg;
+        std::stringstream ss_info;
+        size_t mvg_avg_max = CONF::MVG_AVG;
+        std::string log_sav = CONF::LOG_SAV;
 
         Genotype::Genome best;
 
-        size_t mvg_avg_max = CONF::MVG_AVG;
-        std::string log_plt = CONF::LOG_PLT;
-        std::string log_sav = CONF::LOG_SAV;
-        MovingAverage mvg_avg;
-        std::stringstream ss_info;
-        std::pair<std::vector<double>, std::vector<double>> plt_data;
-
-    protected:
+protected:
         virtual void init_func() = 0;
 
         virtual void obs_func() = 0;

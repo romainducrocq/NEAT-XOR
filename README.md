@@ -14,33 +14,35 @@
 ```
 ./build.sh -R
 ./compile.sh
-./run.sh -m train -g 300 -p 150 -l plt -s sav
-./run.sh -m eval -s sav
+./run.sh -m train -g 300 -p plt -s sav
+./run.sh -m eval -e 10 -s sav
 ```
+
     - or `./app.sh`  
 
 ### Train
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -p 15`  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p 150 -l plt -s sav`  
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -p plt -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -p plt -s sav`  
 
 ### Eval
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m eval -s sav`  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -s sav`  
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m eval -e 10 -s sav`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -e 10 -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -s sav`  
 
 ```
-usage: apps/exec [-h] [-g GEN] [-p POP] [-l PLT] [-s SAV]
+usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-p PLT] [-s SAV]
 
 NEAT XOR
 
 optional args:
   -h      Print help and exit
+  -m MOD  Set mode < train | eval | play | test >
   params:
   -g GEN  Set generation number
-  -p POP  Set population size
+  -e EPO  Set epoch number
   utils:
-  -l PLT  Set plot log file name
+  -p PLT  Set plot log file name
   -s SAV  Set save sav file name
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`

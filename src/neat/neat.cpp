@@ -30,6 +30,7 @@ void Neat::init()
             break;
 
         case Neat::MODE::EVAL:
+            if(! this->log_sav.empty()) { this->best.load(this->log_sav); }
             this->best.ctor_network();
             break;
 

@@ -359,15 +359,37 @@ void Genotype::Genome::save(const std::string& file) const
     j["mutation_rates"] = this->mutation_rates;
     j["genes"] = j_genes;
 
-    std::cout << j.dump(4) << std::endl;
-
-    std::ofstream o("../../log/save/" + file + ".json");
-    o << std::setw(4) << j << std::endl;
+    std::ofstream os("../../log/saves/" + file + ".json");
+    os << std::setw(4) << j << std::endl;
 }
 
 void Genotype::Genome::load(const std::string& file)
 {
-    std::cerr << file;
+    nlohmann::json j;
+
+    std::ifstream is("../../log/saves/" + file + ".json");
+    is >> j;
+
+    *this = Genotype::Genome();
+
+    this->max_neuron = j["max_neuron"].get<size_t>();
+
+    for(auto& mutation_rate : this->mutation_rates){
+        mutation_rate.second = j["mutation_rates"].at(mutation_rate.first).get<float>();
+    }
+
+    for (const auto& j_gene : j["genes"]) {
+        this->genes.push_back(std::make_shared<Genotype::Gene>(
+            j_gene[0].get<size_t>(),
+            j_gene[1].get<size_t>(),
+            j_gene[2].get<size_t>(),
+            j_gene[3].get<float>(),
+            j_gene[4].get<bool>()
+        ));
+
+        this->innovation_set.insert(this->genes.back()->innovation);
+        this->innovation_gene_map.insert({this->genes.back()->innovation, this->genes.back()});
+    }
 }
 
 float Genotype::Genome::get_fitness() const { return this->fitness; }
@@ -375,31 +397,3 @@ size_t Genotype::Genome::get_global_rank() const { return this->global_rank; }
 
 void Genotype::Genome::set_fitness(float fitness) { this->fitness = fitness; }
 void Genotype::Genome::set_global_rank(size_t global_rank) { this->global_rank = global_rank; }
-
-
-
-/*
-nlohmann::json j = {
-        {"pi", 3.141},
-        {"happy", true},
-        {"name", "Niels"},
-        {"nothing", nullptr},
-        {"answer", {
-                       {"everything", 42}
-               }},
-        {"list", {1, 0, 2}},
-        {"object", {
-                       {"currency", "USD"},
-                     {"value", 42.99}
-               }}
-};
-
-std::ofstream o("pretty.json");
-o << std::setw(4) << j << std::endl;
-
-std::ifstream i("pretty.json");
-nlohmann::json j2;
-i >> j2;
-
-std::cout << j.dump(4) << std::endl;
-*/

@@ -30,8 +30,21 @@ class Neat
     };
 
     private:
+        size_t inputs = CONF::INPUTS;
+        size_t outputs = CONF::OUTPUTS;
+
+        size_t repeat = CONF::ACT_REPEAT;
+        size_t max_noop = CONF::MAX_NOOP;
+        size_t max_step = CONF::MAX_STEP;
+
+        size_t noops = 0;
+
         Population::Pool pool;
 
+        Genotype::Genome best;
+
+        size_t mvg_avg_max = CONF::MVG_AVG;
+        std::string log_sav = CONF::LOG_SAV;
         std::string log_plt = CONF::LOG_PLT;
         std::pair<std::vector<double>, std::vector<double>> plt_data;
 
@@ -39,17 +52,10 @@ class Neat
         enum MODE { TEST, EVAL, TRAIN };
         size_t mode = Neat::MODE::TEST;
 
-        size_t inputs = CONF::INPUTS;
-        size_t outputs = CONF::OUTPUTS;
-
-        size_t repeat = CONF::ACT_REPEAT;
-        size_t max_noop = CONF::MAX_NOOP;
-        size_t max_step = CONF::MAX_STEP;
         size_t max_epoch_eval = CONF::EPOCHS_EVAL;
         size_t max_generation_train = CONF::GENERATIONS_TRAIN;
 
         size_t steps = 0;
-        size_t noops = 0;
         size_t epoch = 0;
         size_t generation = 0;
         float max_fitness = 0.f;
@@ -58,10 +64,6 @@ class Neat
 
         MovingAverage mvg_avg;
         std::stringstream ss_info;
-        size_t mvg_avg_max = CONF::MVG_AVG;
-        std::string log_sav = CONF::LOG_SAV;
-
-        Genotype::Genome best;
 
 protected:
         virtual void init_func() = 0;

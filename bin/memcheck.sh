@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# https://stackoverflow.com/questions/5134891/how-do-i-use-valgrind-to-find-memory-leaks
-
 args=""
 for ARG in $( echo "${@}" | sed 's/ / /g' )
 do
@@ -15,3 +13,5 @@ valgrind --leak-check=full \
          --verbose \
          --log-file=$(dirname $(dirname $(pwd)))/log/valgrind/out.txt \
          ./exec${args}
+
+cat ../../log/valgrind/out.txt

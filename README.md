@@ -39,11 +39,11 @@ optional args:
   -h      Print help and exit
   -m MOD  Set mode < train | eval | play | test >
   params:
-  -g GEN  Set generation number
-  -e EPO  Set epoch number
+  -g GEN  [train]       Set generation number
+  -e EPO  [eval]        Set epoch number
   utils:
-  -p PLT  Set plot log file name
-  -s SAV  Set save sav file name
+  -p PLT  [train]       Set plot log file name
+  -s SAV  [train, eval] Set save sav file name
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`
 

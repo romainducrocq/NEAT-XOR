@@ -199,6 +199,7 @@ void Neat::train()
     }
 
     if(! this->log_plt.empty()) { this->plot(); }
+    this->best.save();
 }
 
 void Neat::eval()

@@ -8,7 +8,7 @@ Genotype::Genome::Genome()
 void Genotype::Genome::copy_genome(const Genotype::Genome& other)
 {
     *this = Genotype::Genome();
-    
+
     this->max_neuron = other.max_neuron;
 
     for(const auto& mutation_rate : other.mutation_rates){
@@ -346,8 +346,60 @@ void Genotype::Genome::simple_genome(size_t& innovation)
     this->mutate(innovation);
 }
 
+void Genotype::Genome::save() const
+{
+    nlohmann::json j;
+
+    std::vector<std::tuple<size_t, size_t, size_t, float, bool>> j_genes;
+    for(const auto& gene : this->genes){
+        j_genes.emplace_back(gene->into, gene->out, gene->innovation, gene->weight, gene->enabled);
+    }
+
+    j["max_neuron"] = this->max_neuron;
+    j["mutation_rates"] = this->mutation_rates;
+    j["genes"] = j_genes;
+
+    std::cout << j.dump(4) << std::endl;
+
+    std::ofstream o("../../log/save/sav.json");
+    o << std::setw(4) << j << std::endl;
+}
+
+void Genotype::Genome::load(const std::string& file)
+{
+    std::cerr << file;
+}
+
 float Genotype::Genome::get_fitness() const { return this->fitness; }
 size_t Genotype::Genome::get_global_rank() const { return this->global_rank; }
 
 void Genotype::Genome::set_fitness(float fitness) { this->fitness = fitness; }
 void Genotype::Genome::set_global_rank(size_t global_rank) { this->global_rank = global_rank; }
+
+
+
+/*
+nlohmann::json j = {
+        {"pi", 3.141},
+        {"happy", true},
+        {"name", "Niels"},
+        {"nothing", nullptr},
+        {"answer", {
+                       {"everything", 42}
+               }},
+        {"list", {1, 0, 2}},
+        {"object", {
+                       {"currency", "USD"},
+                     {"value", 42.99}
+               }}
+};
+
+std::ofstream o("pretty.json");
+o << std::setw(4) << j << std::endl;
+
+std::ifstream i("pretty.json");
+nlohmann::json j2;
+i >> j2;
+
+std::cout << j.dump(4) << std::endl;
+*/

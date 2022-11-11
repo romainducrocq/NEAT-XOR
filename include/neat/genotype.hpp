@@ -18,6 +18,9 @@
 #include <utility>
 #include <memory>
 
+#include <fstream>
+#include <nlohmann/json.hpp>
+
 #include "env/conf.hpp"
 
 namespace Genotype
@@ -119,6 +122,9 @@ namespace Genotype
             void crossover(const Genotype::Genome& other, Genotype::Genome& child) const;
 
             void simple_genome(size_t& innovation);
+
+            void save() const;
+            void load(const std::string& file);
 
             float get_fitness() const;
             size_t get_global_rank() const;

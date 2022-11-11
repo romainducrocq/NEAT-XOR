@@ -10,14 +10,14 @@
 
 #include <algorithm>
 
+#include <pbplots/pbPlots.hpp>
+#include <pbplots/supportLib.hpp>
+
 #include "env/conf.hpp"
 
 #include "neat/population.hpp"
 
 #include "utils/utils.hpp"
-
-#include "pbplots/pbPlots.hpp"
-#include "pbplots/supportLib.hpp"
 
 class Neat
 {

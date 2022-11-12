@@ -5,6 +5,7 @@
 
 #include "train.hpp"
 #include "eval.hpp"
+#include "play.hpp"
 
 int main(int argc, char** argv)
 {
@@ -22,6 +23,11 @@ int main(int argc, char** argv)
             case CONF::Mode::EVAL:{
                 if(CONF::LOG_SAV.empty()) { return 1; }
                 Eval eval;
+                return 0;
+            }
+
+            case CONF::Mode::PLAY:{
+                Play play;
                 return 0;
             }
 

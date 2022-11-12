@@ -8,10 +8,13 @@
 
 #include "env/env/xor.hpp"
 
+class Play;
+
 class Env: public Neat
 {
     private:
         typedef Neat Super;
+        friend class Play;
 
     private:
         Xor agent;

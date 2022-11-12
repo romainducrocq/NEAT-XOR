@@ -28,11 +28,11 @@ void Neat::init(size_t mode, bool load, Genotype::Genome* best)
 
     switch(this->mode){
 
-        case Neat::MODE::TRAIN:
+        case CONF::Mode::TRAIN:
             this->pool.init();
             break;
 
-        case Neat::MODE::EVAL:
+        case CONF::Mode::EVAL:
             if(load)      { this->best.load(this->log_sav); }
             else if(best) { this->best.copy_genome(*best);  }
 
@@ -111,11 +111,11 @@ void Neat::reset()
 
     switch(this->mode){
 
-        case Neat::MODE::TRAIN:
+        case CONF::Mode::TRAIN:
             this->pool.self_curr_genome().ctor_network();
             break;
 
-        case Neat::MODE::EVAL:
+        case CONF::Mode::EVAL:
             break;
 
         default:
@@ -134,11 +134,11 @@ void Neat::step()
 
         switch(this->mode){
 
-            case Neat::MODE::TRAIN:
+            case CONF::Mode::TRAIN:
                 this->pool.eval_curr_genome(this->mdp.obs, this->mdp.act);
                 break;
 
-            case Neat::MODE::EVAL:
+            case CONF::Mode::EVAL:
                 this->best.eval_network(this->mdp.obs, this->mdp.act);
                 break;
 

@@ -31,6 +31,11 @@ int main(int argc, char** argv)
                 return 0;
             }
 
+            case CONF::Mode::TEST:{
+                // TODO
+                return 0;
+            }
+
             default:
                 return 1;
         }

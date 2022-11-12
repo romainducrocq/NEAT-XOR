@@ -42,11 +42,11 @@ struct DefaultConf{
 
     const static size_t ACT_REPEAT;
     const static size_t MAX_NOOP;
-    const static size_t MAX_STEP;
     const static size_t MVG_AVG;
 
     static size_t GENERATIONS_TRAIN;
     static size_t EPOCHS_EVAL;
+    static size_t MAX_STEP;
 
     static std::string LOG_PLT;
     static std::string LOG_SAV;
@@ -58,23 +58,24 @@ struct DefaultConf{
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
         for(;;){
-            switch(getopt(argc, argv, "h:m:g:e:p:s:")){
+            switch(getopt(argc, argv, "h:m:g:e:n:p:s:")){
                 case '?': // help
                 case 'h':
                 default :
-                    std::cerr << "usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-p PLT] [-s SAV] \n";
+                    std::cerr << "usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-n NUM] [-p PLT] [-s SAV] \n";
                     std::cerr << "\n";
-                    std::cerr << "NEAT XOR                                                           \n";
+                    std::cerr << "NEAT XOR                                                                    \n";
                     std::cerr << "\n";
-                    std::cerr << "optional args:                                                     \n";
-                    std::cerr << "  -h      Print help and exit                                      \n";
-                    std::cerr << "  -m MOD  Set mode < train | eval | play | test >                  \n";
-                    std::cerr << "  params:                                                          \n";
-                    std::cerr << "  -g GEN  [train]       Set generation number                      \n";
-                    std::cerr << "  -e EPO  [eval]        Set epoch number                           \n";
-                    std::cerr << "  utils:                                                           \n";
-                    std::cerr << "  -p PLT  [train]       Set plot log file name                     \n";
-                    std::cerr << "  -s SAV  [train, eval] Set save sav file name                     \n";
+                    std::cerr << "optional args:                                                              \n";
+                    std::cerr << "  -h      Print help and exit                                               \n";
+                    std::cerr << "  -m MOD  Set mode < train | eval | play | test >                           \n";
+                    std::cerr << "  params:                                                                   \n";
+                    std::cerr << "  -g GEN  [train]       Set generation number (0=inf)                       \n";
+                    std::cerr << "  -e EPO  [eval, play]  Set epoch number      (0=inf)                       \n";
+                    std::cerr << "  -n NUM  [train, eval] Set max step number   (0=inf)                       \n";
+                    std::cerr << "  utils:                                                                    \n";
+                    std::cerr << "  -p PLT  [train]       Set plot log file name                              \n";
+                    std::cerr << "  -s SAV  [train, eval] Set save sav file name                              \n";
 
                     return false;
 
@@ -99,6 +100,10 @@ struct DefaultConf{
 
                 case 'e': // epoch number
                     DefaultConf<T>::EPOCHS_EVAL = static_cast<size_t>(std::atoi(optarg));
+                    continue;
+
+                case 'n': // max step number
+                    DefaultConf<T>::MAX_STEP = static_cast<size_t>(std::atoi(optarg));
                     continue;
 
                 case 'p': // plot log file name
@@ -155,14 +160,14 @@ const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
 const size_t DefaultConf<T>::MAX_NOOP = 0;
 template<typename T>
-const size_t DefaultConf<T>::MAX_STEP = 0;
-template<typename T>
 const size_t DefaultConf<T>::MVG_AVG = 20;
 
 template<typename T>
 size_t DefaultConf<T>::GENERATIONS_TRAIN = 300;
 template<typename T>
 size_t DefaultConf<T>::EPOCHS_EVAL = 10;
+template<typename T>
+size_t DefaultConf<T>::MAX_STEP = 0;
 template<typename T>
 std::string DefaultConf<T>::LOG_PLT = "";
 template<typename T>

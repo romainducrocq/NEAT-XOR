@@ -37,10 +37,10 @@ Renderer::Renderer()
 {
 }
 
-void Renderer::draw_init()
+void Renderer::draw_init(const Env& /*env*/)
 {
 }
 
-void Renderer::draw_loop()
+void Renderer::draw_loop(const Env& /*env*/)
 {
 }

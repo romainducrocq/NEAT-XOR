@@ -22,11 +22,11 @@ class Play
     private:
         void run();
 
-        void init();
         void reset();
         void step();
 
-        bool play();
+        void setup();
+        bool loop();
 
     public:
         Play();

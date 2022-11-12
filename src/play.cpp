@@ -13,77 +13,43 @@ void Play::run()
     std::cout << "-------------------------------PLAY--------------------------------" << "\n";
     std::cout << "\n";
 
-    this->init();
+    this->ev_handler.add_event();
+    this->setup();
+    this->renderer.draw_init(this->env);
 
-    do{
-    }while(this->play());
+    while(this->loop()){
+        this->renderer.draw_loop(this->env);
+    }
 }
 
-void Play::init()
+void Play::setup()
 {
-    env.init_func();
+    this->env.init_func();
 
-    env.mvg_avg = MovingAverage(env.mvg_avg_max);
+    this->env.mvg_avg = MovingAverage(this->env.mvg_avg_max);
 
-    env.mdp.act.clear();
-    for(size_t i = 0; i < env.outputs; i++){
+    this->env.mdp.act.clear();
+    for(size_t i = 0; i < this->env.outputs; i++){
         this->env.mdp.act.push_back(0.f);
     }
 
-    env.epoch = 0;
+    this->env.epoch = 0;
 
     this->reset();
 }
 
-void Play::reset()
-{
-    env.reset_func();
-
-    env.reset_render_func();
-
-    env.steps = 0;
-
-    env.mdp.done = false;
-    env.mdp.fitness = 0.f;
-
-    env.epoch++;
-}
-
-void Play::step()
-{
-    env.step_func();
-
-    env.step_render_func();
-
-    this->ev_handler.get_action(env.mdp.act);
-
-    env.act_func();
-
-    env.steps++;
-
-    env.done_func();
-
-    env.fitness_func();
-
-    if(env.mdp.done){
-        env.mvg_avg.add(env.mdp.fitness);
-    }
-}
-
-
-
-bool Play::play()
+bool Play::loop()
 {
     this->step();
 
-    if(env.mdp.done) {
-        env.info_func();
-        env.ss_info.str(std::string());
+    if(this->env.mdp.done) {
+        this->env.info_func();
+        this->env.ss_info.str(std::string());
 
         this->reset();
     }
 
-    if(env.max_epoch_eval && env.epoch > env.max_epoch_eval){
+    if(this->env.max_epoch_eval && this->env.epoch > this->env.max_epoch_eval){
 
         return false;
     }
@@ -91,63 +57,37 @@ bool Play::play()
     return true;
 }
 
-/*
-
-Play::Play()
+void Play::reset()
 {
-    std::cout << "PLAY" << "\n";
+    this->env.reset_func();
 
-    this->run();
+    this->env.reset_render_func();
+
+    this->env.steps = 0;
+
+    this->env.mdp.done = false;
+    this->env.mdp.fitness = 0.f;
+
+    this->env.epoch++;
 }
 
-Play::~Play()
+void Play::step()
 {
-}
+    this->env.step_func();
 
-void Play::setup()
-{
-    this->env.reset(nullptr);
-}
+    this->env.step_render_func();
 
-void Play::loop()
-{
-    int action = this->getAction();
+    this->ev_handler.get_action(this->env.mdp.act);
 
-    this->env.step(action, nullptr, nullptr, this->done, nullptr);
+    this->env.act_func();
 
-    if(this->done){
-        this->setup();
+    this->env.steps++;
+
+    this->env.done_func();
+
+    this->env.fitness_func();
+
+    if(this->env.mdp.done){
+        this->env.mvg_avg.add(this->env.mdp.fitness);
     }
 }
-
-void Play::drawInit()
-{
-    this->Super::m_renderer.drawInit(this->env.get_env());
-}
-
-void Play::drawLoop()
-{
-    this->Super::m_renderer.drawLoop(this->env.get_env());
-}
-
-void Play::eventAdd()
-{
-    this->m_ev_handler.eventAdd();
-}
-
-int Play::getAction() {
-    return this->m_ev_handler.getAction();
-}
-
-void Play::mainInit()
-{
-    this->setup();
-}
-
-void Play::mainLoop()
-{
-    this->loop();
-}
-
- *
- */

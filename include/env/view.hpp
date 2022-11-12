@@ -6,6 +6,8 @@
 
 #include "env/conf.hpp"
 
+#include "env/env.hpp"
+
 class EventHandler
 {
     struct EventState
@@ -30,8 +32,8 @@ class Renderer
     public:
         Renderer();
 
-        void draw_init();
-        void draw_loop();
+        void draw_init(const Env& /*env*/);
+        void draw_loop(const Env& /*env*/);
 };
 
 #endif

@@ -13,8 +13,21 @@ void Eval::run()
     std::cout << "-------------------------------EVAL--------------------------------" << "\n";
     std::cout << "\n";
 
-    this->env.init(CONF::Mode::EVAL, true, nullptr);
+    this->renderer.self_ev_handler().add_event();
+    this->setup();
+    this->renderer.draw_init(this->env);
 
-    do{
-    }while(this->env.eval());
+    while(this->loop()){
+        this->renderer.draw_loop(this->env);
+    }
+}
+
+void Eval::setup()
+{
+    this->env.init(CONF::Mode::EVAL, true, nullptr);
+}
+
+bool Eval::loop()
+{
+    return this->env.eval();
 }

@@ -8,32 +8,38 @@
 
 #include "env/env.hpp"
 
-class EventHandler
+namespace View
 {
-    struct EventState
+    class EventHandler
     {
-        CONF::Action action = CONF::ZERO;
+        struct EventState
+        {
+            CONF::Action action = CONF::ZERO;
+        };
+
+        private:
+            EventState ev_state;
+
+        public:
+            EventHandler();
+
+            void add_event();
+            void get_action(std::vector<float>& act);
     };
 
-    private:
-        EventState ev_state;
+    class Renderer
+    {
+        private:
+            EventHandler ev_handler;
 
-    public:
-        EventHandler();
+        public:
+            Renderer();
 
-        void add_event();
-        void get_action(std::vector<float>& act);
-};
+            View::EventHandler& self_ev_handler();
 
-class Renderer
-{
-    private:
-
-    public:
-        Renderer();
-
-        void draw_init(const Env& /*env*/);
-        void draw_loop(const Env& /*env*/);
-};
+            void draw_init(const Env& /*env*/);
+            void draw_loop(const Env& /*env*/);
+    };
+}
 
 #endif

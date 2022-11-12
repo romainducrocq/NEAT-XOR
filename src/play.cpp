@@ -13,7 +13,7 @@ void Play::run()
     std::cout << "-------------------------------PLAY--------------------------------" << "\n";
     std::cout << "\n";
 
-    this->ev_handler.add_event();
+    this->renderer.self_ev_handler().add_event();
     this->setup();
     this->renderer.draw_init(this->env);
 
@@ -23,6 +23,16 @@ void Play::run()
 }
 
 void Play::setup()
+{
+    this->init();
+}
+
+bool Play::loop()
+{
+    return this->play();
+}
+
+void Play::init()
 {
     this->env.init_func();
 
@@ -36,25 +46,6 @@ void Play::setup()
     this->env.epoch = 0;
 
     this->reset();
-}
-
-bool Play::loop()
-{
-    this->step();
-
-    if(this->env.mdp.done) {
-        this->env.info_func();
-        this->env.ss_info.str(std::string());
-
-        this->reset();
-    }
-
-    if(this->env.max_epoch_eval && this->env.epoch > this->env.max_epoch_eval){
-
-        return false;
-    }
-
-    return true;
 }
 
 void Play::reset()
@@ -77,7 +68,7 @@ void Play::step()
 
     this->env.step_render_func();
 
-    this->ev_handler.get_action(this->env.mdp.act);
+    this->renderer.self_ev_handler().get_action(this->env.mdp.act);
 
     this->env.act_func();
 
@@ -90,4 +81,23 @@ void Play::step()
     if(this->env.mdp.done){
         this->env.mvg_avg.add(this->env.mdp.fitness);
     }
+}
+
+bool Play::play()
+{
+    this->step();
+
+    if(this->env.mdp.done) {
+        this->env.info_func();
+        this->env.ss_info.str(std::string());
+
+        this->reset();
+    }
+
+    if(this->env.max_epoch_eval && this->env.epoch > this->env.max_epoch_eval){
+
+        return false;
+    }
+
+    return true;
 }

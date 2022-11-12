@@ -16,14 +16,16 @@ class Play
     private:
         Env env;
 
-        EventHandler ev_handler;
-        Renderer renderer;
+        View::Renderer renderer;
+
+    private:
+        void init();
+        void reset();
+        void step();
+        bool play();
 
     private:
         void run();
-
-        void reset();
-        void step();
 
         void setup();
         bool loop();

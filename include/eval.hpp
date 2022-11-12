@@ -3,6 +3,7 @@
 
 #include "env/conf.hpp"
 #include "env/env.hpp"
+#include "env/view.hpp"
 
 #include "utils/timer.hpp"
 
@@ -11,8 +12,13 @@ class Eval
     private:
         Env env;
 
+        View::Renderer renderer;
+
     private:
         void run();
+
+        void setup();
+        bool loop();
 
     public:
         Eval();

@@ -1,14 +1,14 @@
 #include "env/view.hpp"
 
-EventHandler::EventHandler()
+View::EventHandler::EventHandler()
 {
 }
 
-void EventHandler::add_event()
+void View::EventHandler::add_event()
 {
 }
 
-void EventHandler::get_action(std::vector<float>& act)
+void View::EventHandler::get_action(std::vector<float>& act)
 {
     size_t x;
 
@@ -33,14 +33,19 @@ void EventHandler::get_action(std::vector<float>& act)
     act[0] = x;
 }
 
-Renderer::Renderer()
+View::Renderer::Renderer()
 {
 }
 
-void Renderer::draw_init(const Env& /*env*/)
+View::EventHandler& View::Renderer::self_ev_handler()
+{
+    return this->ev_handler;
+}
+
+void View::Renderer::draw_init(const Env& /*env*/)
 {
 }
 
-void Renderer::draw_loop(const Env& /*env*/)
+void View::Renderer::draw_loop(const Env& /*env*/)
 {
 }

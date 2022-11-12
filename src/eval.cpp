@@ -13,12 +13,12 @@ void Eval::run()
     std::cout << "-------------------------------EVAL--------------------------------" << "\n";
     std::cout << "\n";
 
-    this->renderer.self_ev_handler().add_event();
+    this->ev_setup();
     this->setup();
-    this->renderer.draw_init(this->env);
+    this->draw_setup();
 
     while(this->loop()){
-        this->renderer.draw_loop(this->env);
+        this->draw_loop();
     }
 }
 
@@ -30,4 +30,20 @@ void Eval::setup()
 bool Eval::loop()
 {
     return this->env.eval();
+}
+
+
+void Eval::ev_setup()
+{
+    this->renderer.self_ev_handler().ev_setup();
+}
+
+void Eval::draw_setup()
+{
+    this->renderer.draw_setup(this->env);
+}
+
+void Eval::draw_loop()
+{
+    this->renderer.draw_loop(this->env);
 }

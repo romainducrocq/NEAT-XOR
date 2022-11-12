@@ -14,6 +14,9 @@ class Train
     private:
         void run();
 
+        void setup();
+        bool loop();
+
     public:
         Train();
 };

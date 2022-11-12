@@ -23,7 +23,7 @@ namespace View
         public:
             EventHandler();
 
-            void add_event();
+            void ev_setup();
             void get_action(std::vector<float>& act);
     };
 
@@ -37,7 +37,7 @@ namespace View
 
             View::EventHandler& self_ev_handler();
 
-            void draw_init(const Env& /*env*/);
+            void draw_setup(const Env& /*env*/);
             void draw_loop(const Env& /*env*/);
     };
 }

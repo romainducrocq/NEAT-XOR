@@ -13,8 +13,17 @@ void Train::run()
     std::cout << "-------------------------------TRAIN-------------------------------" << "\n";
     std::cout << "\n";
 
-    this->env.init(CONF::Mode::TRAIN, false, nullptr);
+    this->setup();
 
-    do{
-    }while(this->env.train());
+    while(this->loop()){}
+}
+
+void Train::setup()
+{
+    this->env.init(CONF::Mode::TRAIN, false, nullptr);
+}
+
+bool Train::loop()
+{
+    return this->env.train();
 }

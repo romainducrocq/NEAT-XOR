@@ -27,6 +27,10 @@ class Play
     private:
         void run();
 
+        void ev_setup();
+        void draw_setup();
+        void draw_loop();
+
         void setup();
         bool loop();
 

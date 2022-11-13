@@ -20,25 +20,42 @@ namespace View
         private:
             EventState ev_state;
 
-        public:
+        private:
             EventHandler();
 
+        public:
             void ev_setup();
             void get_action(std::vector<float>& act);
+
+        public:
+            EventHandler(const EventHandler& other) = delete;
+            EventHandler operator=(const EventHandler& other) = delete;
+
+            static EventHandler& EVENTHANDLER()
+            {
+                static EventHandler singleton;
+                return singleton;
+            }
     };
 
     class Renderer
     {
         private:
-            EventHandler ev_handler;
-
-        public:
             Renderer();
 
-            View::EventHandler& self_ev_handler();
-
+        public:
             void draw_setup(const Env& /*env*/);
             void draw_loop(const Env& /*env*/);
+
+        public:
+            Renderer(const Renderer& other) = delete;
+            Renderer operator=(const Renderer& other) = delete;
+
+            static Renderer& RENDERER()
+            {
+                static Renderer singleton;
+                return singleton;
+            }
     };
 }
 

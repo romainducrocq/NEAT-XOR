@@ -37,11 +37,6 @@ View::Renderer::Renderer()
 {
 }
 
-View::EventHandler& View::Renderer::self_ev_handler()
-{
-    return this->ev_handler;
-}
-
 void View::Renderer::draw_setup(const Env& /*env*/)
 {
 }

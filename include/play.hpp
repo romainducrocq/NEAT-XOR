@@ -16,8 +16,6 @@ class Play
     private:
         Env env;
 
-        View::Renderer renderer;
-
     private:
         void init();
         void reset();
@@ -40,7 +38,7 @@ class Play
         Play(const Play& other) = delete;
         Play operator=(const Play& other) = delete;
 
-        static inline Play& PLAY()
+        static Play& PLAY()
         {
             static Play singleton;
             return singleton;

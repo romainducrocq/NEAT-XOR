@@ -23,7 +23,7 @@ class Train
         Train(const Train& other) = delete;
         Train operator=(const Train& other) = delete;
 
-        static inline Train& TRAIN()
+        static Train& TRAIN()
         {
             static Train singleton;
             return singleton;

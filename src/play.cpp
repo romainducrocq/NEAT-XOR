@@ -34,17 +34,17 @@ bool Play::loop()
 
 void Play::ev_setup()
 {
-    this->renderer.self_ev_handler().ev_setup();
+    View::EventHandler::EVENTHANDLER().ev_setup();
 }
 
 void Play::draw_setup()
 {
-    this->renderer.draw_setup(this->env);
+    View::Renderer::RENDERER().draw_setup(this->env);
 }
 
 void Play::draw_loop()
 {
-    this->renderer.draw_loop(this->env);
+    View::Renderer::RENDERER().draw_loop(this->env);
 }
 
 void Play::init()
@@ -83,7 +83,7 @@ void Play::step()
 
     this->env.step_render_func();
 
-    this->renderer.self_ev_handler().get_action(this->env.mdp.act);
+    View::EventHandler::EVENTHANDLER().get_action(this->env.mdp.act);
 
     this->env.act_func();
 

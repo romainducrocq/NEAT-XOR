@@ -12,8 +12,6 @@ class Eval
     private:
         Env env;
 
-        View::Renderer renderer;
-
     private:
         void run();
 
@@ -30,7 +28,7 @@ class Eval
         Eval(const Eval& other) = delete;
         Eval operator=(const Eval& other) = delete;
 
-        static inline Eval& EVAL()
+        static Eval& EVAL()
         {
             static Eval singleton;
             return singleton;

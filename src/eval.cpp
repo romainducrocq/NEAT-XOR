@@ -35,15 +35,15 @@ bool Eval::loop()
 
 void Eval::ev_setup()
 {
-    this->renderer.self_ev_handler().ev_setup();
+    View::EventHandler::EVENTHANDLER().ev_setup();
 }
 
 void Eval::draw_setup()
 {
-    this->renderer.draw_setup(this->env);
+    View::Renderer::RENDERER().draw_setup(this->env);
 }
 
 void Eval::draw_loop()
 {
-    this->renderer.draw_loop(this->env);
+    View::Renderer::RENDERER().draw_loop(this->env);
 }

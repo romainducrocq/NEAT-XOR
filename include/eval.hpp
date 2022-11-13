@@ -24,8 +24,17 @@ class Eval
         void setup();
         bool loop();
 
-    public:
         Eval();
+
+    public:
+        Eval(const Eval& other) = delete;
+        Eval operator=(const Eval& other) = delete;
+
+        static inline Eval& EVAL()
+        {
+            static Eval singleton;
+            return singleton;
+        }
 };
 
 #endif

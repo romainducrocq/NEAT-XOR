@@ -34,8 +34,17 @@ class Play
         void setup();
         bool loop();
 
-    public:
         Play();
-};
+
+    public:
+        Play(const Play& other) = delete;
+        Play operator=(const Play& other) = delete;
+
+        static inline Play& PLAY()
+            {
+                static Play singleton;
+                return singleton;
+            }
+    };
 
 #endif

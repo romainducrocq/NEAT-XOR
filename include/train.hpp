@@ -17,8 +17,17 @@ class Train
         void setup();
         bool loop();
 
-    public:
         Train();
+
+    public:
+        Train(const Train& other) = delete;
+        Train operator=(const Train& other) = delete;
+
+        static inline Train& TRAIN()
+        {
+            static Train singleton;
+            return singleton;
+        }
 };
 
 #endif

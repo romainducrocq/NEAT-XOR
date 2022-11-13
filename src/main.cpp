@@ -9,29 +9,31 @@
 
 int main(int argc, char** argv)
 {
-    std::srand(time(nullptr));
-
     if(CONF::argParse(argc, argv)) {
 
         switch(CONF::MODE){
 
             case CONF::Mode::TRAIN:{
-                Train train;
+                std::srand(time(nullptr));
+                Train::TRAIN();
                 return 0;
             }
 
             case CONF::Mode::EVAL:{
                 if(CONF::LOG_SAV.empty()) { return 1; }
-                Eval eval;
+                std::srand(time(nullptr));
+                Eval::EVAL();
                 return 0;
             }
 
             case CONF::Mode::PLAY:{
-                Play play;
+                std::srand(time(nullptr));
+                Play::PLAY();
                 return 0;
             }
 
             case CONF::Mode::TEST:{
+                std::srand(42);
                 // TODO
                 return 0;
             }

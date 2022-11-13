@@ -41,10 +41,10 @@ class Play
         Play operator=(const Play& other) = delete;
 
         static inline Play& PLAY()
-            {
-                static Play singleton;
-                return singleton;
-            }
-    };
+        {
+            static Play singleton;
+            return singleton;
+        }
+};
 
 #endif

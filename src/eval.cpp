@@ -24,7 +24,7 @@ void Eval::run()
 
 void Eval::setup()
 {
-    this->env.init(CONF::Mode::EVAL, true, nullptr);
+    this->env.init(CONF::Mode::EVAL, nullptr);
 }
 
 bool Eval::loop()

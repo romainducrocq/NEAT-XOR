@@ -4,7 +4,7 @@ Neat::Neat()
 {
 }
 
-void Neat::init(size_t mode, bool load, Genotype::Genome* best)
+void Neat::init(size_t mode, Genotype::Genome* best)
 {
     this->mode = mode;
 
@@ -33,10 +33,10 @@ void Neat::init(size_t mode, bool load, Genotype::Genome* best)
             break;
 
         case CONF::Mode::EVAL:
-            if(load)      { this->best.load(this->log_sav); }
-            else if(best) { this->best.copy_genome(*best);  }
+            if(best) { this->best.copy_genome(*best);  }
+            else     { this->best.load(this->log_sav); }
 
-            this->best.ctor_network();
+                this->best.ctor_network();
             break;
 
         default:
@@ -191,6 +191,7 @@ bool Neat::train()
             this->info();
 
             if(! this->log_plt.empty()) { this->to_plt(); }
+            if(! this->log_sav.empty()) { this->best.save(this->log_sav); }
         }
 
         this->reset();
@@ -199,7 +200,6 @@ bool Neat::train()
     if(this->max_generation_train && this->generation >= this->max_generation_train){
 
         if(! this->log_plt.empty()) { this->plot(); }
-        if(! this->log_sav.empty()) { this->best.save(this->log_sav); }
 
         return false;
     }

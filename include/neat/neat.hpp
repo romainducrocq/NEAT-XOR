@@ -104,7 +104,7 @@ protected:
     public:
         Neat();
 
-        void init(size_t mode, bool load, Genotype::Genome* best);
+        void init(size_t mode, Genotype::Genome* best);
 
         bool train();
         bool eval();

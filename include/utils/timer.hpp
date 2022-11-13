@@ -6,20 +6,44 @@
 
 struct Timer
 {
-    std::chrono::_V2::system_clock::time_point m_start, m_end;
-    std::chrono::duration<float> m_duration;
+    std::chrono::_V2::system_clock::time_point start, end;
+    std::chrono::duration<float> duration;
+
+    float* acc = nullptr;
 
     Timer()
     {
-        this->m_start = std::chrono::high_resolution_clock::now();
+        this->start = std::chrono::high_resolution_clock::now();
+    }
+
+    Timer(float* acc)
+        : acc(acc)
+    {
+        this->start = std::chrono::high_resolution_clock::now();
+    }
+
+    float ms()
+    {
+
+        this->end = std::chrono::high_resolution_clock::now();
+        this->duration = this->end - this->start;
+
+        return this->duration.count() * 1000.f;
+    }
+
+    float s()
+    {
+
+        this->end = std::chrono::high_resolution_clock::now();
+        this->duration = this->end - this->start;
+
+        return this->duration.count() * 1.f;
     }
 
     ~Timer()
     {
-        this->m_end = std::chrono::high_resolution_clock::now();
-        this->m_duration = this->m_end - this->m_start;
-
-        float ms = this->m_duration.count() * 1000.0f;
+        float ms = this->ms();
+        if(this->acc) { *acc += ms; }
         std::cout << "Time: " << ms << "ms" << std::endl;
     }
 };

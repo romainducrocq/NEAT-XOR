@@ -3,6 +3,8 @@
 
 #include <mutex>
 
+#include <gtest/gtest.h>
+
 #include "env/conf.hpp"
 
 #include "train.hpp"
@@ -38,8 +40,8 @@ int main(int argc, char** argv)
 
             case CONF::Mode::TEST:{
                 std::srand(42);
-                // TODO
-                return 0;
+                testing::InitGoogleTest(&argc, argv);
+                return RUN_ALL_TESTS();
             }
 
             default:

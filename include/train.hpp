@@ -1,6 +1,8 @@
 #ifndef _TRAIN_HPP
 #define _TRAIN_HPP
 
+#include <thread>
+
 #include "env/conf.hpp"
 #include "env/env.hpp"
 

@@ -10,6 +10,8 @@
 
 #include <algorithm>
 
+#include <mutex>
+
 #include <pbplots/pbPlots.hpp>
 #include <pbplots/supportLib.hpp>
 
@@ -18,6 +20,8 @@
 #include "neat/population.hpp"
 
 #include "utils/mvgavg.hpp"
+
+extern std::mutex rw;
 
 class Neat
 {

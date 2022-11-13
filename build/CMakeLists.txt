@@ -10,7 +10,7 @@ set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/../src/")
 set(HEADER_DIR "${PROJECT_SOURCE_DIR}/../include/")
 set(LIB_DIR "${PROJECT_SOURCE_DIR}/../lib/")
 set(EXEC_DIR "${PROJECT_SOURCE_DIR}/../bin/apps/")
-set(LINK_LIB "-L${LIB_DIR}pbplots/ -lPbPlots")
+set(LINK_LIB "-L${LIB_DIR}pbplots/ -lPbPlots -pthread")
 
 file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/*.cpp")
 file(GLOB_RECURSE HEADER_FILES "${HEADER_DIR}/*.hpp" "${LIB_DIR}/*.hpp")

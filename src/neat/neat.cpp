@@ -112,7 +112,13 @@ void Neat::reset()
             break;
 
         case CONF::Mode::EVAL:
-            this->best.load(this->log_sav);
+            rw.lock();
+            try{
+                this->best.load(this->log_sav);
+            }catch(const std::exception&){
+            }
+            rw.unlock();
+
             this->best.ctor_network();
             break;
 
@@ -188,8 +194,14 @@ bool Neat::train()
 
             this->info();
 
-            if(! this->log_plt.empty()) { this->to_plt(); }
-            if(! this->log_sav.empty()) { this->best.save(this->log_sav); }
+            if(! this->log_plt.empty()){
+                this->to_plt();
+            }
+            if(! this->log_sav.empty()){
+                rw.lock();
+                this->best.save(this->log_sav);
+                rw.unlock();
+            }
         }
 
         this->reset();
@@ -197,7 +209,9 @@ bool Neat::train()
 
     if(this->max_generation_train && this->generation >= this->max_generation_train){
 
-        if(! this->log_plt.empty()) { this->plot(); }
+        if(! this->log_plt.empty()){
+            this->plot();
+        }
 
         return false;
     }

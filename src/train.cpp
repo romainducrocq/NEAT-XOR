@@ -13,9 +13,15 @@ void Train::run()
     std::cout << "-------------------------------TRAIN-------------------------------" << "\n";
     std::cout << "\n";
 
-    this->setup();
+    std::thread th([&]() {
+        this->setup();
 
-    while(this->loop()){}
+        while(this->loop()){}
+    });
+
+    if(th.joinable()){
+        th.join();
+    }
 }
 
 void Train::setup()

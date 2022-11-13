@@ -1,11 +1,15 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <mutex>
+
 #include "env/conf.hpp"
 
 #include "train.hpp"
 #include "eval.hpp"
 #include "play.hpp"
+
+std::mutex rw;
 
 int main(int argc, char** argv)
 {

@@ -42,6 +42,9 @@ or `./eval.sh`
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m play -e 10`  
 or `./play.sh`  
 
+### Test
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
+or `./test.sh`  
 
 ```
 usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-n NUM] [-p PLT] [-s SAV]

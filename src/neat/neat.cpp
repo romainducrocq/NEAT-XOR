@@ -4,7 +4,7 @@ Neat::Neat()
 {
 }
 
-void Neat::init(size_t mode, Genotype::Genome* best)
+void Neat::init(size_t mode)
 {
     this->mode = mode;
 
@@ -33,10 +33,6 @@ void Neat::init(size_t mode, Genotype::Genome* best)
             break;
 
         case CONF::Mode::EVAL:
-            if(best) { this->best.copy_genome(*best);  }
-            else     { this->best.load(this->log_sav); }
-
-                this->best.ctor_network();
             break;
 
         default:
@@ -116,6 +112,8 @@ void Neat::reset()
             break;
 
         case CONF::Mode::EVAL:
+            this->best.load(this->log_sav);
+            this->best.ctor_network();
             break;
 
         default:

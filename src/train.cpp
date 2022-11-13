@@ -20,7 +20,7 @@ void Train::run()
 
 void Train::setup()
 {
-    this->env.init(CONF::Mode::TRAIN, nullptr);
+    this->env.init(CONF::Mode::TRAIN);
 }
 
 bool Train::loop()

@@ -33,20 +33,49 @@ class Neat
         float fitness = 0.f;
     };
 
-    struct Scale
-    {
-        float min = 0.f;
-        float max = 1.f;
-        inline float minmax(float z)
+    protected:
+        struct Scale
         {
-            return (z - this->min) / (this->max - this->min);
-        }
+            static inline float out01(float z)
+            {
+                return (z + 1.f) / 2.f;
+            }
 
-        inline float out01(float z)
+            struct MinMax
+            {
+                float min = 0.f;
+                float max = 1.f;
+                inline float minmax(float z) const
+                {
+                    return (z - this->min) / (this->max - this->min);
+                }
+            };
+
+            static MinMax minmax;
+        };
+
+        struct Output
         {
-            return (z + 1.f) / 2.f;
-        }
-    };
+            static inline bool activate(float z)
+            {
+                return z > 0.f;
+            }
+
+            static inline size_t argmax(const std::vector<float>& out)
+            {
+                size_t argmax = 0;
+                float max = -std::numeric_limits<float>::max();
+
+                for(size_t i = 0; i < out.size(); i++){
+                    if(out[i] > max){
+                        max = out[i];
+                        argmax = i;
+                    }
+                }
+
+                return argmax;
+            }
+        };
 
     private:
         size_t inputs = CONF::INPUTS;
@@ -82,7 +111,6 @@ class Neat
         bool is_noop = false;
 
         Neat::Mdp mdp;
-        Neat::Scale scale;
 
         MovingAverage mvg_avg;
         std::stringstream ss_info;

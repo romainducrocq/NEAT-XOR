@@ -33,19 +33,20 @@ class Neat
         float fitness = 0.f;
     };
 
-    protected:
-        struct Scale
+    struct Scale
+    {
+        float min = 0.f;
+        float max = 1.f;
+        inline float minmax(float z)
         {
-            static inline float to01(float z)
-            {
-                return (z + 1.f) / 2.f;
-            }
+            return (z - this->min) / (this->max - this->min);
+        }
 
-            static inline float minmax(float z, float min, float max)
-            {
-                return (z - min) / (max - min);
-            }
-        };
+        inline float out01(float z)
+        {
+            return (z + 1.f) / 2.f;
+        }
+    };
 
     private:
         size_t inputs = CONF::INPUTS;
@@ -80,6 +81,7 @@ class Neat
         float max_fitness = 0.f;
 
         Neat::Mdp mdp;
+        Neat::Scale scale;
 
         MovingAverage mvg_avg;
         std::stringstream ss_info;

@@ -58,7 +58,7 @@ class Neat
         {
             static inline bool activate(float z)
             {
-                return z > 0.f;
+                return z > std::numeric_limits<float>::min();
             }
 
             static inline size_t argmax(const std::vector<float>& out)

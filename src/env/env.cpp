@@ -86,9 +86,8 @@ void Env::info_func()
 }
 
 /*** DEF NOOP FUNC HERE */
-bool Env::noop_func()
+void Env::noop_func()
 {
-    return false;
 }
 
 /*** DEF RESET FUNC HERE */

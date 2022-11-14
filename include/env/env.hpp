@@ -30,7 +30,7 @@ class Env: public Neat
         void fitness_func() override;
         void info_func() override;
 
-        bool noop_func() override;
+        void noop_func() override;
 
         void reset_func() override;
         void step_func() override;

@@ -79,6 +79,7 @@ class Neat
         size_t epoch = 0;
         size_t generation = 0;
         float max_fitness = 0.f;
+        bool is_noop = false;
 
         Neat::Mdp mdp;
         Neat::Scale scale;
@@ -95,7 +96,7 @@ class Neat
         virtual void fitness_func() = 0;
         virtual void info_func() = 0;
 
-        virtual bool noop_func() = 0;
+        virtual void noop_func() = 0;
 
         virtual void reset_func() = 0;
         virtual void step_func() = 0;

@@ -83,7 +83,11 @@ void Neat::info()
 
 void Neat::noop()
 {
-    if(this->noop_func()){
+    this->is_noop = false;
+
+    this->noop_func();
+
+    if(this->is_noop){
         this->noops++;
     }else{
         this->noops = 0;

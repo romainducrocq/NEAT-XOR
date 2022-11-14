@@ -32,12 +32,12 @@ void View::EventHandler::get_action(std::vector<float>& act)
 }
 
 /*** DEF DRAW SETUP HERE */
-void View::Renderer::draw_setup(const Env& /*env*/)
+void View::Renderer::draw_setup(const MyEnv::Model& /*m*/)
 {
 }
 
 /*** DEF DRAW LOOP HERE */
-void View::Renderer::draw_loop(const Env& /*env*/)
+void View::Renderer::draw_loop(const MyEnv::Model& /*m*/)
 {
 }
 

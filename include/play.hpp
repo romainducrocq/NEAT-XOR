@@ -11,38 +11,48 @@
 
 #include "utils/timer.hpp"
 
-class Play
+namespace App
 {
-    private:
-        Env env;
+    class Play
+    {
+        private:
+            MyEnv::Env env;
 
-    private:
-        void init();
-        void reset();
-        void step();
-        bool play();
+        private:
+            void init();
 
-    private:
-        void run();
+            void reset();
 
-        void ev_setup();
-        void draw_setup();
-        void draw_loop();
+            void step();
 
-        void setup();
-        bool loop();
+            bool play();
 
-        Play();
+        private:
+            void run();
 
-    public:
-        Play(const Play& other) = delete;
-        Play operator=(const Play& other) = delete;
+            void ev_setup();
 
-        static Play& PLAY()
-        {
-            static Play singleton;
-            return singleton;
-        }
-};
+            void draw_setup();
+
+            void draw_loop();
+
+            void setup();
+
+            bool loop();
+
+            Play();
+
+        public:
+            Play(const Play &other) = delete;
+
+            Play operator=(const Play &other) = delete;
+
+            static Play &PLAY()
+            {
+                static Play singleton;
+                return singleton;
+            }
+    };
+}
 
 #endif

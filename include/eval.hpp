@@ -7,32 +7,35 @@
 
 #include "utils/timer.hpp"
 
-class Eval
+namespace App
 {
-    private:
-        Env env;
+    class Eval
+    {
+        private:
+            MyEnv::Env env;
 
-    private:
-        void run();
+        private:
+            void run();
 
-        void ev_setup();
-        void draw_setup();
-        void draw_loop();
+            void ev_setup();
+            void draw_setup();
+            void draw_loop();
 
-        void setup();
-        bool loop();
+            void setup();
+            bool loop();
 
-        Eval();
+            Eval();
 
-    public:
-        Eval(const Eval& other) = delete;
-        Eval operator=(const Eval& other) = delete;
+        public:
+            Eval(const Eval& other) = delete;
+            Eval operator=(const Eval& other) = delete;
 
-        static Eval& EVAL()
-        {
-            static Eval singleton;
-            return singleton;
-        }
-};
+            static Eval& EVAL()
+            {
+                static Eval singleton;
+                return singleton;
+            }
+    };
+}
 
 #endif

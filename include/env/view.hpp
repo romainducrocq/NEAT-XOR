@@ -10,15 +10,18 @@
 /*** ADD INCLUDE HERE */
 #include <iostream>
 
+#include "env/env/xor.hpp"
+
 namespace View
 {
     class EventHandler
     {
-        /*** DEC EVENT STATE HERE */
-        struct EventState
-        {
-            CONF::Action action = CONF::ZERO;
-        };
+        private:
+            /*** DEC EVENT STATE HERE */
+            struct EventState
+            {
+                CONF::Action action = CONF::ZERO;
+            };
 
         private:
             EventState ev_state;
@@ -29,6 +32,11 @@ namespace View
         public:
             void ev_setup();
             void get_action(std::vector<float>& act);
+
+            inline const EventState& get_ev_state() const
+            {
+                return this->ev_state;
+            }
 
         public:
             EventHandler(const EventHandler& other) = delete;
@@ -46,9 +54,13 @@ namespace View
         private:
             Renderer() = default;
 
+        private:
+            /*** DEC DRAW VARS HERE */
+
+
         public:
-            void draw_setup(const Env& env);
-            void draw_loop(const Env& env);
+            void draw_setup(const MyEnv::Model& m);
+            void draw_loop(const MyEnv::Model& m);
 
             /*** DEC DRAW FUNCS HERE */
 

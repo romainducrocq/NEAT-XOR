@@ -21,20 +21,20 @@ int main(int argc, char** argv)
 
             case CONF::Mode::TRAIN:{
                 std::srand(time(nullptr));
-                Train::TRAIN();
+                App::Train::TRAIN();
                 return 0;
             }
 
             case CONF::Mode::EVAL:{
                 if(CONF::LOG_SAV.empty()) { return 1; }
                 std::srand(time(nullptr));
-                Eval::EVAL();
+                App::Eval::EVAL();
                 return 0;
             }
 
             case CONF::Mode::PLAY:{
                 std::srand(time(nullptr));
-                Play::PLAY();
+                App::Play::PLAY();
                 return 0;
             }
 

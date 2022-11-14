@@ -9,37 +9,56 @@
 
 #include "env/env/xor.hpp"
 
-class Play;
+namespace App { class Play; }
 
-class Env: public Neat
+namespace MyEnv
 {
-    private:
-        typedef Neat Super;
-        friend class Play;
-
-    private:
-        /*** DEC ENV HERE */
+    /*** DEC MODEL HERE */
+    struct Model
+    {
         Xor agent;
+    };
 
-    private:
-        void init_func() override;
+    class Env : public Neat
+    {
+        private:
+            typedef Neat Super;
+            friend class App::Play;
 
-        void obs_func() override;
-        void act_func() override;
-        void done_func() override;
-        void fitness_func() override;
-        void info_func() override;
+        private:
+            MyEnv::Model m;
 
-        void noop_func() override;
+        private:
+            void init_func() override;
 
-        void reset_func() override;
-        void step_func() override;
+            void obs_func() override;
 
-        void reset_render_func() override;
-        void step_render_func() override;
+            void act_func() override;
 
-    public:
-        Env() = default;
-};
+            void done_func() override;
+
+            void fitness_func() override;
+
+            void info_func() override;
+
+            void noop_func() override;
+
+            void reset_func() override;
+
+            void step_func() override;
+
+            void reset_render_func() override;
+
+            void step_render_func() override;
+
+        public:
+            Env() = default;
+
+            inline const MyEnv::Model &get_m() const
+            {
+                return this->m;
+            }
+    };
+}
 
 #endif

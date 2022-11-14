@@ -25,13 +25,14 @@ extern std::mutex rw;
 
 class Neat
 {
-    struct Mdp
-    {
-        std::vector<float> obs;
-        std::vector<float> act;
-        bool done = false;
-        float fitness = 0.f;
-    };
+    private:
+        struct Mdp
+        {
+            std::vector<float> obs;
+            std::vector<float> act;
+            bool done = false;
+            float fitness = 0.f;
+        };
 
     protected:
         struct Scale

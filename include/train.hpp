@@ -8,28 +8,31 @@
 
 #include "utils/timer.hpp"
 
-class Train
+namespace App
 {
-    private:
-        Env env;
+    class Train
+    {
+        private:
+            MyEnv::Env env;
 
-    private:
-        void run();
+        private:
+            void run();
 
-        void setup();
-        bool loop();
+            void setup();
+            bool loop();
 
-        Train();
+            Train();
 
-    public:
-        Train(const Train& other) = delete;
-        Train operator=(const Train& other) = delete;
+        public:
+            Train(const Train& other) = delete;
+            Train operator=(const Train& other) = delete;
 
-        static Train& TRAIN()
-        {
-            static Train singleton;
-            return singleton;
-        }
-};
+            static Train& TRAIN()
+            {
+                static Train singleton;
+                return singleton;
+            }
+    };
+}
 
 #endif

@@ -1,11 +1,11 @@
 #include "train.hpp"
 
-Train::Train()
+App::Train::Train()
 {
     this->run();
 }
 
-void Train::run()
+void App::Train::run()
 {
     Timer timer;
 
@@ -24,12 +24,12 @@ void Train::run()
     }
 }
 
-void Train::setup()
+void App::Train::setup()
 {
     this->env.init(CONF::Mode::TRAIN);
 }
 
-bool Train::loop()
+bool App::Train::loop()
 {
     return this->env.train();
 }

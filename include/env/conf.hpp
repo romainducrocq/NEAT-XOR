@@ -57,7 +57,7 @@ struct DefaultConf{
     /*** DEC OPT PARAMS HERE */
 
 
-    static bool argParse(int argc, char** argv)
+    static inline bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 

@@ -7,8 +7,13 @@
 #include <vector>
 #include <utility>
 
+namespace View { class Renderer; }
+
 class Xor
 {
+    private:
+        friend class View::Renderer;
+
     private:
         size_t curr = -1;
 

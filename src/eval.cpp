@@ -1,11 +1,11 @@
 #include "eval.hpp"
 
-Eval::Eval()
+App::Eval::Eval()
 {
     this->run();
 }
 
-void Eval::run()
+void App::Eval::run()
 {
     Timer timer;
 
@@ -22,28 +22,28 @@ void Eval::run()
     }
 }
 
-void Eval::setup()
+void App::Eval::setup()
 {
     this->env.init(CONF::Mode::EVAL);
 }
 
-bool Eval::loop()
+bool App::Eval::loop()
 {
     return this->env.eval();
 }
 
 
-void Eval::ev_setup()
+void App::Eval::ev_setup()
 {
     View::EventHandler::EVENTHANDLER().ev_setup();
 }
 
-void Eval::draw_setup()
+void App::Eval::draw_setup()
 {
-    View::Renderer::RENDERER().draw_setup(this->env);
+    View::Renderer::RENDERER().draw_setup(this->env.get_m());
 }
 
-void Eval::draw_loop()
+void App::Eval::draw_loop()
 {
-    View::Renderer::RENDERER().draw_loop(this->env);
+    View::Renderer::RENDERER().draw_loop(this->env.get_m());
 }

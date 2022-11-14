@@ -1,11 +1,11 @@
 #include "play.hpp"
 
-Play::Play()
+App::Play::Play()
 {
     this->run();
 }
 
-void Play::run()
+void App::Play::run()
 {
     Timer timer;
 
@@ -22,32 +22,32 @@ void Play::run()
     }
 }
 
-void Play::setup()
+void App::Play::setup()
 {
     this->init();
 }
 
-bool Play::loop()
+bool App::Play::loop()
 {
     return this->play();
 }
 
-void Play::ev_setup()
+void App::Play::ev_setup()
 {
     View::EventHandler::EVENTHANDLER().ev_setup();
 }
 
-void Play::draw_setup()
+void App::Play::draw_setup()
 {
-    View::Renderer::RENDERER().draw_setup(this->env);
+    View::Renderer::RENDERER().draw_setup(this->env.get_m());
 }
 
-void Play::draw_loop()
+void App::Play::draw_loop()
 {
-    View::Renderer::RENDERER().draw_loop(this->env);
+    View::Renderer::RENDERER().draw_loop(this->env.get_m());
 }
 
-void Play::init()
+void App::Play::init()
 {
     this->env.init_func();
 
@@ -63,7 +63,7 @@ void Play::init()
     this->reset();
 }
 
-void Play::reset()
+void App::Play::reset()
 {
     this->env.reset_func();
 
@@ -77,7 +77,7 @@ void Play::reset()
     this->env.epoch++;
 }
 
-void Play::step()
+void App::Play::step()
 {
     this->env.step_func();
 
@@ -98,7 +98,7 @@ void Play::step()
     }
 }
 
-bool Play::play()
+bool App::Play::play()
 {
     this->step();
 

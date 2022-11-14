@@ -33,6 +33,20 @@ class Neat
         float fitness = 0.f;
     };
 
+    protected:
+        struct Scale
+        {
+            static inline float to01(float z)
+            {
+                return (z + 1.f) / 2.f;
+            }
+
+            static inline float minmax(float z, float min, float max)
+            {
+                return (z - min) / (max - min);
+            }
+        };
+
     private:
         size_t inputs = CONF::INPUTS;
 
@@ -70,7 +84,7 @@ class Neat
         MovingAverage mvg_avg;
         std::stringstream ss_info;
 
-protected:
+    protected:
         virtual void init_func() = 0;
 
         virtual void obs_func() = 0;

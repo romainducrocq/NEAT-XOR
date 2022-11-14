@@ -28,7 +28,7 @@ void Env::fitness_func()
 {
     switch(this->Super::mode) {
         case CONF::Mode::TRAIN:
-            this->Super::mdp.fitness += 1.f - std::pow(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y(), 2);
+            this->Super::mdp.fitness += 1.f - std::pow(Super::Scale::to01(this->Super::mdp.act[0]) - this->agent.get_y(), 2);
 
             break;
 
@@ -36,8 +36,8 @@ void Env::fitness_func()
             this->Super::ss_info << "#" << this->Super::steps << " | "
                                  << this->agent.get_x()[0] << " " << this->agent.get_x()[1] << " | "
                                  << this->agent.get_y()                                     << " | "
-                                 << ((this->Super::mdp.act[0] + 1.f) / 2.f)                 << " | " << "\n";
-            this->Super::mdp.fitness += 1.f - std::abs(((this->Super::mdp.act[0] + 1.f) / 2.f) - this->agent.get_y());
+                                 << Super::Scale::to01(this->Super::mdp.act[0])             << " | " << "\n";
+            this->Super::mdp.fitness += 1.f - std::abs(Super::Scale::to01(this->Super::mdp.act[0]) - this->agent.get_y());
 
             break;
 

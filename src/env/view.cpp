@@ -1,13 +1,11 @@
 #include "env/view.hpp"
 
-View::EventHandler::EventHandler()
-{
-}
-
+/*** DEF EVENT SETUP HERE */
 void View::EventHandler::ev_setup()
 {
 }
 
+/*** DEF ACTION HANDLER HERE */
 void View::EventHandler::get_action(std::vector<float>& act)
 {
     size_t x;
@@ -33,14 +31,14 @@ void View::EventHandler::get_action(std::vector<float>& act)
     act[0] = x;
 }
 
-View::Renderer::Renderer()
-{
-}
-
+/*** DEF DRAW SETUP HERE */
 void View::Renderer::draw_setup(const Env& /*env*/)
 {
 }
 
+/*** DEF DRAW LOOP HERE */
 void View::Renderer::draw_loop(const Env& /*env*/)
 {
 }
+
+/*** DEF DRAW FUNCS HERE */

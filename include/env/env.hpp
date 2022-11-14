@@ -1,10 +1,11 @@
 #ifndef _ENV_ENV_HPP
 #define _ENV_ENV_HPP
 
+#include "neat/neat.hpp"
+
+/*** ADD INCLUDE HERE */
 #include <iostream>
 #include <cmath>
-
-#include "neat/neat.hpp"
 
 #include "env/env/xor.hpp"
 
@@ -17,6 +18,7 @@ class Env: public Neat
         friend class Play;
 
     private:
+        /*** DEC ENV HERE */
         Xor agent;
 
     private:
@@ -37,7 +39,7 @@ class Env: public Neat
         void step_render_func() override;
 
     public:
-        Env();
+        Env() = default;
 };
 
 #endif

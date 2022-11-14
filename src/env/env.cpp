@@ -1,28 +1,29 @@
 #include "env/env.hpp"
 
-Env::Env()
-{
-}
-
+/*** DEF INIT FUNC HERE */
 void Env::init_func()
 {
 }
 
+/*** DEF OBS FUNC HERE */
 void Env::obs_func()
 {
     this->Super::mdp.obs[0] = agent.get_x()[0];
     this->Super::mdp.obs[1] = agent.get_x()[1];
 }
 
+/*** DEF ACT FUNC HERE */
 void Env::act_func()
 {
 }
 
+/*** DEF DONE FUNC HERE */
 void Env::done_func()
 {
     this->Super::mdp.done = this->agent.is_end();
 }
 
+/*** DEF FITNESS FUNC HERE */
 void Env::fitness_func()
 {
     switch(this->Super::mode) {
@@ -54,6 +55,7 @@ void Env::fitness_func()
     }
 }
 
+/*** DEF INFO FUNC HERE */
 void Env::info_func()
 {
     switch(this->Super::mode){
@@ -83,26 +85,31 @@ void Env::info_func()
     }
 }
 
+/*** DEF NOOP FUNC HERE */
 bool Env::noop_func()
 {
     return false;
 }
 
+/*** DEF RESET FUNC HERE */
 void Env::reset_func()
 {
     this->agent.shuffle_data();
     this->agent.reset_data();
 }
 
+/*** DEF STEP FUNC HERE */
 void Env::step_func()
 {
     this->agent.next_data();
 }
 
+/*** DEF RESET RENDER FUNC HERE */
 void Env::reset_render_func()
 {
 }
 
+/*** DEF STEP RENDER FUNC HERE */
 void Env::step_render_func()
 {
     switch(this->Super::mode) {

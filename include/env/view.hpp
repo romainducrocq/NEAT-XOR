@@ -1,17 +1,20 @@
 #ifndef _ENV_VIEW_HPP
 #define _ENV_VIEW_HPP
 
-#include <iostream>
 #include <vector>
 
 #include "env/conf.hpp"
 
 #include "env/env.hpp"
 
+/*** ADD INCLUDE HERE */
+#include <iostream>
+
 namespace View
 {
     class EventHandler
     {
+        /*** DEC EVENT STATE HERE */
         struct EventState
         {
             CONF::Action action = CONF::ZERO;
@@ -21,7 +24,7 @@ namespace View
             EventState ev_state;
 
         private:
-            EventHandler();
+            EventHandler() = default;
 
         public:
             void ev_setup();
@@ -41,11 +44,13 @@ namespace View
     class Renderer
     {
         private:
-            Renderer();
+            Renderer() = default;
 
         public:
-            void draw_setup(const Env& /*env*/);
-            void draw_loop(const Env& /*env*/);
+            void draw_setup(const Env& env);
+            void draw_loop(const Env& env);
+
+            /*** DEC DRAW FUNCS HERE */
 
         public:
             Renderer(const Renderer& other) = delete;

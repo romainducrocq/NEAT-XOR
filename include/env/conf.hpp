@@ -14,6 +14,7 @@ struct DefaultConf{
         TRAIN, EVAL, PLAY, TEST, NONE
     };
 
+    /*** DEC ACTIONS HERE */
     enum Action{
         ZERO, ONE
     };
@@ -53,12 +54,19 @@ struct DefaultConf{
 
     static Mode MODE;
 
+    /*** DEC OPT PARAMS HERE */
+
     static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
+        /*** DEF CMDS HERE */
+        const char cmds[] = "h:m:g:e:n:p:s:";
+
         for(;;){
-            switch(getopt(argc, argv, "h:m:g:e:n:p:s:")){
+            switch(getopt(argc, argv, cmds)){
+
+                /*** DEF HELP HERE */
                 case '?': // help
                 case 'h':
                 default :
@@ -113,6 +121,9 @@ struct DefaultConf{
                 case 's': // save sav file name
                     DefaultConf<T>::LOG_SAV = std::string(optarg);
                     continue;
+
+                /*** DEF OPT CMDS HERE */
+
             }
             break;
         }
@@ -121,6 +132,7 @@ struct DefaultConf{
     }
 };
 
+/*** DEF PARAMS HERE */
 template<typename T>
 const size_t DefaultConf<T>::INPUTS = 2;
 template<typename T>
@@ -175,6 +187,8 @@ std::string DefaultConf<T>::LOG_SAV = "";
 
 template<typename T>
 typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::NONE;
+
+/*** DEF OPT PARAMS HERE */
 
 using CONF = DefaultConf<int>;
 

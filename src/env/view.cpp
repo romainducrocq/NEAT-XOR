@@ -42,3 +42,4 @@ void View::Renderer::draw_loop(const Env& /*env*/)
 }
 
 /*** DEF DRAW FUNCS HERE */
+

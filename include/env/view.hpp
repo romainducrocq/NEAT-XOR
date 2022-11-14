@@ -52,6 +52,7 @@ namespace View
 
             /*** DEC DRAW FUNCS HERE */
 
+
         public:
             Renderer(const Renderer& other) = delete;
             Renderer operator=(const Renderer& other) = delete;

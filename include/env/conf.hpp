@@ -56,6 +56,7 @@ struct DefaultConf{
 
     /*** DEC OPT PARAMS HERE */
 
+
     static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
@@ -124,6 +125,7 @@ struct DefaultConf{
 
                 /*** DEF OPT CMDS HERE */
 
+
             }
             break;
         }
@@ -131,6 +133,13 @@ struct DefaultConf{
         return true;
     }
 };
+
+template<typename T>
+typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::NONE;
+template<typename T>
+std::string DefaultConf<T>::LOG_PLT = "";
+template<typename T>
+std::string DefaultConf<T>::LOG_SAV = "";
 
 /*** DEF PARAMS HERE */
 template<typename T>
@@ -170,25 +179,19 @@ const size_t DefaultConf<T>::POPULATION_SIZE = 150;
 template<typename T>
 const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
-const size_t DefaultConf<T>::MAX_NOOP = 0;
+const size_t DefaultConf<T>::MAX_NOOP = 0; // 0=inf
 template<typename T>
 const size_t DefaultConf<T>::MVG_AVG = 20;
 
 template<typename T>
-size_t DefaultConf<T>::GENERATIONS_TRAIN = 300;
+size_t DefaultConf<T>::GENERATIONS_TRAIN = 300; // 0=inf
 template<typename T>
-size_t DefaultConf<T>::EPOCHS_EVAL = 10;
+size_t DefaultConf<T>::EPOCHS_EVAL = 10; // 0=inf
 template<typename T>
-size_t DefaultConf<T>::MAX_STEP = 0;
-template<typename T>
-std::string DefaultConf<T>::LOG_PLT = "";
-template<typename T>
-std::string DefaultConf<T>::LOG_SAV = "";
-
-template<typename T>
-typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::NONE;
+size_t DefaultConf<T>::MAX_STEP = 0; // 0=inf
 
 /*** DEF OPT PARAMS HERE */
+
 
 using CONF = DefaultConf<int>;
 

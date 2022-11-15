@@ -169,7 +169,7 @@ const float DefaultConf<T>::MUTATE_DISABLE_RATE = 0.4f;
 template<typename T>
 const float DefaultConf<T>::MUTATE_OFFSET_SIZE = 0.1f;
 template<typename T>
-const float DefaultConf<T>::MUTATE_RATE_DECAY = 0.99f; // (0.f=false) -> no decay, rand perturbs
+const float DefaultConf<T>::MUTATE_RATE_DECAY = 0.f; // (0.f=false) -> no decay, rand perturbs
 template<typename T>
 const float DefaultConf<T>::DELTA_DISJOINT = 2.f;
 template<typename T>

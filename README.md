@@ -1,12 +1,11 @@
-# [C++] Simple XOR PROBLEM with NEAT
+# [C++] Simple XOR PROBLEM with NEAT and TidyVolve
 
-- The NeuroEvolution of Augmenting Topologies (NEAT) User Page: http://www.cs.ucf.edu/~kstanley/neat.html
-- MarI/O - Machine Learning for Video Games (SethBling): https://www.youtube.com/watch?v=qv6UVOQ0F44 
+- My very own NEAT framework in C++ (by & for myself): https://github.com/romainducrocq/TidyVolve
 - NEAT-Python documentation XOR example: https://neat-python.readthedocs.io/en/latest/xor_example.html
 
 ****
 
-## Run
+## How to _
 
 `cd bin`
 - **Install**: `./make.sh` or  

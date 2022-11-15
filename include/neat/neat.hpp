@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include <vector>
+#include <unordered_map>
 #include <utility>
 
 #include <algorithm>
@@ -21,7 +22,7 @@
 
 #include "utils/mvgavg.hpp"
 
-extern std::mutex rw;
+extern std::unordered_map<std::string, std::mutex> mutex_map;
 
 class Neat
 {
@@ -46,13 +47,16 @@ class Neat
             {
                 float min = 0.f;
                 float max = 1.f;
+
+                inline MinMax(float min, float max)
+                    : min(min), max(max)
+                {}
+
                 inline float minmax(float z) const
                 {
                     return (z - this->min) / (this->max - this->min);
                 }
             };
-
-            static MinMax minmax;
         };
 
         struct Output
@@ -115,6 +119,8 @@ class Neat
 
         MovingAverage mvg_avg;
         std::stringstream ss_info;
+
+        std::unordered_map<std::string, Neat::Scale::MinMax> minmax_map;
 
     protected:
         virtual void init_func() = 0;

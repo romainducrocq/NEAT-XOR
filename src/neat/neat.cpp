@@ -116,12 +116,12 @@ void Neat::reset()
             break;
 
         case CONF::Mode::EVAL:
-            rw.lock();
+            mutex_map["rw_sav"].lock();
             try{
                 this->best.load(this->log_sav);
             }catch(const std::exception&){
             }
-            rw.unlock();
+            mutex_map["rw_sav"].unlock();
 
             this->best.ctor_network();
             break;
@@ -202,9 +202,9 @@ bool Neat::train()
                 this->to_plt();
             }
             if(! this->log_sav.empty()){
-                rw.lock();
+                mutex_map["rw_sav"].lock();
                 this->best.save(this->log_sav);
-                rw.unlock();
+                mutex_map["rw_sav"].unlock();
             }
         }
 

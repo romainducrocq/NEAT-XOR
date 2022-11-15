@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <unordered_map>
+#include <tuple>
 #include <mutex>
 
 #include <gtest/gtest.h>
@@ -11,11 +13,17 @@
 #include "eval.hpp"
 #include "play.hpp"
 
-std::mutex rw;
+std::unordered_map<std::string, std::mutex> mutex_map;
 
 int main(int argc, char** argv)
 {
     if(CONF::argParse(argc, argv)) {
+
+        for(const auto& key : {"rw_sav"}){
+            mutex_map.emplace(std::piecewise_construct,
+                              std::forward_as_tuple(key),
+                              std::forward_as_tuple());
+        }
 
         switch(CONF::MODE){
 

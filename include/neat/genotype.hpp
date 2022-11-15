@@ -76,6 +76,7 @@ namespace Genotype
                 {"disable", CONF::MUTATE_DISABLE_RATE},
                 {"offset", CONF::MUTATE_OFFSET_SIZE}
             };
+            float mutate_rate_decay = CONF::MUTATE_RATE_DECAY;
 
             float d_disjoint = CONF::DELTA_DISJOINT;
             float d_weight = CONF::DELTA_WEIGHTS;

@@ -233,7 +233,9 @@ void Genotype::Genome::mutate_enable(bool enable)
 void Genotype::Genome::mutate(size_t& innovation)
 {
     for(auto& mutation_rate : this->mutation_rates){
-        if(std::rand() % 2){
+        if(this->mutate_rate_decay) {
+            mutation_rate.second *= this->mutate_rate_decay;
+        } else if(std::rand() % 2) {
             mutation_rate.second *= 0.95f;
         } else {
             mutation_rate.second *= 1.05263f;

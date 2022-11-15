@@ -32,6 +32,7 @@ struct DefaultConf{
     const static float MUTATE_ENABLE_RATE;
     const static float MUTATE_DISABLE_RATE;
     const static float MUTATE_OFFSET_SIZE;
+    const static float MUTATE_RATE_DECAY;
 
     const static float DELTA_WEIGHTS;
     const static float DELTA_DISJOINT;
@@ -40,6 +41,9 @@ struct DefaultConf{
     const static float CROSSOVER_PROB;
     const static size_t STALE_SPECIES;
     const static size_t POPULATION_SIZE;
+    const static size_t MAX_POPULATION_SIZE;
+    const static size_t POPULATION_GENS_INC;
+    const static size_t POPULATION_INC_FREQ;
 
     const static size_t ACT_REPEAT;
     const static size_t MAX_NOOP;
@@ -165,6 +169,8 @@ const float DefaultConf<T>::MUTATE_DISABLE_RATE = 0.4f;
 template<typename T>
 const float DefaultConf<T>::MUTATE_OFFSET_SIZE = 0.1f;
 template<typename T>
+const float DefaultConf<T>::MUTATE_RATE_DECAY = 0.f; // (0.f=false) -> no decay, rand perturbs
+template<typename T>
 const float DefaultConf<T>::DELTA_DISJOINT = 2.f;
 template<typename T>
 const float DefaultConf<T>::DELTA_WEIGHTS = 0.4f;
@@ -177,18 +183,24 @@ const size_t DefaultConf<T>::STALE_SPECIES = 15;
 template<typename T>
 const size_t DefaultConf<T>::POPULATION_SIZE = 150;
 template<typename T>
+const size_t DefaultConf<T>::MAX_POPULATION_SIZE = 0; // (0=false) -> const population size // &&
+template<typename T>
+const size_t DefaultConf<T>::POPULATION_GENS_INC = 200; // (0=false) -> const population size // &&
+template<typename T>
+const size_t DefaultConf<T>::POPULATION_INC_FREQ = 10; // (0=false) -> const population size
+template<typename T>
 const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
-const size_t DefaultConf<T>::MAX_NOOP = 0; // 0=inf
+const size_t DefaultConf<T>::MAX_NOOP = 0; // (0=inf) -> no noop early stop
 template<typename T>
 const size_t DefaultConf<T>::MVG_AVG = 20;
 
 template<typename T>
-size_t DefaultConf<T>::GENERATIONS_TRAIN = 300; // 0=inf
+size_t DefaultConf<T>::GENERATIONS_TRAIN = 300; // (0=inf) -> infinite train
 template<typename T>
-size_t DefaultConf<T>::EPOCHS_EVAL = 10; // 0=inf
+size_t DefaultConf<T>::EPOCHS_EVAL = 10; // (0=inf) -> infinite eval
 template<typename T>
-size_t DefaultConf<T>::MAX_STEP = 0; // 0=inf
+size_t DefaultConf<T>::MAX_STEP = 0; // (0=inf) -> no step early stop
 
 /*** DEF OPT PARAMS HERE */
 

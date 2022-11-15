@@ -47,6 +47,15 @@ namespace Population
     class Pool
     {
         private:
+            struct Interp
+            {
+                static inline float linear(float x, float x1, float x2, float y1, float y2)
+                {
+                    return y1 + ((std::min(std::max(x, x1), x2) - x1) / (x2 - x1)) * (y2 - y1);
+                }
+            };
+
+        private:
             size_t curr_specie = 0;
             size_t curr_genome = 0;
 
@@ -58,6 +67,10 @@ namespace Population
 
             size_t stale_species = CONF::STALE_SPECIES;
             size_t population_size = CONF::POPULATION_SIZE;
+            size_t min_population_size = CONF::POPULATION_SIZE;
+            size_t max_population_size = CONF::MAX_POPULATION_SIZE;
+            size_t population_gens_inc = CONF::POPULATION_GENS_INC;
+            size_t population_inc_freq = CONF::POPULATION_INC_FREQ;
 
             std::vector<Population::Specie> species;
 

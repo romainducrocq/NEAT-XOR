@@ -155,7 +155,7 @@ void Population::Pool::new_generation()
 
     if(this->max_population_size && this->population_gens_inc && this->population_inc_freq &&
        this->generation > 0 && (this->generation+1) % this->population_inc_freq == 0){
-        this->population_size = static_cast<size_t>(Population::Pool::Interp::linear(
+        this->population_size = static_cast<size_t>(this->interp_func(
             this->generation+1, 0.f, this->population_gens_inc, this->min_population_size, this->max_population_size));
     }
 

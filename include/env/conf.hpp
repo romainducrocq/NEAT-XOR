@@ -169,7 +169,7 @@ const float DefaultConf<T>::MUTATE_DISABLE_RATE = 0.4f;
 template<typename T>
 const float DefaultConf<T>::MUTATE_OFFSET_SIZE = 0.1f;
 template<typename T>
-const float DefaultConf<T>::MUTATE_RATE_DECAY = 0.f; // (0.f=false) -> no decay, rand perturbs
+const float DefaultConf<T>::MUTATE_RATE_DECAY = 0.99f; // (0.f=false) -> no decay, rand perturbs
 template<typename T>
 const float DefaultConf<T>::DELTA_DISJOINT = 2.f;
 template<typename T>
@@ -181,9 +181,9 @@ const float DefaultConf<T>::CROSSOVER_PROB = 0.75f;
 template<typename T>
 const size_t DefaultConf<T>::STALE_SPECIES = 15;
 template<typename T>
-const size_t DefaultConf<T>::POPULATION_SIZE = 150;
+const size_t DefaultConf<T>::POPULATION_SIZE = 10;
 template<typename T>
-const size_t DefaultConf<T>::MAX_POPULATION_SIZE = 0; // (0=false) -> const population size // &&
+const size_t DefaultConf<T>::MAX_POPULATION_SIZE = 150; // (0=false) -> const population size // &&
 template<typename T>
 const size_t DefaultConf<T>::POPULATION_GENS_INC = 200; // (0=false) -> const population size // &&
 template<typename T>

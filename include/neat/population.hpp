@@ -53,6 +53,12 @@ namespace Population
                 {
                     return y1 + ((std::min(std::max(x, x1), x2) - x1) / (x2 - x1)) * (y2 - y1);
                 }
+
+                static inline float exponential(float x, float x1, float x2, float y1, float y2)
+                {
+                    return std::exp(std::log(y1) +
+                        ((std::min(std::max(x, x1), x2) - x1) / (x2 - x1)) * (std::log(y2) - std::log(y1)));
+                }
             };
 
         private:
@@ -67,10 +73,12 @@ namespace Population
 
             size_t stale_species = CONF::STALE_SPECIES;
             size_t population_size = CONF::POPULATION_SIZE;
+
             size_t min_population_size = CONF::POPULATION_SIZE;
             size_t max_population_size = CONF::MAX_POPULATION_SIZE;
             size_t population_gens_inc = CONF::POPULATION_GENS_INC;
             size_t population_inc_freq = CONF::POPULATION_INC_FREQ;
+            float(*interp_func)(float, float, float, float, float) = Population::Pool::Interp::linear;
 
             std::vector<Population::Specie> species;
 

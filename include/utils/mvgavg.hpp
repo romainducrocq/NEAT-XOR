@@ -24,7 +24,7 @@ public:
     {
         this->t += x;
         this->i = (this->i + 1) % this->n;
-        if(this->xs.size() < n){
+        if(this->xs.size() < this->n){
             this->xs.push_back(x);
         }else{
             this->t -= this->xs[this->i];

@@ -27,9 +27,47 @@ namespace Genotype
 {
     struct Activation
     {
+        static inline float id(float z)
+        {
+            return z;
+        }
+
         static inline float sigmoid(float z)
         {
             return 2.f / (1.f + std::exp(-4.9f * z)) - 1.f;
+        }
+
+        static inline float tanh(float z)
+        {
+            return (std::exp(z) - std::exp(-z)) / (std::exp(z) + std::exp(-z));
+        }
+
+        static inline float relu(float z)
+        {
+            return z > 0.f ? z : 0.f;
+        }
+
+        static inline float elu(float z)
+        {
+            return z > 0.f ? z : 1.f * (std::exp(z) - 1.f);
+        }
+
+        static inline float selu(float z)
+        {
+            return 1.0507f * (z > 0.f ? z : 1.67326f * (std::exp(z) - 1.f));
+        }
+
+        static inline void softmax(std::vector<float>& zs)
+        {
+            float sum = 0.f;
+
+            for(const auto& zj : zs) {
+                sum += std::exp(zj);
+            }
+
+            for(auto& zi : zs) {
+                zi = std::exp(zi) / sum;
+            }
         }
     };
 

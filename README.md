@@ -37,17 +37,14 @@ sudo cp -v lib/*.a /usr/lib
 
 ### Eval
 `./eval.sh [-D] [-R] <args>` or  
-- **Debug**: `./eval.sh -D -e 10 -t 0 -n 0 -s sav`  
 - **Release**: `./eval.sh -R -e 10 -t 0 -n 0 -s sav`  
 
 ### Play
 `./play.sh [-D] [-R] <args>` or  
-- **Debug**: `./play.sh -D -e 10`  
 - **Release**: `./play.sh -R -e 10`  
 
 ### Test
 `./test.sh [-D] [-R] <args>` or  
-- **Debug**: `./test.sh -D`  
 - **Release**: `./test.sh -R`  
 
 ### Log

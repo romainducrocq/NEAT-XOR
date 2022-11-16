@@ -1,5 +1,8 @@
 #!/bin/sh
 
+./build.sh -D
+./compile.sh
+
 args=""
 for ARG in $( echo "${@}" | sed 's/ / /g' )
 do

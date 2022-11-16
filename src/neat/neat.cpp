@@ -200,8 +200,12 @@ bool Neat::train()
 
             if(! this->log_plt.empty()){
                 this->to_plt();
+
+                if(this->plt_freq && this->generation % this->plt_freq == 0){
+                    this->plot();
+                }
             }
-            if(! this->log_sav.empty()){
+            if(! this->log_sav.empty() && this->sav_freq && this->generation % this->sav_freq == 0){
                 mutex_map["rw_sav"].lock();
                 this->best.save(this->log_sav);
                 mutex_map["rw_sav"].unlock();
@@ -215,6 +219,12 @@ bool Neat::train()
 
         if(! this->log_plt.empty()){
             this->plot();
+        }
+
+        if(! this->log_sav.empty()){
+            mutex_map["rw_sav"].lock();
+            this->best.save(this->log_sav);
+            mutex_map["rw_sav"].unlock();
         }
 
         return false;

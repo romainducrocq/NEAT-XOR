@@ -96,6 +96,8 @@ class Neat
 
         std::string log_sav = CONF::LOG_SAV;
         std::string log_plt = CONF::LOG_PLT;
+        size_t plt_freq = CONF::PLT_FREQ;
+        size_t sav_freq = CONF::SAV_FREQ;
         std::pair<std::vector<double>, std::vector<double>> plt_data;
 
     protected:

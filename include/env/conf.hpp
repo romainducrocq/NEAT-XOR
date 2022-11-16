@@ -47,6 +47,8 @@ struct DefaultConf{
 
     const static size_t ACT_REPEAT;
     const static size_t MVG_AVG;
+    const static size_t PLT_FREQ;
+    const static size_t SAV_FREQ;
 
     static size_t GENERATIONS_TRAIN;
     static size_t EPOCHS_EVAL;
@@ -197,6 +199,10 @@ template<typename T>
 const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
 const size_t DefaultConf<T>::MVG_AVG = 100;
+template<typename T>
+const size_t DefaultConf<T>::PLT_FREQ = 0; // (0=false) -> plot at end train only
+template<typename T>
+const size_t DefaultConf<T>::SAV_FREQ = 1; // (0=false) -> save at end train only
 
 template<typename T>
 size_t DefaultConf<T>::GENERATIONS_TRAIN = 300; // (0=inf) -> infinite train

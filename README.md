@@ -31,20 +31,20 @@ sudo cp -v lib/*.a /usr/lib
 ```
 
 ### Train
-`./train.sh [-D] [-R] <args>` or  
+`./train.sh [-D -R] <args>` or  
 - **Debug**: `./train.sh -D -g 300 -t 0 -n 0 -p plt -s sav`  
 - **Release**: `./train.sh -R -g 300 -t 0 -n 0 -p plt -s sav`  
 
 ### Eval
-`./eval.sh [-D] [-R] <args>` or  
+`./eval.sh [-D -R] <args>` or  
 - **Release**: `./eval.sh -R -e 10 -t 0 -n 0 -s sav`  
 
 ### Play
-`./play.sh [-D] [-R] <args>` or  
+`./play.sh [-D -R] <args>` or  
 - **Release**: `./play.sh -R -e 10`  
 
 ### Test
-`./test.sh [-D] [-R] <args>` or  
+`./test.sh [-D -R] <args>` or  
 - **Release**: `./test.sh -R`  
 
 ### Memcheck
@@ -54,7 +54,7 @@ sudo cp -v lib/*.a /usr/lib
 ### Log
 `./log.sh [-V] <cmd>`
 - **Eg.**: `./log.sh ./train.sh -s sav`  
-- **Eg. (verbose)**:`./log.sh -V ./play.sh`  
+- **Eg.** (verbose): `./log.sh -V ./play.sh`  
 
 ### Help
 `./help.sh`  

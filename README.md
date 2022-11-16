@@ -59,7 +59,7 @@ optional args:
   -t STP  [train, eval] Set number max step   (0=inf)
   -n NOP  [train, eval] Set number max noop   (0=inf)
   utils:
-  -s PLT  [train]       Set file name plot plt
+  -p PLT  [train]       Set file name plot plt
   -s SAV  [train, eval] Set file name save sav
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`

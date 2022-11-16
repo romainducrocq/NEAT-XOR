@@ -88,7 +88,7 @@ struct DefaultConf{
                     std::cerr << "  -t STP  [train, eval] Set number max step   (0=inf)                                \n";
                     std::cerr << "  -n NOP  [train, eval] Set number max noop   (0=inf)                                \n";
                     std::cerr << "  utils:                                                                             \n";
-                    std::cerr << "  -s PLT  [train]       Set file name plot plt                                       \n";
+                    std::cerr << "  -p PLT  [train]       Set file name plot plt                                       \n";
                     std::cerr << "  -s SAV  [train, eval] Set file name save sav                                       \n";
 
                     return false;

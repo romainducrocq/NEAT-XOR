@@ -201,11 +201,15 @@ bool Neat::train()
             if(! this->log_plt.empty()){
                 this->to_plt();
 
-                if(this->plt_freq && this->generation % this->plt_freq == 0){
+                if((this->plt_freq && this->generation % this->plt_freq == 0) ||
+                   (this->max_generation_train && this->generation >= this->max_generation_train)){
                     this->plot();
                 }
             }
-            if(! this->log_sav.empty() && this->sav_freq && this->generation % this->sav_freq == 0){
+
+            if(! this->log_sav.empty() &&
+               ((this->sav_freq && this->generation % this->sav_freq == 0) ||
+                (this->max_generation_train && this->generation >= this->max_generation_train))){
                 mutex_map["rw_sav"].lock();
                 this->best.save(this->log_sav);
                 mutex_map["rw_sav"].unlock();
@@ -216,16 +220,6 @@ bool Neat::train()
     }
 
     if(this->max_generation_train && this->generation >= this->max_generation_train){
-
-        if(! this->log_plt.empty()){
-            this->plot();
-        }
-
-        if(! this->log_sav.empty()){
-            mutex_map["rw_sav"].lock();
-            this->best.save(this->log_sav);
-            mutex_map["rw_sav"].unlock();
-        }
 
         return false;
     }

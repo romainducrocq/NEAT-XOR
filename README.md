@@ -31,32 +31,32 @@ sudo cp -v lib/*.a /usr/lib
 ```
 
 ### Train
-`./train.sh [-D] [-R]` or  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
+`./train.sh [-D] [-R] <args>` or  
+- **Debug**: `./train.sh -D -g 300 -t 0 -n 0 -p plt -s sav`  
+- **Release**: `./train.sh -R -g 300 -t 0 -n 0 -p plt -s sav`  
 
 ### Eval
-`./eval.sh [-D] [-R]` or  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
+`./eval.sh [-D] [-R] <args>` or  
+- **Debug**: `./eval.sh -D -e 10 -t 0 -n 0 -s sav`  
+- **Release**: `./eval.sh -R -e 10 -t 0 -n 0 -s sav`  
 
 ### Play
-`./play.sh [-D] [-R]` or  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m play -e 10`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m play -e 10`  
+`./play.sh [-D] [-R] <args>` or  
+- **Debug**: `./play.sh -D -e 10`  
+- **Release**: `./play.sh -R -e 10`  
 
 ### Test
-`./test.sh [-D] [-R]` or  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m test`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
+`./test.sh [-D] [-R] <args>` or  
+- **Debug**: `./test.sh -D`  
+- **Release**: `./test.sh -R`  
+
+### Log
+`./log.sh [-V] <cmd>`
+- **Examples**: `./log.sh ./train.sh -p plt -s sav` `./log.sh -V ./play.sh`  
 
 ### Memcheck
 `./memcheck.sh <args>`  
-- **Examples**: `./memcheck.sh -m train -g 10` `./memcheck.sh -m eval -e 2 -s sav`  
-
-### Log
-`./log.sh [-V] <cmd>`  
-- **Examples**: `./log.sh ./train.sh` `./log.sh ./eval.sh` `./log.sh -V ./play.sh`  
+- **Examples**: `./memcheck.sh -m train -g 10` `./memcheck.sh -m eval -s sav`  
 
 ### Help
 `./help.sh`  

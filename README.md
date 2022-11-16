@@ -31,22 +31,22 @@ sudo cp -v lib/*.a /usr/lib
 ```
 
 ### Train
-`./train.sh [-R] [-D]` or  
+`./train.sh [-D] [-R]` or  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
 
 ### Eval
-`./eval.sh [-R] [-D]` or  
+`./eval.sh [-D] [-R]` or  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
 
 ### Play
-`./play.sh [-R] [-D]` or  
+`./play.sh [-D] [-R]` or  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m play -e 10`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m play -e 10`  
 
 ### Test
-`./test.sh [-R] [-D]` or  
+`./test.sh [-D] [-R]` or  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m test`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
 
@@ -56,7 +56,7 @@ sudo cp -v lib/*.a /usr/lib
 
 ### Log
 `./log.sh [-V] <cmd>`  
-- **Examples**: `./log.sh ./train.sh` `./log.sh ./eval.sh` `./log.sh ./play.sh`  
+- **Examples**: `./log.sh ./train.sh` `./log.sh ./eval.sh` `./log.sh -V ./play.sh`  
 
 ### Help
 `./help.sh`  

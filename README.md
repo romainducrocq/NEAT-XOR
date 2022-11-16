@@ -45,6 +45,9 @@ or `./play.sh`
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
 or `./test.sh`  
 
+### Logs
+- `./logs.sh <cmd>`: eg. `./logs.sh ./train.sh` `./run.sh -m eval -s sav`  
+
 ```
 usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-t STP] [-n NOP] [-p PLT] [-s SAV]
 

@@ -55,7 +55,7 @@ sudo cp -v lib/*.a /usr/lib
 - **Examples**: `./memcheck.sh -m train -g 10` `./memcheck.sh -m eval -e 2 -s sav`  
 
 ### Log
-`./log.sh <cmd>`  
+`./log.sh [-V] <cmd>`  
 - **Examples**: `./log.sh ./train.sh` `./log.sh ./eval.sh` `./log.sh ./play.sh`  
 
 ### Help

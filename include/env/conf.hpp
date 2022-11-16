@@ -66,7 +66,7 @@ struct DefaultConf{
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
         /*** DEF CMDS HERE */
-        const char cmds[] = "h:m:g:e:c:n:p:s:";
+        const char cmds[] = "h:m:g:e:t:n:p:s:";
 
         for(;;){
             switch(getopt(argc, argv, cmds)){
@@ -75,7 +75,7 @@ struct DefaultConf{
                 case '?': // help
                 case 'h':
                 default :
-                    std::cerr << "usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-c CNT] [-n NOP] [-p PLT] [-s SAV] \n";
+                    std::cerr << "usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-t STP] [-n NOP] [-p PLT] [-s SAV] \n";
                     std::cerr << "\n";
                     std::cerr << "NEAT XOR                                                                             \n";
                     std::cerr << "\n";
@@ -85,10 +85,10 @@ struct DefaultConf{
                     std::cerr << "  params:                                                                            \n";
                     std::cerr << "  -g GEN  [train]       Set number generation (0=inf)                                \n";
                     std::cerr << "  -e EPO  [eval, play]  Set number epoch      (0=inf)                                \n";
-                    std::cerr << "  -c CNT  [train, eval] Set number max step   (0=inf)                                \n";
+                    std::cerr << "  -t STP  [train, eval] Set number max step   (0=inf)                                \n";
                     std::cerr << "  -n NOP  [train, eval] Set number max noop   (0=inf)                                \n";
                     std::cerr << "  utils:                                                                             \n";
-                    std::cerr << "  -p PLT  [train]       Set file name plot plt                                       \n";
+                    std::cerr << "  -s PLT  [train]       Set file name plot plt                                       \n";
                     std::cerr << "  -s SAV  [train, eval] Set file name save sav                                       \n";
 
                     return false;
@@ -116,7 +116,7 @@ struct DefaultConf{
                     DefaultConf<T>::EPOCHS_EVAL = static_cast<size_t>(std::atoi(optarg));
                     continue;
 
-                case 'c': // number max step
+                case 't': // number max step
                     DefaultConf<T>::MAX_STEP = static_cast<size_t>(std::atoi(optarg));
                     continue;
 

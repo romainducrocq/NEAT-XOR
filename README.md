@@ -23,18 +23,18 @@ sudo cp -v lib/*.a /usr/lib
 ```
 ./build.sh -R
 ./compile.sh
-./run.sh -m train -g 300 -c 0 -n 0 -p plt -s sav
-./run.sh -m eval -e 10 -c 0 -n 0 -s sav
+./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav
+./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 ```
 
 ### Train
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -c 0 -n 0`  
-- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -c 0 -n 0 -p plt -s sav`  
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -c 0 -n 0 -p plt -s sav`  
+- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -t 0 -n 0`  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
 or `./train.sh`  
 
 ### Eval
-- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -c 0 -n 0 -s sav`  
+- **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
 or `./eval.sh`  
 
 ### Play
@@ -46,7 +46,7 @@ or `./play.sh`
 or `./test.sh`  
 
 ```
-usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-c CNT] [-n NOP] [-p PLT] [-s SAV]
+usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-t STP] [-n NOP] [-p PLT] [-s SAV]
 
 NEAT XOR
 
@@ -56,10 +56,10 @@ optional args:
   params:
   -g GEN  [train]       Set number generation (0=inf)
   -e EPO  [eval, play]  Set number epoch      (0=inf)
-  -c CNT  [train, eval] Set number max step   (0=inf)
+  -t STP  [train, eval] Set number max step   (0=inf)
   -n NOP  [train, eval] Set number max noop   (0=inf)
   utils:
-  -p PLT  [train]       Set file name plot plt
+  -s PLT  [train]       Set file name plot plt
   -s SAV  [train, eval] Set file name save sav
 ```
 > Hyperparameter configuration file: `include/env/conf.hpp`

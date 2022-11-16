@@ -9,7 +9,7 @@
 
 `cd bin`
 
-### Install: 
+### Install
 `./make.sh` or  
 ```
 sudo apt-get update
@@ -21,7 +21,7 @@ sudo make
 sudo cp -v lib/*.a /usr/lib
 ```
 
-### Run: 
+### Run
 `./app.sh` or  
 ```
 ./build.sh -R
@@ -37,23 +37,26 @@ sudo cp -v lib/*.a /usr/lib
 
 ### Eval
 `./eval.sh` or  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
 
 ### Play
 `./play.sh` or  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m play -e 10`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m play -e 10`  
 
 ### Test
 `./test.sh` or  
+- **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m test`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
 
 ### Memcheck
 `./memcheck.sh <args>`  
-- **Example**: `./memcheck.sh -m train -g 15 -t 0 -n 0`  
+- **Examples**: `./memcheck.sh -m train -g 10` `./memcheck.sh -m eval -e 2 -s sav`  
 
 ### Log
-`./log.sh <cmd>`
-- **Example**: `./log.sh ./train.sh` `./log.sh ./eval.sh`
+`./log.sh <cmd>`  
+- **Examples**: `./log.sh ./train.sh` `./log.sh ./eval.sh` `./log.sh ./play.sh`  
 
 ### Help
 `./help.sh`  

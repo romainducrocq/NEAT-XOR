@@ -47,13 +47,14 @@ sudo cp -v lib/*.a /usr/lib
 `./test.sh [-D] [-R] <args>` or  
 - **Release**: `./test.sh -R`  
 
+### Memcheck
+`./memcheck.sh <args>`
+- **Eg.**: `./memcheck.sh -m train -g 10`  
+
 ### Log
 `./log.sh [-V] <cmd>`
-- **Examples**: `./log.sh ./train.sh -p plt -s sav` `./log.sh -V ./play.sh`  
-
-### Memcheck
-`./memcheck.sh <args>`  
-- **Examples**: `./memcheck.sh -m train -g 10` `./memcheck.sh -m eval -s sav`  
+- **Eg.**: `./log.sh ./train.sh -s sav`  
+- **Eg. (verbose)**:`./log.sh -V ./play.sh`  
 
 ### Help
 `./help.sh`  

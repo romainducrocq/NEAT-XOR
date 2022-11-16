@@ -8,7 +8,9 @@
 ## How to _
 
 `cd bin`
-- **Install**: `./make.sh` or  
+
+### Install: 
+`./make.sh` or  
 ```
 sudo apt-get update
 sudo apt-get install g++ cmake valgrind libgtest-dev
@@ -19,7 +21,8 @@ sudo make
 sudo cp -v lib/*.a /usr/lib
 ```
 
-- **Run**: `./app.sh` or  
+### Run: 
+`./app.sh` or  
 ```
 ./build.sh -R
 ./compile.sh
@@ -28,26 +31,32 @@ sudo cp -v lib/*.a /usr/lib
 ```
 
 ### Train
-- **Memcheck**: `./build.sh -D && ./compile.sh && ./memcheck.sh -m train -g 15 -t 0 -n 0`  
+`./train.sh` or  
 - **Debug**: `./build.sh -D && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav`  
-or `./train.sh`  
 
 ### Eval
+`./eval.sh` or  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m eval -e 10 -t 0 -n 0 -s sav`  
-or `./eval.sh`  
 
 ### Play
+`./play.sh` or  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m play -e 10`  
-or `./play.sh`  
 
 ### Test
+`./test.sh` or  
 - **Release**: `./build.sh -R && ./compile.sh && ./run.sh -m test`  
-or `./test.sh`  
 
-### Logs
-- `./logs.sh <cmd>`: eg. `./logs.sh ./train.sh` `./run.sh -m eval -s sav`  
+### Memcheck
+`./memcheck.sh <args>`  
+- **Example**: `./memcheck.sh -m train -g 15 -t 0 -n 0`  
 
+### Log
+`./log.sh <cmd>`
+- **Example**: `./log.sh ./train.sh` `./log.sh ./eval.sh`
+
+### Help
+`./help.sh`  
 ```
 usage: apps/exec [-h] [-m MOD] [-g GEN] [-e EPO] [-t STP] [-n NOP] [-p PLT] [-s SAV]
 

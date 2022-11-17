@@ -1,30 +1,17 @@
 #!/bin/bash
 
-DEFAULT="-g 300 -t 0 -n 0 -p plt -s sav"
+source utils.sh --source-specific set_build_type get_args get_tr_lead_args get_default_args
 
-#---------------------------------------------------
+BUILD_T=$(set_build_type "$1" -R -D -R)
 
-BUILD_T="-R"
+args=$(get_args " ${@}")
 
-args=""
-for ARG in $( echo "${@}" | sed 's/ / /g' )
-do
-    args="${args} ${ARG}"
-done
+args=$(get_tr_lead_args "${args}" "$1")
 
-if [ "$1" = "-R" ] || [ "$1" = "--Release" ] ; then
-    BUILD_T="-R"
-    args=$(echo ${args} | cut -d'R' -f2-)
-elif [ "$1" = "-D" ] || [ "$1" = "--Debug" ] ; then
-    BUILD_T="-D"
-    args=$(echo ${args} | cut -d'D' -f2-)
+if [ ${#args} -eq 0 ] ; then
+    args=" "$(get_default_args "TRAIN")
 fi
 
 ./build.sh ${BUILD_T}
 ./compile.sh
-
-if [[ ${#args} > 0 ]] ; then
-    ./run.sh -m train ${args}
-else
-    ./run.sh -m train ${DEFAULT}
-fi
+./run.sh -m train${args}

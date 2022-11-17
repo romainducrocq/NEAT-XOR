@@ -48,8 +48,8 @@ sudo cp -v lib/*.a /usr/lib
 - **Release**: `./test.sh -R`  
 
 ### Memcheck
-`./memcheck.sh <args>`
-- **Eg.**: `./memcheck.sh -m train -g 10`  
+`./memcheck.sh <cmd>`
+- **Eg.**: `./memcheck.sh ./train -g 10`  
 
 ### Log
 `./log.sh [-V] <cmd>`

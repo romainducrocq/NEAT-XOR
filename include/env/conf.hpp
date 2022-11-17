@@ -1,6 +1,18 @@
 #ifndef _ENV_CONF_HPP
 #define _ENV_CONF_HPP
 
+/*** DEF DEFAULT ARGS HERE */
+/*
+ * TRAIN
+   -g 300 -t 0 -n 0 -p plt -s -sav
+ * EVAL
+   -e 10 -t 0 -n 0 -s sav
+ * PLAY
+   -e 10
+ * TEST
+
+*/
+
 #include <unistd.h>
 
 #include <iostream>

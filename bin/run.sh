@@ -1,10 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-args=""
-for ARG in $( echo "${@}" | sed 's/ / /g' )
-do
-    args="${args} ${ARG}"
-done
+source utils.sh --source-specific get_args
+
+args=$(get_args " ${@}")
 
 cd apps/
 ./exec${args}

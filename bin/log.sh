@@ -1,10 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-args=""
-for ARG in $( echo "${@}" | sed 's/ / /g' )
-do
-    args="${args} ${ARG}"
-done
+source utils.sh --source-specific get_args
+
+args=$(get_args " ${@}")
 
 if [ "$1" = "-V" ] || [ "$1" = "--Verbose" ] ; then
     echo -n "" > ../log/logs/out.txt

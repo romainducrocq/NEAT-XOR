@@ -1,11 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-BUILD_T="Debug"
+source utils.sh --source-specific set_build_type
 
-if [ "$1" = "-R" ] || [ "$1" = "--Release" ] ; then
-    BUILD_T="Release"
-elif [ "$1" = "-D" ] || [ "$1" = "--Debug" ] ; then
-    BUILD_T="Debug"
-fi
+BUILD_T=$(set_build_type "$1" Release Debug Debug)
 
 cmake -G "Unix Makefiles" -S ../build/ -B ../build/out/ -DCMAKE_BUILD_TYPE=${BUILD_T}

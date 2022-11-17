@@ -49,7 +49,7 @@ sudo cp -v lib/*.a /usr/lib
 
 ### Memcheck
 `./memcheck.sh <cmd>`
-- **Eg.**: `./memcheck.sh ./train -g 10`  
+- **Eg.**: `./memcheck.sh ./train.sh -g 10`  
 
 ### Log
 `./log.sh [-V] <cmd>`

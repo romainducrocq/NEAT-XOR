@@ -57,15 +57,19 @@ namespace View
             Renderer() = default;
 
         private:
+            std::string res = "../../res/";
+
+        private:
             /*** DEC DRAW VARS HERE */
+
+
+        private:
+            /*** DEC DRAW FUNCS HERE */
 
 
         public:
             void draw_setup(const MyEnv::Model& m);
             void draw_loop(const MyEnv::Model& m);
-
-            /*** DEC DRAW FUNCS HERE */
-
 
         public:
             Renderer(const Renderer& other) = delete;

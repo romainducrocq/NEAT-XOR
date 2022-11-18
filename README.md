@@ -113,9 +113,10 @@ optional args:
 
 ## Config
 
-### Hyperparameters
+### Parameters
 
-<span id="hyperparameters">
+- **Hyperparameters**:  
+<span id="hyperparameter_values">
 ```
 INPUTS               = 2
 OUTPUTS              = 1

@@ -63,8 +63,8 @@ $ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 `./test.sh [-D -R] <args>` or  
 <span id="how_to_test" title="4">
 ```
-* Debug   : $ ./test.sh -D
-* Release : $ ./test.sh -R
+* Debug   : $ ./test.sh -D 
+* Release : $ ./test.sh -R 
 ```
 </span>
 

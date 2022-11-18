@@ -47,7 +47,7 @@ function get_default_args () {
 }
 
 function get_conf_param () {
-    param=$(cat ../include/env/conf.hpp | grep "$1" | tail -1 | cut -d'=' -f 2 | cut -d';' -f 1 | sed -e 's/^[[:space:]]*//')
+    param=$(cat ../include/env/conf.hpp | grep $(echo ':'"$1"' ') | tail -1 | cut -d'=' -f 2 | cut -d';' -f 1 | sed -e 's/^[[:space:]]*//')
     echo "${param}"
 }
 

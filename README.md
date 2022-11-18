@@ -83,7 +83,7 @@ $ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 ```
 
 ### Readme
-`./readme.sh`
+`./readme.sh`  
 ```
 * Update : $ ./readme.sh
 ```
@@ -112,10 +112,11 @@ optional args:
 
 ## Config
 
-### Hyperparameters
+`include/env/conf.hpp`
 
-`include/env/conf.hpp`  
-<span id="hyperparameter_values">
+### Hyperparameters
+  
+<span id="hyperparameters">
 ```
 INPUTS               = 2
 OUTPUTS              = 1
@@ -170,7 +171,9 @@ log/plots/
 ```
 
 <span id="plot_demo">
+  
 ![Demo](log/plots/demo.jpg)
+  
 </span>
 
 ```

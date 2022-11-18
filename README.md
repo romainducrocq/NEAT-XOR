@@ -48,7 +48,7 @@ $ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 * Debug   : $ ./eval.sh -D -e 10 -t 0 -n 0 -s sav
 * Release : $ ./eval.sh -R -e 10 -t 0 -n 0 -s sav
 ```
-<\span>
+</span>
 
 ### Play
 `./play.sh [-D -R] <args>` or  

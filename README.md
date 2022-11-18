@@ -1,7 +1,7 @@
 # [C++] XOR PROBLEM with NEAT and TidyVolve
 
-- My very own NEAT framework in C++ (it's neat & tidy): https://github.com/romainducrocq/TidyVolve
-- NEAT-Python documentation XOR example: https://neat-python.readthedocs.io/en/latest/xor_example.html
+- My very own NEAT framework in C++ (it's neat & tidy) : https://github.com/romainducrocq/TidyVolve
+- NEAT-Python documentation XOR example : https://neat-python.readthedocs.io/en/latest/xor_example.html
 
 ****
 
@@ -12,49 +12,75 @@
 ### Install
 `./make.sh` or  
 ```
-sudo apt-get update
-sudo apt-get install g++ cmake valgrind libgtest-dev
+$ sudo apt-get update
+$ sudo apt-get install g++ cmake valgrind libgtest-dev
 
-cd /usr/src/gtest
-sudo cmake CMakeLists.txt
-sudo make
-sudo cp -v lib/*.a /usr/lib
+$ cd /usr/src/gtest
+$ sudo cmake CMakeLists.txt
+$ sudo make
+$ sudo cp -v lib/*.a /usr/lib
 ```
 
 ### Run
 `./app.sh` or  
+<span id="how_to_run" title="6">
 ```
-./build.sh -R
-./compile.sh
-./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav
-./run.sh -m eval -e 10 -t 0 -n 0 -s sav
+$ ./build.sh -R
+$ ./compile.sh
+$ ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav
+$ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 ```
+</span>
 
 ### Train
 `./train.sh [-D -R] <args>` or  
-- **Debug**: `./train.sh -D -g 300 -t 0 -n 0 -p plt -s sav`  
-- **Release**: `./train.sh -R -g 300 -t 0 -n 0 -p plt -s sav`  
+<span id="how_to_train" title="4">
+```
+* Debug   : $ ./train.sh -D -g 300 -t 0 -n 0 -p plt -s sav
+* Release : $ ./train.sh -R -g 300 -t 0 -n 0 -p plt -s sav
+```
+</span>
 
 ### Eval
 `./eval.sh [-D -R] <args>` or  
-- **Release**: `./eval.sh -R -e 10 -t 0 -n 0 -s sav`  
+<span id="how_to_eval" title="4">
+```
+* Debug   : $ ./eval.sh -D -e 10 -t 0 -n 0 -s sav
+* Release : $ ./eval.sh -R -e 10 -t 0 -n 0 -s sav
+```
+<\span>
 
 ### Play
 `./play.sh [-D -R] <args>` or  
-- **Release**: `./play.sh -R -e 10`  
+<span id="how_to_play" title="4">
+```
+* Debug   : $ ./play.sh -D -e 10
+* Release : $ ./play.sh -R -e 10
+```
+</span>
 
 ### Test
 `./test.sh [-D -R] <args>` or  
-- **Release**: `./test.sh -R`  
+<span id="how_to_test" title="4">
+```
+* Debug   : $ ./test.sh -D
+* Release : $ ./test.sh -R
+```
+</span>
 
 ### Memcheck
-`./memcheck.sh <cmd>`
-- **Eg.**: `./memcheck.sh ./train.sh -g 10`  
+`./memcheck.sh <cmd>`  
+```
+* Example : $ ./memcheck.sh ./train.sh -g 10 
+* Example : $ ./memcheck.sh ./eval.sh -s sav
+```
 
 ### Log
-`./log.sh [-V] <cmd>`
-- **Eg.**: `./log.sh ./train.sh -s sav`  
-- **Eg.** (verbose): `./log.sh -V ./play.sh`  
+`./log.sh [-V] <cmd>`  
+```
+* Example : $ ./log.sh ./train.sh -s sav
+* Example : $ ./log.sh -V ./play.sh -e 1
+```
 
 ### Help
 `./help.sh`  

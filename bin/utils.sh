@@ -1,11 +1,16 @@
 #!/bin/bash
 
 funcs=(
+"assert"
 "set_build_type"
 "get_args"
 "get_tr_lead_args"
 "get_default_args"
 )
+
+function assert () {
+    if [ ${?} -ne 0 ]; then exit; fi;
+}
 
 function set_build_type () {
     BUILD_T="$4"

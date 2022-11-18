@@ -6,6 +6,7 @@ funcs=(
 "get_args"
 "get_tr_lead_args"
 "get_default_args"
+"get_conf_param"
 )
 
 function assert () {
@@ -43,6 +44,11 @@ function get_tr_lead_args () {
 function get_default_args () {
     args=$(cat ../include/env/conf.hpp | grep "$1" -A 1 | sed -n 2p | sed -e 's/^[[:space:]]*//')
     echo "${args}"
+}
+
+function get_conf_param () {
+    param=$(cat ../include/env/conf.hpp | grep "$1" | tail -1 | cut -d'=' -f 2 | cut -d';' -f 1 | sed -e 's/^[[:space:]]*//')
+    echo "${param}"
 }
 
 # SOURCE FUNCS

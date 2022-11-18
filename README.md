@@ -112,12 +112,11 @@ optional args:
 
 ## Config
 
-`include/env/conf.hpp`
-
-### Hyperparameters
-  
-<span id="hyperparameters">
+`include/env/conf.hpp`  
+<span id="hyperparameter_values">
 ```
+* HYPERPARAMETER VALUES :
+
 INPUTS               = 2
 OUTPUTS              = 1
 

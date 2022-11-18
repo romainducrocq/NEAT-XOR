@@ -107,15 +107,14 @@ optional args:
   -p PLT  [train]       Set file name plot plt
   -s SAV  [train, eval] Set file name save sav
 ```
-> Hyperparameter configuration file: `include/env/conf.hpp`
 
 ****
 
 ## Config
 
-### Parameters
+### Hyperparameters
 
-- **Hyperparameters**:  
+`include/env/conf.hpp`  
 <span id="hyperparameter_values">
 ```
 INPUTS               = 2

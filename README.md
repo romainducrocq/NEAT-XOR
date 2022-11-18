@@ -1,4 +1,4 @@
-  
+
 # [C++] XOR PROBLEM with NEAT and TidyVolve
 
 - My very own NEAT framework in C++ (it's neat & tidy) : https://github.com/romainducrocq/TidyVolve

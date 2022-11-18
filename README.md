@@ -3,7 +3,7 @@
 
 - My very own NEAT framework in C++ (it's neat & tidy) : https://github.com/romainducrocq/TidyVolve
 - NEAT-Python documentation XOR example : https://neat-python.readthedocs.io/en/latest/xor_example.html
-
+  
 ****
 
 ## How to _

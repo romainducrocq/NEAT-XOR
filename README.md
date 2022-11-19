@@ -172,7 +172,7 @@ Time: 6690.15ms
 `log/plots/`  
 <span id="plot_demo">
   
-![Demo](log/plots/demo.jpg)
+![Demo](log/plots/demo.png)
   
 </span>
 

@@ -2,7 +2,7 @@
 # [C++] XOR PROBLEM with NEAT and TidyVolve
 
 - My very own NEAT framework in C++ (it's neat & tidy) : https://github.com/romainducrocq/NEAT-TidyVolve
-- NEAT-Python documentation XOR example : https://neat-python.readthedocs.io/en/latest/xor_example.html
+- NEAT-Python documentation XOR problem : https://neat-python.readthedocs.io/en/latest/xor_example.html
   
 ****
 

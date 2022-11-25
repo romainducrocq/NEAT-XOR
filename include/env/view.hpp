@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <keyboard/kbhit.hpp>
+
 #include "env/conf.hpp"
 
 #include "env/env.hpp"

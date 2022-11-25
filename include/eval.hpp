@@ -15,8 +15,6 @@ namespace App
             MyEnv::Env env;
 
         private:
-            void run();
-
             void ev_setup();
             void draw_setup();
             void draw_loop();
@@ -27,6 +25,10 @@ namespace App
             Eval();
 
         public:
+            void run();
+
+        public:
+
             Eval(const Eval& other) = delete;
             Eval operator=(const Eval& other) = delete;
 

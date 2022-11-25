@@ -2,7 +2,6 @@
 
 App::Train::Train()
 {
-    this->run();
 }
 
 void App::Train::run()

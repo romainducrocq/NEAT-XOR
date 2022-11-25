@@ -27,8 +27,6 @@ namespace App
             bool play();
 
         private:
-            void run();
-
             void ev_setup();
             void draw_setup();
             void draw_loop();
@@ -39,8 +37,10 @@ namespace App
             Play();
 
         public:
-            Play(const Play &other) = delete;
+            void run();
 
+        public:
+            Play(const Play &other) = delete;
             Play operator=(const Play &other) = delete;
 
             static Play &PLAY()

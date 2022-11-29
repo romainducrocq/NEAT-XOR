@@ -22,7 +22,7 @@ namespace App
             void setup();
             bool loop();
 
-            Eval();
+            Eval() = default;
 
         public:
             void run();

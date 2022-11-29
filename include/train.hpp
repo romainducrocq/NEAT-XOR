@@ -19,7 +19,7 @@ namespace App
             void setup();
             bool loop();
 
-            Train();
+            Train() = default;
 
         public:
             void run();

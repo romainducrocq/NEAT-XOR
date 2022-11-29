@@ -34,7 +34,7 @@ namespace App
             void setup();
             bool loop();
 
-            Play();
+            Play() = default;
 
         public:
             void run();

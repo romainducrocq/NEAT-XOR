@@ -1,7 +1,7 @@
 #ifndef _ENV_VIEW_HPP
 #define _ENV_VIEW_HPP
 
-#include <vector>
+#include <array>
 
 #include <keyboard/kbhit.hpp>
 
@@ -35,7 +35,7 @@ namespace View
 
         public:
             void ev_setup();
-            void get_action(std::vector<float>& act);
+            void get_action(std::array<float, CONF::OUTPUTS>& act);
 
             inline const EventState& get_ev_state() const
             {

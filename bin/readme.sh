@@ -10,7 +10,13 @@ do
         echo '' >> README.md
         echo '# [C++] APPLICATION with NEAT and TidyVolve' >> README.md
         echo '' >> README.md
-        echo '- My very own NEAT framework in C++ (it'"'"'s neat & tidy) : https://github.com/romainducrocq/NEAT-TidyVolve' >> README.md
+        echo '- My very own NEAT framework in C++ (it'"'"'s neat & tidy) : [\[v1. BASE\]](https://github.com/romainducrocq/NEAT-TidyVolve) - [\[v2. SFML\]](https://github.com/romainducrocq/NEAT-TidyV2fml) - [\[v3. EMUL\]](https://github.com/romainducrocq/NEAT-TidyV3mul)' >> README.md
+        echo '<!---->' >> README.md
+        echo '  ' >> README.md
+        echo '- The NeuroEvolution of Augmenting Topologies (NEAT) User Page : http://www.cs.ucf.edu/~kstanley/neat.html' >> README.md
+        echo '- MarI/O - Machine Learning for Video Games (SethBling) : https://www.youtube.com/watch?v=qv6UVOQ0F44' >> README.md
+        echo '<!---->' >> README.md
+        echo '  ' >> README.md
     elif [[ "${LINE}" == *"how_to_run"* ]] ; then
         echo "${LINE}" >> README.md
         echo '```' >> README.md

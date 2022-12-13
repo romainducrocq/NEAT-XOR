@@ -203,17 +203,17 @@ const float DefaultConf<T>::CROSSOVER_PROB = 0.75f;
 template<typename T>
 const size_t DefaultConf<T>::STALE_SPECIES = 15;
 template<typename T>
-const size_t DefaultConf<T>::POPULATION_SIZE = 10;
+const size_t DefaultConf<T>::POPULATION_SIZE = 150;
 template<typename T>
-const size_t DefaultConf<T>::END_POPULATION_SIZE = 150; // (0=false) -> const population size // &&
+const size_t DefaultConf<T>::END_POPULATION_SIZE = 0; // (0=false) -> const population size // &&
 template<typename T>
-const size_t DefaultConf<T>::POPULATION_GENS_INC = 200; // (0=false) -> const population size // &&
+const size_t DefaultConf<T>::POPULATION_GENS_INC = 150; // (0=false) -> const population size // &&
 template<typename T>
 const size_t DefaultConf<T>::POPULATION_INC_FREQ = 10; // (0=false) -> const population size
 template<typename T>
 const size_t DefaultConf<T>::ACT_REPEAT = 0;
 template<typename T>
-const size_t DefaultConf<T>::MVG_AVG = 100;
+const size_t DefaultConf<T>::MVG_AVG = 150;
 template<typename T>
 const size_t DefaultConf<T>::PLT_FREQ = 0; // (0=false) -> plot at end train only
 template<typename T>

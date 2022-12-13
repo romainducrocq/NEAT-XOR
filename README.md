@@ -34,7 +34,7 @@ $ sudo cp -v lib/*.a /usr/lib
 ```
 $ ./build.sh -R
 $ ./compile.sh
-$ ./run.sh -m train -g 300 -t 0 -n 0 -p plt -s sav
+$ ./run.sh -m train -g 150 -t 0 -n 0 -p plt -s sav
 $ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 ```
 </span>
@@ -43,8 +43,8 @@ $ ./run.sh -m eval -e 10 -t 0 -n 0 -s sav
 `./train.sh [-D -R] <args>` or  
 <span id="how_to_train">
 ```
-* Debug   : $ ./train.sh -D -g 300 -t 0 -n 0 -p plt -s sav
-* Release : $ ./train.sh -R -g 300 -t 0 -n 0 -p plt -s sav
+* Debug   : $ ./train.sh -D -g 150 -t 0 -n 0 -p plt -s sav
+* Release : $ ./train.sh -R -g 150 -t 0 -n 0 -p plt -s sav
 ```
 </span>
 
@@ -155,7 +155,7 @@ MVG_AVG              = 150
 PLT_FREQ             = 0
 SAV_FREQ             = 1
 
-GENERATIONS_TRAIN    = 300
+GENERATIONS_TRAIN    = 150
 EPOCHS_EVAL          = 10
 MAX_STEP             = 0
 MAX_NOOP             = 0
@@ -172,7 +172,7 @@ MAX_NOOP             = 0
 -------------------------------TRAIN-------------------------------
 ```
 ```
-Time: 5215.24ms
+Time: 2296.96ms
 ```
 
 `log/plots/`  
@@ -306,7 +306,7 @@ MVG AVG : 4
 #4 | 0 1 | 1 | 1 |
 ------------------
 
-Time: 6.18517ms
+Time: 4.8907ms
 ```
 
 <span id="gif_demo">

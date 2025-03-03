@@ -1,5 +1,5 @@
 
-# [C++] XOR PROBLEM with NEAT and TidyVolve
+# NEAT - XOR PROBLEM with NEAT and TidyVolve
 
 - My very own NEAT framework in C++ (it's neat & tidy) : [\[v1. BASE\]](https://github.com/romainducrocq/NEAT-TidyVolve) - [\[v2. SFML\]](https://github.com/romainducrocq/NEAT-TidyV2fml) - [\[v3. EMUL\]](https://github.com/romainducrocq/NEAT-TidyV3mul)
 <!---->
